@@ -1,0 +1,73 @@
+.scroll-stack-scroller {
+    position: relative;
+    width: 100%;
+}
+
+.scroll-stack-inner {
+    position: relative;
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.scroll-stack-card {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    background: transparent;
+    will-change: transform, filter;
+    transform-origin: center top !important;
+
+    /* Critical: disable CSS transitions on transform to prevent fighting with JS */
+    transition: transform 0s linear !important;
+    /* We might want to keep other transitions like box-shadow/opacity if they aren't animated by JS */
+}
+
+/* Ensure z-index layering if not handled by JS */
+.scroll-stack-card:nth-child(1) {
+    z-index: 1;
+}
+
+.scroll-stack-card:nth-child(2) {
+    z-index: 2;
+}
+
+.scroll-stack-card:nth-child(3) {
+    z-index: 3;
+}
+
+.scroll-stack-card:nth-child(4) {
+    z-index: 4;
+}
+
+.scroll-stack-card:nth-child(5) {
+    z-index: 5;
+}
+
+.scroll-stack-card:nth-child(6) {
+    z-index: 6;
+}
+
+.scroll-stack-card:nth-child(7) {
+    z-index: 7;
+}
+
+.scroll-stack-card:nth-child(8) {
+    z-index: 8;
+}
+
+.scroll-stack-card:nth-child(9) {
+    z-index: 9;
+}
+
+.scroll-stack-card:nth-child(10) {
+    z-index: 10;
+}
+
+.scroll-stack-end {
+    height: 1px;
+    width: 100%;
+    margin-top: auto;
+}

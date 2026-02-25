@@ -44,84 +44,119 @@ body {
 
 /* ── Glass Card (for hero overlays) ── */
 .glass-card {
-  background: rgba(255, 255, 255, 0.35);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-radius: 20px;
+  border-radius: 32px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
 }
 
 /* ── Service Card ── */
-.service-card {
-  background: #e8e8e8;
-  border-radius: 24px;
-  padding: 48px;
+.service-card-horizontal {
+  background: #f0f0f0;
+  border-radius: 48px;
+  padding: 60px 80px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 32px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  gap: 40px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  min-height: 380px;
 }
 
-.service-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+.service-card-horizontal:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+  background: #efefef;
+}
+
+/* ── Feature Card (Welcome Section) ── */
+.feature-card {
+  background: #f0f0f0;
+  border-radius: 40px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: all 0.4s ease;
+}
+
+.feature-card-horizontal {
+  background: #f0f0f0;
+  border-radius: 40px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.4s ease;
+  min-height: 500px;
+}
+
+.feature-card-content {
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+}
+
+.feature-card-image {
+  flex: 1;
+  min-height: 320px;
+}
+
+.feature-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.btn-pill-white {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 9999px;
+  padding: 8px 24px;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: lowercase;
+  letter-spacing: 0.1em;
+  transition: all 0.3s ease;
+}
+
+.btn-pill-white:hover {
+  background: black;
+  color: white;
+}
+
+.feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.06);
 }
 
 /* ── About Card ── */
 .about-card {
-  background: #e8e8e8;
-  border-radius: 24px;
+  background: #f0f0f0;
+  border-radius: 32px;
   overflow: hidden;
   display: flex;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.about-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
-}
-
-/* ── Mission/Vision Card ── */
-.mv-card {
-  background: #f0f0f0;
-  border-radius: 24px;
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-  transition: transform 0.3s ease;
-  padding-bottom: 32px;
-}
-
-.mv-card:hover {
-  transform: translateY(-4px);
-}
-
-/* ── Pill Button ── */
-.pill-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 28px;
-  border-radius: 999px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  background: transparent;
-  font-size: 14px;
-  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
   transition: all 0.3s ease;
 }
 
-.pill-btn:hover {
-  background: rgba(0, 0, 0, 0.06);
+/* ── Mission/Vision Card ── */
+.mv-card-horizontal {
+  background: #f0f0f0;
+  border-radius: 40px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.4s ease;
+  height: 100%;
 }
 
-.pill-btn-light {
-  border-color: rgba(255, 255, 255, 0.3);
-  color: white;
-}
-
-.pill-btn-light:hover {
-  background: rgba(255, 255, 255, 0.1);
+.mv-card-horizontal:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.06);
 }
 
 /* ── Navbar Pill ── */
@@ -129,7 +164,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 32px;
-  padding: 14px 36px;
+  padding: 12px 32px;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.4);
   background: rgba(255, 255, 255, 0.15);
@@ -137,10 +172,11 @@ body {
   -webkit-backdrop-filter: blur(12px);
 }
 
-.nav-pill-solid {
-  border-color: rgba(0, 0, 0, 0.08);
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(12px);
+.nav-pill-white {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  padding: 12px 40px;
 }
 
 /* ── Contact Dark Card ── */
@@ -152,7 +188,98 @@ body {
 }
 
 /* ── Small Caps Effect ── */
+/* ── About Page Specific (Single View) ── */
+.about-page-container {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: black;
+}
+
+/* Hide Unicorn Studio Watermark - Nuclear Rules */
+[href*="unicornStudio"],
+[href*="unicorn.studio"],
+[class*="watermark"],
+[id*="watermark"],
+.watermark,
+#unicorn-studio-watermark,
+.us-watermark,
+[class*="us-brand"],
+[id*="us-brand"],
+div[style*="z-index: 2147483647"],
+div[style*="2147483647"],
+iframe[src*="unicornstudio"],
+#us-canvas-container+div,
+.about-page-container~div,
+body>div:not(#root),
+/* Hide everything at the top level except root */
+a[href*="unicorn"] {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  max-width: 0 !important;
+  max-height: 0 !important;
+  position: absolute !important;
+  left: -9999px !important;
+  z-index: -99999 !important;
+  transform: scale(0) !important;
+}
+
+/* Fallback for any unknown floating elements in the corner */
+body>[style*="fixed"],
+body>[style*="absolute"] {
+  display: none !important;
+}
+
+/* Ensure our root and specific elements are visible though */
+#root {
+  visibility: visible;
+}
+
 .small-caps {
   font-variant: small-caps;
   letter-spacing: 0.05em;
+}
+
+.tracking-widest-xl {
+  letter-spacing: 0.4em;
+}
+
+.service-card-horizontal {
+  background: #f0f0f0;
+  border-radius: 48px;
+  padding: 60px 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  min-height: 400px;
+}
+
+.explore-capsule {
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 9999px;
+  padding: 10px 32px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.explore-capsule:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
