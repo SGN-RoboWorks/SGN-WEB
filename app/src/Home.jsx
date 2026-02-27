@@ -102,19 +102,19 @@ function Home() {
                     initial={{ opacity: 0, y: -30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.3 }}
-                    className="absolute top-6 left-1/2 -translate-x-1/2 z-20"
+                    className="absolute z-20 left-1/2 -translate-x-1/2 top-8"
                 >
-                    <div className="nav-pill">
+                    <div className="nav-pill flex items-center justify-center font-medium">
                         {navLinks.map((link) => (
                             <a
                                 key={link}
                                 href={link === 'About' ? '/about' : link === 'Service' ? '/service' : link === 'Contact' ? '/contact' : link === 'Home' ? '/' : '#'}
-                                className="text-white text-sm font-medium tracking-wide hover:opacity-70 transition-opacity"
+                                className="text-white text-[17px] tracking-wide hover:opacity-70 transition-opacity drop-shadow-sm"
                             >
                                 {link}
                             </a>
                         ))}
-                        <span className="text-white text-sm font-semibold tracking-wide ml-4">SGN Agritech</span>
+                        <span className="text-white text-[17px] font-[Playfair_Display] tracking-wide ml-2 drop-shadow-sm">SGN Agritech</span>
                     </div>
 
                     {/* Mobile hamburger */}
@@ -153,35 +153,50 @@ function Home() {
                     </motion.div>
                 )}
 
-                {/* Bottom-left glass card — SGN RoboWorks */}
+                {/* Hero Content - Left Side Overlay */}
                 <motion.div
                     initial={{ opacity: 0, x: -40 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8, delay: 0.6 }}
-                    className="absolute bottom-24 left-8 md:left-16 z-10 glass-card p-10 md:p-14"
+                    className="absolute z-20 glass-card flex flex-col items-center justify-center bottom-[15%] left-[5%] md:left-[10%]"
+                    style={{ width: '320px', padding: '40px 0' }}
                 >
-                    <h1 className="font-[Playfair_Display] text-[#1a1a1a] text-6xl md:text-8xl font-medium leading-[0.7]">
+                    {/* SGN Text */}
+                    <div className="font-[Playfair_Display] text-white drop-shadow-md text-[95px] leading-none text-center tracking-wide">
                         SGN
-                    </h1>
-                    <p className="font-[Playfair_Display] text-[#1a1a1a] text-2xl md:text-3xl mt-1 tracking-tight">
+                    </div>
+                    {/* RoboWorks Text */}
+                    <div className="font-[Inter] text-white tracking-[0.15em] drop-shadow-md text-[24px] mt-2 mb-8 text-center uppercase font-light">
                         RoboWorks
-                    </p>
-                    <a href="/contact" className="mt-8 inline-flex items-center justify-center px-8 py-2.5 rounded-full bg-white text-black text-[10px] font-extrabold tracking-widest uppercase shadow-sm hover:scale-105 transition-all">
+                    </div>
+                    {/* Contact Button */}
+                    <motion.a
+                        href="/contact"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.9 }}
+                        className="flex items-center justify-center border border-white text-white font-medium hover:bg-white hover:text-black hover:scale-105 transition-all shadow-md backdrop-blur-sm"
+                        style={{ width: '160px', height: '44px', borderRadius: '22px', fontSize: '15px' }}
+                    >
                         Contact
-                    </a>
+                    </motion.a>
                 </motion.div>
 
-                {/* Bottom-center Explore button */}
+                {/* Explore Button Component */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 2.0, delay: 1.2 }}
-                    className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10"
+                    className="absolute z-20 bottom-12 left-1/2 -translate-x-1/2"
                 >
-                    <a href="#welcome" className="explore-capsule">
-                        Explore
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                            <path d="M19 14l-7 7-7-7" strokeLinecap="round" strokeLinejoin="round" />
+                    <a
+                        href="#welcome"
+                        className="explore-capsule shadow-sm hover:scale-105 transition-all flex items-center justify-center gap-3"
+                        style={{ padding: '16px 48px' }}
+                    >
+                        <span className="text-[18px] font-normal tracking-wide text-white drop-shadow-sm">Explore</span>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-white drop-shadow-sm">
+                            <path d="M12 4v16m0 0l6-6m-6 6l-6-6" />
                         </svg>
                     </a>
                 </motion.div>
@@ -212,81 +227,153 @@ function Home() {
             {/* ═══════════════════════════════════════ */}
             {/* WELCOME SECTION                         */}
             {/* ═══════════════════════════════════════ */}
-            <section id="welcome" className="py-24 bg-[#f5f5f5]" ref={welcomeRef}>
-                <div className="max-w-6xl mx-auto px-6 text-center">
+            <section id="welcome" className="py-24 bg-[#f5f5f5] relative" ref={welcomeRef}>
+                <div className="max-w-5xl mx-auto px-4 md:px-8 text-center relative z-10 w-full">
                     <motion.div
                         initial="hidden"
                         animate={welcomeInView ? 'visible' : 'hidden'}
                         variants={fadeUp}
                     >
-                        <h2 className="font-[Inter] text-4xl font-light text-[#1a1a1a] mb-4">
+                        <h2 className="font-[Inter] text-[2.2rem] md:text-[3.2rem] font-[300] text-[#1a1a1a] mb-[2px] md:leading-tight tracking-wide">
                             Hola ! Welcome to the world of
                         </h2>
-                        <h1 className="font-[Inter] text-7xl md:text-[10rem] font-black tracking-[0.4em] text-[#1a1a1a] leading-none mb-20 uppercase">
+                        <h1 className="font-[Inter] text-[3.5rem] md:text-[5rem] font-[300] tracking-[0.4em] text-[#1a1a1a] leading-none mb-20 uppercase ml-4">
                             S G N
                         </h1>
                     </motion.div>
 
                     {/* Feature Cards — Alternating Horizontal */}
-                    <div className="flex flex-col gap-8" ref={aboutCardsRef}>
-                        {/* Card 1: Agritech — Image Left, Text Right */}
+                    <div className="flex flex-col gap-8 md:gap-12 relative z-20" ref={aboutCardsRef}>
+                        {/* Shadow blob for center background glow */}
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-black/10 blur-[140px] -z-10 rounded-full"></div>
+
+                        {/* Card 1: Agritech */}
                         <motion.div
                             initial="hidden"
                             animate={aboutCardsInView ? 'visible' : 'hidden'}
                             variants={fadeUp}
-                            className="flex flex-col md:flex-row bg-white rounded-[40px] overflow-hidden min-h-[460px] shadow-[0_2px_24px_rgba(0,0,0,0.06)]"
+                            className="bg-[#e9e9e9] p-3 md:p-4 rounded-[40px] shadow-md flex flex-col md:flex-row gap-4"
                         >
-                            <div className="md:flex-1 p-6">
-                                <div className="w-full h-full rounded-[30px] overflow-hidden shadow-inner border border-black/5">
-                                    <img src={gallery11} alt="Agritech" className="w-full h-full object-cover" />
-                                </div>
+                            <div className="md:w-[45%] h-64 md:h-auto rounded-[30px] overflow-hidden border-2 border-white/50 relative shadow-sm">
+                                <img src={gallery11} alt="Agritech" className="w-full h-full object-cover" />
+                                <div className="absolute inset-0 shadow-[inset_0_0_20px_rgba(0,0,0,0.1)] rounded-[30px] pointer-events-none"></div>
                             </div>
-                            <div className="md:flex-1 p-8 md:p-12 flex flex-col items-center justify-center text-center">
-                                <h3 className="text-4xl md:text-5xl font-bold mb-4 border-b-[3px] border-black pb-2 inline-block">SGN Agritech</h3>
-                                <p className="text-gray-500 text-sm md:text-base leading-relaxed mb-10 max-w-[420px]">
-                                    SGN Aquaponics is a sustainable way of growing food by combining fish
-                                    farming and plant cultivation in one shared system. The fish provide
-                                    natural nutrients through their waste, which feeds the plants, while the
-                                    plants filter and clean the water that returns to the fish. This creates a
-                                    balanced, low-waste cycle that uses less water, avoids chemical
-                                    fertilizers, and produces fresh vegetables and fish in a natural, efficient
-                                    way.
+                            <div className="md:w-[55%] bg-white rounded-[30px] p-8 md:p-12 flex flex-col items-center justify-center text-center shadow-sm">
+                                <h3 className="text-3xl md:text-[2.5rem] font-medium text-[#1a1a1a] mb-4 border-b-[2.5px] border-black pb-1 inline-block">
+                                    SGN Agritech
+                                </h3>
+                                <p className="text-gray-500 text-[12px] md:text-[13px] leading-relaxed mb-8 max-w-[400px]">
+                                    SGN Aquaponics is a sustainable way of growing food by combining fish farming and plant cultivation in one shared system. The fish provide natural nutrients through their waste, which feeds the plants, while the plants filter and clean the water that returns to the fish. This creates a balanced, low-waste cycle that uses less water, avoids chemical fertilizers, and produces fresh vegetables and fish in a natural, efficient way.
                                 </p>
-                                <button className="px-8 py-2.5 rounded-full bg-white border border-black/10 text-xs font-semibold text-black hover:bg-black hover:text-white transition-all uppercase tracking-widest font-bold">
+                                <a href="/about" className="px-6 py-[2px] rounded-full border border-black/80 text-[11px] font-semibold text-black hover:bg-black hover:text-white transition-all transform hover:scale-105">
                                     explore
-                                </button>
+                                </a>
                             </div>
                         </motion.div>
 
-                        {/* Card 2: Roboworks — Text Left, Image Right */}
+                        {/* Card 2: Roboworks */}
                         <motion.div
                             initial="hidden"
                             animate={aboutCardsInView ? 'visible' : 'hidden'}
                             variants={fadeUp}
-                            className="flex flex-col-reverse md:flex-row bg-white rounded-[40px] overflow-hidden min-h-[460px] shadow-[0_2px_24px_rgba(0,0,0,0.06)]"
+                            className="bg-[#e9e9e9] p-3 md:p-4 rounded-[40px] shadow-md flex flex-col-reverse md:flex-row gap-4"
                         >
-                            <div className="md:flex-1 p-8 md:p-12 flex flex-col items-start justify-center text-left">
-                                <h3 className="text-4xl md:text-5xl font-bold mb-4 border-b-[3px] border-black pb-2 inline-block">SGN Roboworks</h3>
-                                <p className="text-gray-500 text-sm md:text-base leading-relaxed mb-10 max-w-[420px]">
-                                    SGN Roboworks is the field where robots are designed, built, and
-                                    programmed to help humans do work more efficiently and safely. It
-                                    combines engineering, software, and artificial intelligence to create
-                                    machines that can sense, think, and act in the real world. From factories
-                                    and hospitals to homes and research labs, roboworks focuses on using
-                                    robotics to solve problems, improve productivity, and support people in
-                                    everyday life.
+                            <div className="md:w-[55%] bg-white rounded-[30px] p-8 md:p-12 flex flex-col items-center justify-center text-center shadow-sm">
+                                <h3 className="text-3xl md:text-[2.5rem] font-medium text-[#1a1a1a] mb-4 border-b-[2.5px] border-black pb-1 inline-block">
+                                    SGN Roboworks
+                                </h3>
+                                <p className="text-gray-500 text-[12px] md:text-[13px] leading-relaxed mb-8 max-w-[400px]">
+                                    SGN Roboworks is the field where robots are designed, built, and programmed to help humans do work more efficiently and safely. It combines engineering, software, and artificial intelligence to create machines that can sense, think, and act in the real world. From factories and hospitals to homes and research labs, roboworks focuses on using robotics to solve problems, improve productivity, and support people in everyday life.
                                 </p>
-                                <a href="/about" className="px-8 py-2.5 rounded-full bg-white border border-black/10 text-xs font-semibold text-black hover:bg-black hover:text-white transition-all uppercase tracking-widest font-bold">
+                                <a href="/about" className="px-6 py-[2px] rounded-full border border-black/80 text-[11px] font-semibold text-black hover:bg-black hover:text-white transition-all transform hover:scale-105">
                                     learn more
                                 </a>
                             </div>
-                            <div className="md:flex-1 p-6">
-                                <div className="w-full h-full rounded-[30px] overflow-hidden shadow-inner border border-black/5">
-                                    <img src={gallery10} alt="Roboworks" className="w-full h-full object-cover" />
-                                </div>
+                            <div className="md:w-[45%] h-64 md:h-auto rounded-[30px] overflow-hidden border-2 border-white/50 relative shadow-sm">
+                                <img src={gallery10} alt="Roboworks" className="w-full h-full object-cover" />
+                                <div className="absolute inset-0 shadow-[inset_0_0_20px_rgba(0,0,0,0.1)] rounded-[30px] pointer-events-none"></div>
                             </div>
                         </motion.div>
                     </div>
+
+                    {/* Intro paragraph below cards */}
+                    <motion.div
+                        initial="hidden"
+                        animate={aboutCardsInView ? 'visible' : 'hidden'}
+                        variants={fadeUp}
+                        className="mt-32 max-w-4xl mx-auto"
+                    >
+                        <h2 className="font-[Playfair_Display] text-[2.5rem] md:text-[3.25rem] text-[#1a1a1a] mb-8 font-normal">
+                            SGN Roboworks
+                        </h2>
+                        <p className="text-[#333] text-[13px] md:text-[15px] leading-relaxed font-medium">
+                            SGN RoboWorks is a future-focused technology company engineering intelligent, secure, and sustainable systems for real-world industries. Operating at the intersection of AI, IoT, automation, and secure digital infrastructure, the company transforms complex operational challenges into data-driven, self-optimizing ecosystems, enabling industries to operate with greater efficiency, resilience, and long-term sustainability in an increasingly connected world.
+                        </p>
+                    </motion.div>
+
+                    {/* Mission and Vision Cards */}
+                    <div className="mt-24 flex flex-col md:flex-row items-center justify-center gap-6 md:gap-14">
+                        {/* Mission */}
+                        <motion.div
+                            initial="hidden"
+                            animate={aboutCardsInView ? 'visible' : 'hidden'}
+                            variants={fadeUp}
+                            className="bg-[#e4e4e4] p-4 pb-6 rounded-[35px] w-full max-w-[340px] shadow-sm flex flex-col"
+                        >
+                            <div className="bg-white rounded-[24px] py-2 mb-4 w-[90%] mx-auto shadow-sm">
+                                <span className="text-[20px] font-normal text-[#1a1a1a]">Our Mission</span>
+                            </div>
+                            <div className="w-full h-[200px] rounded-[18px] overflow-hidden mb-5">
+                                <img src={gallery8} alt="Our Mission" className="w-full h-full object-cover" />
+                            </div>
+                            <div className="px-3 text-left">
+                                <ul className="text-[11px] text-gray-800 space-y-3 leading-snug font-medium">
+                                    <li>Engineer intelligent, secure, and sustainable systems for real-world industries</li>
+                                    <li>Transform complex industrial operations into data-driven, self-optimizing ecosystems</li>
+                                    <li>Leverage AI, IoT, automation, and secure digital infrastructure to deliver precision and resilience</li>
+                                    <li>Build scalable, energy-efficient, and economically viable solutions for global markets</li>
+                                    <li>Enable long-term operational intelligence rather than short-term technology adoption</li>
+                                </ul>
+                            </div>
+                        </motion.div>
+
+                        {/* Arrow Icon */}
+                        <motion.div
+                            initial="hidden"
+                            animate={aboutCardsInView ? 'visible' : 'hidden'}
+                            variants={fadeUp}
+                            className="hidden md:flex flex-col items-center justify-center transform -translate-y-12"
+                        >
+                            <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-black rotate-45 transform">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </motion.div>
+
+                        {/* Vision */}
+                        <motion.div
+                            initial="hidden"
+                            animate={aboutCardsInView ? 'visible' : 'hidden'}
+                            variants={fadeUp}
+                            className="bg-[#e4e4e4] p-4 pb-6 rounded-[35px] w-full max-w-[340px] shadow-sm flex flex-col"
+                        >
+                            <div className="bg-white rounded-[24px] py-2 mb-4 w-[90%] mx-auto shadow-sm">
+                                <span className="text-[20px] font-normal text-[#1a1a1a]">Our Vision</span>
+                            </div>
+                            <div className="w-full h-[200px] rounded-[18px] overflow-hidden mb-5">
+                                <img src={gallery7} alt="Our Vision" className="w-full h-full object-cover" />
+                            </div>
+                            <div className="px-3 text-left">
+                                <ul className="text-[11px] text-gray-800 space-y-2.5 leading-snug font-medium">
+                                    <li>Lead the future of industrial intelligence across food systems, infrastructure, and digital ecosystems</li>
+                                    <li>Create autonomous, climate-resilient, and secure operational environments</li>
+                                    <li>Redefine how industries adapt, optimize, and scale through intelligent systems</li>
+                                    <li>Bridge physical and digital worlds into unified, self-aware infrastructures</li>
+                                    <li>Shape a future where technology drives sustainability, trust, and continuous innovation</li>
+                                </ul>
+                            </div>
+                        </motion.div>
+                    </div>
+
                 </div>
             </section>
 

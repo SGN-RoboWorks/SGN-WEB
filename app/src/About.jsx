@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 
 // Assets
@@ -76,7 +76,19 @@ const directorBios = [
 ];
 
 function About() {
+    const [scrolled, setScrolled] = useState(false);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const stickyNavRef = useRef(null);
     const heroRef = useRef(null);
+
+    // Scroll listener for sticky nav
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrolled(window.scrollY > window.innerHeight * 0.85);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     // Unicorn Studio Initialization & Branding Cleanup
     useEffect(() => {
@@ -118,12 +130,7 @@ function About() {
                     '.us-watermark',
                     '[class*="us-brand"]',
                     '[id*="us-brand"]',
-                    'div[style*="z-index: 2147483647"]',
-                    'div[style*="z-index:2147483647"]',
-                    'iframe[src*="unicorn"]',
-                    'a[href*="unicorn"]',
-                    'div[style*="fixed"][style*="bottom: 0"][style*="right: 0"]',
-                    'div[style*="fixed"][style*="bottom:0"][style*="right:0"]'
+                    'a[href*="unicorn"]'
                 ];
 
                 selectors.forEach(selector => {
@@ -199,182 +206,182 @@ function About() {
                     initial={{ opacity: 0, y: -30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.3 }}
-                    className="absolute top-8 left-1/2 -translate-x-1/2 z-20 w-max"
+                    className="absolute z-20 left-1/2 -translate-x-1/2 top-8"
                 >
-                    <div className="nav-pill px-8 py-3 rounded-full flex items-center gap-6 bg-white/10 backdrop-blur-md border border-white/20">
+                    <div className="nav-pill flex items-center justify-center font-medium">
                         {navLinks.map((link) => (
                             <a
                                 key={link}
                                 href={link === 'About' ? '/about' : link === 'Service' ? '/service' : link === 'Contact' ? '/contact' : link === 'Home' ? '/' : '#'}
-                                className="text-white text-sm font-medium tracking-wide hover:text-gray-300 transition-colors"
+                                className="text-white text-[17px] tracking-wide hover:opacity-70 transition-opacity drop-shadow-sm"
                             >
                                 {link}
                             </a>
                         ))}
-                        <span className="text-white text-sm font-semibold tracking-wide ml-4">SGN Agritech</span>
+                        <span className="text-white text-[17px] font-[Playfair_Display] tracking-wide ml-2 drop-shadow-sm">SGN Agritech</span>
                     </div>
+
+                    {/* Mobile hamburger */}
+                    <button
+                        className="md:hidden absolute right-4 top-1/2 -translate-y-1/2 text-white"
+                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                    >
+                        <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2">
+                            {mobileMenuOpen ? (
+                                <path d="M6 6l12 12M6 18L18 6" />
+                            ) : (
+                                <path d="M4 6h16M4 12h16M4 18h16" />
+                            )}
+                        </svg>
+                    </button>
                 </motion.nav>
+
+                {/* Mobile menu dropdown */}
+                {mobileMenuOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="fixed top-20 left-4 right-4 z-30 glass-card p-6 flex flex-col gap-4 md:hidden"
+                    >
+                        {navLinks.map((link) => (
+                            <a
+                                key={link}
+                                href={link === 'About' ? '/about' : link === 'Service' ? '/service' : link === 'Contact' ? '/contact' : link === 'Home' ? '/' : '#'}
+                                className="text-white text-lg"
+                                onClick={() => setMobileMenuOpen(false)}
+                            >
+                                {link}
+                            </a>
+                        ))}
+                        <span className="text-white text-lg font-semibold">SGN Agritech</span>
+                    </motion.div>
+                )}
+            </section>
+
+            {/* ═══════════════════════════════════════ */}
+            {/* STICKY NAVBAR (appears after hero)      */}
+            {/* ═══════════════════════════════════════ */}
+            <div
+                ref={stickyNavRef}
+                className={`fixed bottom-8 left-1/2 -translate-x-1/2 z-40 flex justify-center py-4 transition-all duration-500 ${scrolled ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+            >
+                <div className="nav-pill nav-pill-white">
+                    {navLinks.map((link) => (
+                        <a
+                            key={link}
+                            href={link === 'About' ? '/about' : link === 'Service' ? '/service' : link === 'Contact' ? '/contact' : link === 'Home' ? '/' : '#'}
+                            className="text-black text-xs font-semibold tracking-wider hover:opacity-60 transition-opacity"
+                        >
+                            {link}
+                        </a>
+                    ))}
+                    <div className="h-4 w-[1px] bg-black/10 mx-2"></div>
+                    <span className="text-black text-xs font-bold tracking-wider">SGN Agritech</span>
+                </div>
+            </div>
+
+            {/* ═══════════════════════════════════════ */}
+            {/* INTRO PARAGRAPH                         */}
+            {/* ═══════════════════════════════════════ */}
+            <section className="pt-24 pb-16 bg-[#f5f5f5]">
+                <div className="max-w-[48rem] mx-auto px-6 text-center">
+                    <motion.p
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        variants={fadeUp}
+                        className="text-[#1a1a1a] text-[13px] md:text-[15px] font-medium leading-relaxed"
+                    >
+                        Incorporated in 30th July 2025, SGN Roboworks is a rapid prototyping venture with a
+                        clear goal to deliver high-quality IoT ,Robotics etc.. services. And we are evolving
+                        ourselves better to become a renowned people trusted company.
+                    </motion.p>
+                </div>
             </section>
 
             {/* ═══════════════════════════════════════ */}
             {/* VISION SHAPING SECTION                  */}
             {/* ═══════════════════════════════════════ */}
-            <section className="py-24 bg-[#f5f5f5]">
-                <div className="max-w-6xl mx-auto px-6">
+            <section className="py-12 bg-[#f5f5f5]">
+                <div className="max-w-[56rem] mx-auto px-4 md:px-6">
                     <motion.div
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true }}
                         variants={fadeUp}
-                        className="text-center mb-20"
+                        className="mb-10 pl-2 md:pl-4"
                     >
-                        <h2 className="font-[Playfair_Display] text-5xl md:text-7xl font-normal text-black leading-tight">
+                        <h2 className="font-[Playfair_Display] text-[2.5rem] md:text-[3.5rem] font-normal text-black leading-tight tracking-wide">
                             The Visions Shaping SGN <br /> Roboworks
                         </h2>
                     </motion.div>
 
-                    <div className="grid md:grid-cols-3 gap-8">
-                        {team.map((member, i) => (
-                            <motion.div
-                                key={i}
-                                initial="hidden"
-                                whileInView="visible"
-                                viewport={{ once: true }}
-                                variants={fadeUp}
-                                className="bg-[#d9d9d9] rounded-[40px] p-6 pt-8 text-center"
-                            >
-                                <div className="w-full h-80 rounded-[30px] overflow-hidden mb-6 shadow-xl grayscale hover:grayscale-0 transition-all duration-500">
-                                    <img src={member.img} alt={member.name} className="w-full h-full object-cover" />
-                                </div>
-                                <h4 className="text-xl font-bold text-gray-800 mb-4">{member.name}</h4>
-                                <button className="px-6 py-2 rounded-full bg-white text-black text-xs font-semibold shadow-sm hover:bg-black hover:text-white transition-all">
-                                    View Service
-                                </button>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* ═══════════════════════════════════════ */}
-            {/* DIVERSITY & INCLUSION                   */}
-            {/* ═══════════════════════════════════════ */}
-            <section className="py-24 bg-white">
-                <div className="max-w-4xl mx-auto px-6 text-center">
                     <motion.div
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true }}
                         variants={fadeUp}
+                        className="bg-[#e9e9e9] rounded-[40px] p-6 md:p-10 flex flex-col items-center shadow-md"
                     >
-                        <h2 className="text-6xl md:text-8xl font-normal text-black mb-12">
-                            Diversity & Inclusion
-                        </h2>
-                        <p className="text-gray-600 text-lg md:text-xl leading-relaxed">
-                            At SGN Roboworks, we believe innovation thrives on diverse perspectives. We are committed to building an inclusive environment where individuals are valued for their skills, ideas, and contributions—regardless of background or identity. By fostering equal opportunity and interdisciplinary collaboration, we strengthen our ability to engineer intelligent, resilient, and future-ready systems for global industries.
-                        </p>
+                        <div className="grid md:grid-cols-3 gap-6 md:gap-8 w-full mb-8">
+                            {team.map((member, i) => (
+                                <div
+                                    key={i}
+                                    className="flex flex-col w-full h-[320px] md:h-[340px] rounded-[24px] bg-[#898989] p-2 md:p-3 pb-0 overflow-hidden shadow-md transform transition-all duration-300 hover:scale-[1.03]"
+                                >
+                                    <div className="flex-1 w-full rounded-t-[18px] rounded-b-[4px] md:rounded-t-[20px] overflow-hidden border border-black/10">
+                                        <img src={member.img} alt={member.name} className="w-full h-full object-cover" />
+                                    </div>
+                                    <div className="py-3 text-center">
+                                        <h4 className="text-[#1a1a1a] text-[15px] font-semibold tracking-wide">{member.name}</h4>
+                                        <p className="text-gray-200 text-[9px] mt-0.5 tracking-wider">{member.role}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                        <button className="px-5 py-1.5 rounded-full border border-black/20 bg-[#f0f0f0] text-black text-[10px] font-medium hover:bg-black hover:text-white transition-all shadow-sm">
+                            View Service
+                        </button>
                     </motion.div>
-                </div>
-            </section>
-
-            {/* ═══════════════════════════════════════ */}
-            {/* MISSION & VISION SECTION                */}
-            {/* ═══════════════════════════════════════ */}
-            <section className="py-24 bg-[#f5f5f5]">
-                <div className="max-w-6xl mx-auto px-6">
-                    <div className="grid md:grid-cols-2 gap-10 items-start">
-                        {/* Mission */}
-                        <motion.div
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
-                            variants={fadeUp}
-                            className="bg-white rounded-[40px] overflow-hidden shadow-sm"
-                        >
-                            <div className="px-10 pt-10 pb-6">
-                                <span className="bg-[#f5f5f5] rounded-full px-8 py-3 text-lg font-semibold inline-block">
-                                    Our Mission
-                                </span>
-                            </div>
-                            <div className="h-[280px] overflow-hidden p-6 pt-0">
-                                <div className="w-full h-full rounded-[30px] overflow-hidden">
-                                    <img src={gallery8} alt="Mission" className="w-full h-full object-cover" />
-                                </div>
-                            </div>
-                            <div className="px-10 py-8 pt-0">
-                                <ul className="space-y-4">
-                                    {missionPoints.map((pt, i) => (
-                                        <li key={i} className="text-gray-600 text-sm leading-relaxed flex items-start">
-                                            <span className="mr-2 mt-1.5 w-1.5 h-1.5 bg-black/20 rounded-full shrink-0" />
-                                            {pt}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        </motion.div>
-
-                        {/* Vision */}
-                        <motion.div
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
-                            variants={fadeUp}
-                            className="bg-white rounded-[40px] overflow-hidden shadow-sm"
-                        >
-                            <div className="px-10 pt-10 pb-6 flex justify-end">
-                                <span className="bg-[#f5f5f5] rounded-full px-8 py-3 text-lg font-semibold inline-block">
-                                    Our Vision
-                                </span>
-                            </div>
-                            <div className="h-[280px] overflow-hidden p-6 pt-0">
-                                <div className="w-full h-full rounded-[30px] overflow-hidden">
-                                    <img src={gallery7} alt="Vision" className="w-full h-full object-cover" />
-                                </div>
-                            </div>
-                            <div className="px-10 py-8 pt-0">
-                                <ul className="space-y-4">
-                                    {visionPoints.map((pt, i) => (
-                                        <li key={i} className="text-gray-600 text-sm leading-relaxed flex items-start">
-                                            <span className="mr-2 mt-1.5 w-1.5 h-1.5 bg-black/20 rounded-full shrink-0" />
-                                            {pt}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        </motion.div>
-                    </div>
                 </div>
             </section>
 
             {/* ═══════════════════════════════════════ */}
             {/* PROJECTS of DIRECTORS                  */}
             {/* ═══════════════════════════════════════ */}
-            <section className="py-24 bg-[#f5f5f5]">
-                <div className="max-w-6xl mx-auto px-6">
+            <section className="py-12 bg-[#f5f5f5]">
+                <div className="max-w-[56rem] mx-auto px-4 md:px-6">
                     <motion.div
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true }}
                         variants={fadeUp}
-                        className="bg-white rounded-[40px] overflow-hidden shadow-sm"
+                        className="bg-[#e9e9e9] rounded-[40px] p-5 md:p-8 shadow-md"
                     >
-                        <div className="relative h-[400px]">
+                        <div className="relative h-[250px] md:h-[320px] w-full rounded-[30px] overflow-hidden shadow-sm mb-10">
                             <img src={projectsHandshake} alt="Handshake" className="w-full h-full object-cover" />
-                            <div className="absolute inset-0 bg-black/10 flex items-center px-12">
-                                <h2 className="font-[Playfair_Display] text-white text-6xl md:text-8xl font-normal drop-shadow-lg">
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-8 md:p-12">
+                                <h2 className="font-[Playfair_Display] text-white text-3xl md:text-[3.25rem] font-normal leading-tight tracking-wide drop-shadow-md">
                                     PROJECTS of <br /> DIRECTORS
                                 </h2>
                             </div>
                         </div>
 
-                        <div className="p-12 md:p-16 grid md:grid-cols-3 gap-12">
+                        <div className="px-2 md:px-6 grid md:grid-cols-3 gap-8 md:gap-12 mb-4">
                             {directorBios.map((bio, i) => (
-                                <div key={i}>
-                                    <h4 className="text-2xl font-bold mb-1">{bio.name}</h4>
-                                    <p className="text-gray-400 text-sm mb-6">{bio.role}</p>
-                                    <p className="text-gray-600 text-sm leading-relaxed">
+                                <div key={i} className="flex flex-col items-center md:items-start text-center md:text-left h-full">
+                                    <div className="mb-4 text-center w-full md:text-left">
+                                        <h4 className="text-[#1a1a1a] text-lg font-medium">{bio.name}</h4>
+                                        <p className="text-gray-500 text-[10px] mt-0.5">{bio.role}</p>
+                                    </div>
+                                    <p className="text-[#333] text-[9.5px] md:text-[10px] font-medium leading-[1.6] mb-8 flex-1 w-full max-w-[280px] mx-auto md:mx-0">
                                         {bio.desc}
                                     </p>
+                                    <div className="w-full flex justify-center mt-auto">
+                                        <button className="px-5 py-1 rounded-full bg-white border border-gray-300 text-black text-[9px] font-bold hover:bg-black hover:text-white transition-all shadow-sm tracking-wide">
+                                            View Project
+                                        </button>
+                                    </div>
                                 </div>
                             ))}
                         </div>

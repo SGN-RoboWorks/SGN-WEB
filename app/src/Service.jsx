@@ -108,19 +108,19 @@ function Service() {
                     initial={{ opacity: 0, y: -30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.3 }}
-                    className="absolute top-6 left-1/2 -translate-x-1/2 z-20"
+                    className="absolute z-20 left-1/2 -translate-x-1/2 top-8"
                 >
-                    <div className="nav-pill">
+                    <div className="nav-pill flex items-center justify-center font-medium">
                         {navLinks.map((link) => (
                             <a
                                 key={link}
                                 href={link === 'About' ? '/about' : link === 'Service' ? '/service' : link === 'Contact' ? '/contact' : link === 'Home' ? '/' : '#'}
-                                className="text-white text-sm font-medium tracking-wide hover:opacity-70 transition-opacity"
+                                className="text-white text-[17px] tracking-wide hover:opacity-70 transition-opacity drop-shadow-sm"
                             >
                                 {link}
                             </a>
                         ))}
-                        <span className="text-white text-sm font-semibold tracking-wide">SGN Agritech</span>
+                        <span className="text-white text-[17px] font-[Playfair_Display] tracking-wide ml-2 drop-shadow-sm">SGN Agritech</span>
                     </div>
 
                     {/* Mobile hamburger */}
@@ -177,19 +177,20 @@ function Service() {
             {/* ═══════════════════════════════════════ */}
             <div
                 ref={stickyNavRef}
-                className={`sticky top-0 z-40 flex justify-center py-4 transition-all duration-500 bg-[#f5f5f5] ${scrolled ? 'shadow-sm' : ''}`}
+                className={`fixed bottom-8 left-1/2 -translate-x-1/2 z-40 flex justify-center py-4 transition-all duration-500 ${scrolled ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
             >
-                <div className="nav-pill nav-pill-solid">
+                <div className="nav-pill nav-pill-white">
                     {navLinks.map((link) => (
                         <a
                             key={link}
                             href={link === 'About' ? '/about' : link === 'Service' ? '/service' : link === 'Contact' ? '/contact' : link === 'Home' ? '/' : '#'}
-                            className="text-[#1a1a1a] text-sm font-medium tracking-wide hover:opacity-60 transition-opacity"
+                            className="text-black text-xs font-semibold tracking-wider hover:opacity-60 transition-opacity"
                         >
                             {link}
                         </a>
                     ))}
-                    <span className="text-[#1a1a1a] text-sm font-semibold tracking-wide">SGN Agritech</span>
+                    <div className="h-4 w-[1px] bg-black/10 mx-2"></div>
+                    <span className="text-black text-xs font-bold tracking-wider">SGN Agritech</span>
                 </div>
             </div>
 

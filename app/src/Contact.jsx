@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
 // Assets
@@ -21,6 +21,18 @@ const navLinks = ['Home', 'About', 'Service', 'Contact'];
 
 function Contact() {
     const [openFaq, setOpenFaq] = useState(null);
+    const [scrolled, setScrolled] = useState(false);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const stickyNavRef = useRef(null);
+
+    // Scroll listener for sticky nav
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrolled(window.scrollY > window.innerHeight * 0.85);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     const faqs = [
         {
@@ -64,21 +76,56 @@ function Contact() {
                     initial={{ opacity: 0, y: -30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.3 }}
-                    className="absolute top-8 left-1/2 -translate-x-1/2 z-20 w-max"
+                    className="absolute z-20 left-1/2 -translate-x-1/2 top-8"
                 >
-                    <div className="nav-pill px-8 py-3 rounded-full flex items-center gap-6 bg-white/10 backdrop-blur-md border border-white/20">
+                    <div className="nav-pill flex items-center justify-center font-medium">
                         {navLinks.map((link) => (
                             <a
                                 key={link}
                                 href={link === 'About' ? '/about' : link === 'Service' ? '/service' : link === 'Contact' ? '/contact' : link === 'Home' ? '/' : '#'}
-                                className={`text-white text-sm font-medium tracking-wide hover:text-gray-300 transition-colors ${link === 'Contact' ? 'opacity-100' : 'opacity-70'}`}
+                                className="text-white text-[17px] tracking-wide hover:opacity-70 transition-opacity drop-shadow-sm"
                             >
                                 {link}
                             </a>
                         ))}
-                        <span className="text-white text-sm font-semibold tracking-wide ml-4">SGN Agritech</span>
+                        <span className="text-white text-[17px] font-[Playfair_Display] tracking-wide ml-2 drop-shadow-sm">SGN Agritech</span>
                     </div>
+
+                    {/* Mobile hamburger */}
+                    <button
+                        className="md:hidden absolute right-4 top-1/2 -translate-y-1/2 text-white"
+                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                    >
+                        <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2">
+                            {mobileMenuOpen ? (
+                                <path d="M6 6l12 12M6 18L18 6" />
+                            ) : (
+                                <path d="M4 6h16M4 12h16M4 18h16" />
+                            )}
+                        </svg>
+                    </button>
                 </motion.nav>
+
+                {/* Mobile menu dropdown */}
+                {mobileMenuOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="fixed top-20 left-4 right-4 z-30 glass-card p-6 flex flex-col gap-4 md:hidden"
+                    >
+                        {navLinks.map((link) => (
+                            <a
+                                key={link}
+                                href={link === 'About' ? '/about' : link === 'Service' ? '/service' : link === 'Contact' ? '/contact' : link === 'Home' ? '/' : '#'}
+                                className="text-white text-lg"
+                                onClick={() => setMobileMenuOpen(false)}
+                            >
+                                {link}
+                            </a>
+                        ))}
+                        <span className="text-white text-lg font-semibold">SGN Agritech</span>
+                    </motion.div>
+                )}
 
                 {/* Hero Text */}
                 <div className="absolute bottom-24 left-8 md:left-16 z-10 pointer-events-none">
@@ -92,6 +139,28 @@ function Contact() {
                     </motion.h1>
                 </div>
             </section>
+
+            {/* ═══════════════════════════════════════ */}
+            {/* STICKY NAVBAR (appears after hero)      */}
+            {/* ═══════════════════════════════════════ */}
+            <div
+                ref={stickyNavRef}
+                className={`fixed bottom-8 left-1/2 -translate-x-1/2 z-40 flex justify-center py-4 transition-all duration-500 ${scrolled ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+            >
+                <div className="nav-pill nav-pill-white">
+                    {navLinks.map((link) => (
+                        <a
+                            key={link}
+                            href={link === 'About' ? '/about' : link === 'Service' ? '/service' : link === 'Contact' ? '/contact' : link === 'Home' ? '/' : '#'}
+                            className="text-black text-xs font-semibold tracking-wider hover:opacity-60 transition-opacity"
+                        >
+                            {link}
+                        </a>
+                    ))}
+                    <div className="h-4 w-[1px] bg-black/10 mx-2"></div>
+                    <span className="text-black text-xs font-bold tracking-wider">SGN Agritech</span>
+                </div>
+            </div>
 
             {/* ═══════════════════════════════════════ */}
             {/* CONTACT FORM SECTION                     */}
