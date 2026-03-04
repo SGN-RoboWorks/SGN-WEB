@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import { motion, useScroll, useTransform, useInView, useMotionValue, useSpring } from 'framer-motion';
 
 // ── Asset Imports ──
 import gallery1 from './assets/gallery-1.png';
@@ -21,7 +21,6 @@ import whyImgBotR from './assets/59d5145a665116b455cfcd5f7ca676eaaf2fcf9f.jpg'; 
 import gallery6 from './assets/gallery-6.png';
 
 // ── Components ──
-import ScrollStack, { ScrollStackItem } from './ScrollStack';
 
 
 // ── Animation Variants ──
@@ -57,31 +56,82 @@ const techSolutions = [
     { name: 'Electronics Component Supply' },
 ];
 
+
 // ── Why Choosing Cards — real photo assets from video ──
 // Layout: left = tall single card, right = top large + bottom 2 small
 
-// ── ScrollStack Services ──
-const services = [
-    { title: 'IoT & Robotics', location: 'Tamil Nadu', desc: 'Hardware-based installation across TN.', img: gallery1, color: '#f0f0f0' },
-    { title: 'AI-Based Products', location: 'Global', desc: 'Custom Software solutions available worldwide.', img: gallery12, color: '#e8e8e8' },
-    { title: 'Electronics Component Supply', location: 'Tamil Nadu', desc: 'Wholesale supply & dealer network across TN.', img: gallery2, color: '#e0e0e0' },
-    { title: 'Smart Home Automation', location: 'Tamil Nadu', desc: 'Direct installation & consultation across TN.', img: gallery3, color: '#d8d8d8' },
-    { title: 'Sustainable Hydro-ponics', location: 'Tamil Nadu', desc: 'Commercial & home farm setup across TN.', img: gallery1, color: '#d0d0d0' },
-];
+// ── ScrollStack Services (Removed as per video) ──
+
+const AnimatedCard = ({ children, className, variants }) => {
+    const ref = useRef(null);
+    const x = useMotionValue(0);
+    const y = useMotionValue(0);
+
+    const mouseXSpring = useSpring(x);
+    const mouseYSpring = useSpring(y);
+
+    const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], [2, -2]);
+    const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], [-2, 2]);
+
+    const handleMouseMove = (e) => {
+        if (!ref.current) return;
+        const rect = ref.current.getBoundingClientRect();
+        const width = rect.width;
+        const height = rect.height;
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+        const xPct = mouseX / width - 0.5;
+        const yPct = mouseY / height - 0.5;
+        x.set(xPct);
+        y.set(yPct);
+    };
+
+    const handleMouseLeave = () => {
+        x.set(0);
+        y.set(0);
+    };
+
+    const widthMatch = className?.match(/w-full|md:w-\[[^\]]+\]/);
+    const widthClass = widthMatch ? widthMatch[0] : 'w-full';
+    const innerClass = className?.replace(widthClass, '').trim();
+
+    return (
+        <motion.div
+            variants={variants}
+            style={{ perspective: 1200 }}
+            className={`${widthClass} flex flex-col`}
+        >
+            <motion.div
+                ref={ref}
+                className={`${innerClass} flex-1 w-full`}
+                style={{
+                    rotateX,
+                    rotateY,
+                    transformStyle: "preserve-3d",
+                }}
+                whileHover={{ scale: 1.05 }}
+                transition={{ scale: { type: "spring", stiffness: 300, damping: 20 } }}
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
+            >
+                {children}
+            </motion.div>
+        </motion.div>
+    );
+};
 
 function Service() {
-    const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
     const heroRef = useRef(null);
-    const stickyNavRef = useRef(null);
     const footerRef = useRef(null);
 
     useEffect(() => {
         const handleScroll = () => {
-            setScrolled(window.scrollY > window.innerHeight * 0.85);
+            setIsScrolled(window.scrollY > 50);
         };
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
     const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
@@ -103,29 +153,58 @@ function Service() {
                     />
                 </motion.div>
 
+                {/* Hero Title — Positioned bottom-left */}
+                <div className="absolute inset-0 flex flex-col items-start justify-end p-10 md:p-20 z-10 pointer-events-none">
+                    <motion.h1
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.5 }}
+                        className="font-[Playfair_Display] text-white text-6xl md:text-8xl font-normal tracking-wide"
+                    >
+                        OUR SERVICES
+                    </motion.h1>
+                </div>
+
                 {/* Top Navbar — Glassmorphic Pill */}
                 <motion.nav
                     initial={{ opacity: 0, y: -30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.3 }}
-                    className="absolute z-20 left-1/2 -translate-x-1/2 top-8"
+                    // Switch from absolute to fixed so it follows the user
+                    className={`fixed z-50 left-1/2 -translate-x-1/2 transition-all duration-300 w-[90%] md:w-auto ${isScrolled ? "top-4" : "top-8"
+                        }`}
                 >
-                    <div className="nav-pill flex items-center justify-center font-medium">
-                        {navLinks.map((link) => (
+                    <div className={`nav-pill flex items-center justify-center font-medium px-8 py-2 rounded-full transition-all duration-300 w-full md:w-auto ${isScrolled
+                        ? "bg-white/90 backdrop-blur-md shadow-md border border-gray-200"
+                        : "bg-transparent"
+                        }`}>
+                        <div className="flex items-center gap-6">
+                            <div className="hidden md:flex items-center gap-6">
+                                {navLinks.map((link) => (
+                                    <a
+                                        key={link}
+                                        href={link === 'About' ? '/about' : link === 'Service' ? '/service' : link === 'Contact' ? '/contact' : link === 'Home' ? '/' : '#'}
+                                        className={`text-[17px] tracking-wide transition-colors duration-300 ${isScrolled ? "text-black hover:text-gray-600" : "text-white hover:opacity-70"
+                                            } drop-shadow-sm`}
+                                    >
+                                        {link}
+                                    </a>
+                                ))}
+                            </div>
                             <a
-                                key={link}
-                                href={link === 'About' ? '/about' : link === 'Service' ? '/service' : link === 'Contact' ? '/contact' : link === 'Home' ? '/' : '#'}
-                                className="text-white text-[17px] tracking-wide hover:opacity-70 transition-opacity drop-shadow-sm"
+                                href="https://aquponics-amig.vercel.app/Aquaponics.html"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={`text-[17px] font-[Playfair_Display] tracking-wide transition-colors duration-300 ${isScrolled ? "text-black" : "text-white"} drop-shadow-sm`}
                             >
-                                {link}
+                                SGN Agritech
                             </a>
-                        ))}
-                        <span className="text-white text-[17px] font-[Playfair_Display] tracking-wide ml-2 drop-shadow-sm">SGN Agritech</span>
+                        </div>
                     </div>
 
                     {/* Mobile hamburger */}
                     <button
-                        className="md:hidden absolute right-4 top-1/2 -translate-y-1/2 text-white"
+                        className={`md:hidden absolute right-4 top-1/2 -translate-y-1/2 transition-colors duration-300 ${isScrolled ? "text-black" : "text-white"}`}
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                     >
                         <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -136,63 +215,40 @@ function Service() {
                             )}
                         </svg>
                     </button>
+                    {/* Mobile menu dropdown */}
+                    {mobileMenuOpen && (
+                        <motion.div
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className={`absolute top-[120%] left-0 right-0 p-6 flex flex-col gap-4 rounded-3xl md:hidden ${isScrolled
+                                ? "bg-white/95 backdrop-blur-md shadow-lg border border-gray-200"
+                                : "glass-card border border-white/20"
+                                }`}
+                        >
+                            {navLinks.map((link) => (
+                                <a
+                                    key={link}
+                                    href={link === 'About' ? '/about' : link === 'Service' ? '/service' : link === 'Contact' ? '/contact' : link === 'Home' ? '/' : '#'}
+                                    className={`text-lg font-medium transition-colors ${isScrolled ? "text-gray-800 hover:text-black" : "text-white hover:text-gray-300"}`}
+                                    onClick={() => setMobileMenuOpen(false)}
+                                >
+                                    {link}
+                                </a>
+                            ))}
+                            <a
+                                href="https://aquponics-amig.vercel.app/Aquaponics.html"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={`text-lg font-semibold ${isScrolled ? "text-black" : "text-white"}`}
+                            >
+                                SGN Agritech
+                            </a>
+                        </motion.div>
+                    )}
                 </motion.nav>
 
-                {/* Mobile menu dropdown */}
-                {mobileMenuOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="fixed top-20 left-4 right-4 z-30 glass-card p-6 flex flex-col gap-4 md:hidden"
-                    >
-                        {navLinks.map((link) => (
-                            <a
-                                key={link}
-                                href={link === 'About' ? '/about' : link === 'Service' ? '/service' : link === 'Contact' ? '/contact' : link === 'Home' ? '/' : '#'}
-                                className="text-white text-lg"
-                                onClick={() => setMobileMenuOpen(false)}
-                            >
-                                {link}
-                            </a>
-                        ))}
-                        <span className="text-white text-lg font-semibold">SGN Agritech</span>
-                    </motion.div>
-                )}
-
-                {/* Hero bottom-left text */}
-                <div className="absolute inset-0 flex items-end justify-start p-10 md:p-16 z-10 pointer-events-none">
-                    <motion.h1
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.5 }}
-                        className="font-[Playfair_Display] text-white text-6xl md:text-8xl font-normal tracking-wide"
-                    >
-                        OUR SERVICES
-                    </motion.h1>
-                </div>
             </section>
 
-            {/* ═══════════════════════════════════════ */}
-            {/* STICKY NAVBAR (appears after hero)      */}
-            {/* ═══════════════════════════════════════ */}
-            <div
-                ref={stickyNavRef}
-                className={`fixed bottom-8 left-1/2 -translate-x-1/2 z-40 flex justify-center py-4 transition-all duration-500 ${scrolled ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
-            >
-                <div className="nav-pill nav-pill-white">
-                    {navLinks.map((link) => (
-                        <a
-                            key={link}
-                            href={link === 'About' ? '/about' : link === 'Service' ? '/service' : link === 'Contact' ? '/contact' : link === 'Home' ? '/' : '#'}
-                            className="text-black text-xs font-semibold tracking-wider hover:opacity-60 transition-opacity"
-                        >
-                            {link}
-                        </a>
-                    ))}
-                    <div className="h-4 w-[1px] bg-black/10 mx-2"></div>
-                    <span className="text-black text-xs font-bold tracking-wider">SGN Agritech</span>
-                </div>
-            </div>
 
             {/* ═══════════════════════════════════════ */}
             {/* INTRO PARAGRAPH                         */}
@@ -207,59 +263,54 @@ function Service() {
                 >
                     <motion.p
                         variants={fadeUp}
-                        className="text-gray-700 text-base md:text-lg leading-relaxed"
+                        className="text-gray-600 text-lg md:text-xl leading-relaxed font-normal"
                     >
                         SGN RoboWorks delivers services through a structured engineering process—
                         analyzing client requirements, designing intelligent system architectures, integrating
-                        AI, IoT, automation, and secure networks, and deploying fully optimized solutions.
+                        AI, IOT, automation, and secure networks, and deploying fully optimized solutions.
                         The company ensures real-world performance through testing, monitoring, and
                         ongoing technical support.
                     </motion.p>
                 </motion.div>
             </section>
 
+
+
             {/* ═══════════════════════════════════════ */}
             {/* OUR MAIN TECH SOLUTIONS — 3-col grid    */}
             {/* ═══════════════════════════════════════ */}
-            <section className="py-16 md:py-24 bg-[#f5f5f5]">
-                <motion.div
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ margin: '-100px' }}
-                    variants={staggerContainer}
-                    className="max-w-6xl mx-auto px-6"
-                >
-                    <div className="flex flex-col md:flex-row gap-12">
-                        {/* Left label */}
-                        <motion.div variants={fadeUp} className="md:w-1/4 flex flex-col justify-start pt-2">
-                            <h2 className="font-[Playfair_Display] text-2xl md:text-3xl font-normal">
+            <section className="py-16 md:py-24 bg-white">
+                <div className="max-w-[1440px] mx-auto px-6">
+                    {/* Main Grid: 3 columns on desktop */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+
+                        {/* Cell 1: Header Text Block */}
+                        <div className="flex flex-col justify-start pt-0 pl-0 pb-12 md:pt-0 md:pl-0">
+                            <h2 className="font-normal text-[32px] md:text-[36px] font-normal leading-tight text-[#1a1a1a]">
                                 Our Main <span className="font-bold">Tech Solutions</span>
                             </h2>
-                            <p className="text-gray-500 text-sm mt-3 leading-relaxed">
+                            <p className="text-[#1a1a1a] text-[16px] mt-4 leading-relaxed max-w-[300px]">
                                 Delivering Hardware Automation across Tamil Nadu and Custom AI/Software solutions globally.
                             </p>
-                        </motion.div>
-
-                        {/* Right: 3-column grid of bordered cards */}
-                        <div className="md:w-3/4 grid grid-cols-2 md:grid-cols-3 gap-4">
-                            {techSolutions.map((sol, i) => (
-                                <motion.div
-                                    key={i}
-                                    variants={fadeUp}
-                                    whileHover={{
-                                        backgroundColor: '#1a1a1a',
-                                        transition: { duration: 0.3 }
-                                    }}
-                                    className="group border border-gray-300 rounded-2xl p-6 flex items-end min-h-[160px] bg-white hover:shadow-lg transition-shadow cursor-default"
-                                >
-                                    <span className="font-medium text-base text-[#1a1a1a] group-hover:text-white transition-colors duration-300">
-                                        {sol.name}
-                                    </span>
-                                </motion.div>
-                            ))}
                         </div>
+
+                        {/* Map through the solution cards */}
+                        {techSolutions.map((sol, i) => (
+                            <motion.div
+                                key={i}
+                                whileHover={{
+                                    backgroundColor: '#1a1a1a',
+                                    transition: { duration: 0.2, ease: 'easeOut' }
+                                }}
+                                className="group rounded-[20px] p-10 flex flex-col justify-end min-h-[290px] bg-white border border-black transition-colors duration-200 cursor-pointer"
+                            >
+                                <span className="font-medium text-[24px] leading-[1.2] text-[#1a1a1a] group-hover:text-white transition-colors duration-200 max-w-[180px]">
+                                    {sol.name}
+                                </span>
+                            </motion.div>
+                        ))}
                     </div>
-                </motion.div>
+                </div>
             </section>
 
             {/* ═══════════════════════════════════════ */}
@@ -271,103 +322,100 @@ function Service() {
                     whileInView="visible"
                     viewport={{ margin: '-100px' }}
                     variants={staggerContainer}
-                    className="max-w-6xl mx-auto px-6"
+                    className="max-w-[1196px] mx-auto px-6"
                 >
                     <motion.h2
                         variants={fadeUp}
-                        className="font-[Playfair_Display] text-4xl md:text-5xl font-normal text-left mb-12"
+                        className="font-[Playfair_Display] text-[3.5rem] font-normal text-left mb-16 tracking-tight"
                     >
                         Why Choosing SGN Roboworks?
                     </motion.h2>
 
                     {/* Asymmetric layout: LEFT = 1 tall card | RIGHT = 1 large top + 2 small bottom */}
-                    <div className="flex flex-col md:flex-row gap-6">
+                    <div className="flex flex-col md:flex-row gap-10">
 
-                        {/* LEFT — tall card: office professionals */}
-                        <motion.div
+                        {/* LEFT — tall card: Value-Driven Automation */}
+                        <AnimatedCard
                             variants={fadeUp}
-                            className="md:w-[35%] border border-gray-200 rounded-2xl overflow-hidden bg-white flex flex-col"
+                            className="md:w-[38%] border border-black/[0.12] rounded-[32px] overflow-hidden bg-white flex flex-col shadow-sm"
                         >
-                            <div className="flex-1 min-h-[280px] overflow-hidden">
+                            <div className="flex-1 overflow-hidden">
                                 <img
                                     src={whyImgLeft}
                                     alt="Value-Driven Automation"
                                     className="w-full h-full object-cover"
-                                    style={{ minHeight: '280px' }}
                                 />
                             </div>
-                            <div className="p-6">
-                                <h3 className="font-semibold text-lg text-[#1a1a1a]">Value-Driven Automation</h3>
-                                <p className="text-gray-500 text-sm mt-2 leading-relaxed">
+                            <div className="p-10">
+                                <h3 className="text-[28px] font-semibold text-[#1a1a1a] leading-tight mb-4">Value-Driven Automation</h3>
+                                <p className="text-[#666] text-[15px] leading-relaxed">
                                     Cutting-edge technology, including affordable automation solutions, customized to deliver maximum ROI for SMEs and large enterprises.
                                 </p>
                             </div>
-                        </motion.div>
+                        </AnimatedCard>
 
-                        {/* RIGHT — column: 1 large on top + 2 small on bottom */}
-                        <div className="md:w-[65%] flex flex-col gap-6">
+                        {/* RIGHT — column: Global AI + Bottom 2 */}
+                        <div className="md:w-[62%] flex flex-col gap-10">
 
-                            {/* Top large card: warehouse + hardware */}
-                            <motion.div
+                            {/* Top large card: Global AI, Local Hardware */}
+                            <AnimatedCard
                                 variants={fadeUp}
-                                className="border border-gray-200 rounded-2xl overflow-hidden bg-white"
+                                className="border border-black/[0.12] rounded-[32px] overflow-hidden bg-white shadow-sm flex flex-col"
                             >
-                                <div className="h-48 overflow-hidden">
+                                <div className="h-[260px] overflow-hidden">
                                     <img
                                         src={whyImgTopR}
                                         alt="Global AI, Local Hardware"
                                         className="w-full h-full object-cover"
                                     />
                                 </div>
-                                <div className="p-6">
-                                    <h3 className="font-semibold text-lg text-[#1a1a1a]">Global AI, Local Hardware</h3>
-                                    <p className="text-gray-500 text-sm mt-2 leading-relaxed">
-                                        Offering world-class Custom Software &amp; AI Development globally, backed by reliable, on-site hardware installation across Tamil Nadu.
+                                <div className="p-10">
+                                    <h3 className="text-[28px] font-semibold text-[#1a1a1a] leading-tight mb-4">Global AI, Local Hardware</h3>
+                                    <p className="text-[#666] text-[15px] leading-relaxed">
+                                        Offering world-class Custom Software & AI Development globally, backed by reliable, on-site hardware installation across Tamil Nadu.
                                     </p>
                                 </div>
-                            </motion.div>
+                            </AnimatedCard>
 
-                            {/* Bottom row: 2 smaller cards side by side */}
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                {/* Holistic Tech Integration */}
-                                <motion.div
+                            {/* Bottom row: Holistic + Sustainability */}
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
+                                <AnimatedCard
                                     variants={fadeUp}
-                                    className="border border-gray-200 rounded-2xl overflow-hidden bg-white"
+                                    className="border border-black/[0.12] rounded-[32px] overflow-hidden bg-white shadow-sm flex flex-col"
                                 >
-                                    <div className="h-40 overflow-hidden">
+                                    <div className="h-[180px] overflow-hidden">
                                         <img
                                             src={whyImgBotM}
                                             alt="Holistic Tech Integration"
                                             className="w-full h-full object-cover"
                                         />
                                     </div>
-                                    <div className="p-5">
-                                        <h3 className="font-semibold text-base text-[#1a1a1a]">Holistic Tech Integration</h3>
-                                        <p className="text-gray-500 text-xs mt-2 leading-relaxed">
+                                    <div className="p-10">
+                                        <h3 className="text-[24px] font-semibold text-[#1a1a1a] leading-tight mb-4">Holistic Tech Integration</h3>
+                                        <p className="text-[#666] text-[14px] leading-relaxed">
                                             Comprehensive expertise in IoT, AI, and Robotics, delivering holistic, seamless, and integrated hardware and software solutions.
                                         </p>
                                     </div>
-                                </motion.div>
+                                </AnimatedCard>
 
-                                {/* Sustainability Focus */}
-                                <motion.div
+                                <AnimatedCard
                                     variants={fadeUp}
-                                    className="border border-gray-200 rounded-2xl overflow-hidden bg-white"
+                                    className="border border-black/[0.12] rounded-[32px] overflow-hidden bg-white shadow-sm flex flex-col"
                                 >
-                                    <div className="h-40 overflow-hidden">
+                                    <div className="h-[180px] overflow-hidden">
                                         <img
                                             src={whyImgBotR}
                                             alt="Sustainability Focus"
                                             className="w-full h-full object-cover"
                                         />
                                     </div>
-                                    <div className="p-5">
-                                        <h3 className="font-semibold text-base text-[#1a1a1a]">Sustainability Focus</h3>
-                                        <p className="text-gray-500 text-xs mt-2 leading-relaxed">
+                                    <div className="p-10">
+                                        <h3 className="text-[24px] font-semibold text-[#1a1a1a] leading-tight mb-4">Sustainability Focus</h3>
+                                        <p className="text-[#666] text-[14px] leading-relaxed">
                                             Committed to building smarter, greener futures through eco-friendly systems like Hydro/Aqua-ponics and energy-efficient Smart Home solutions.
                                         </p>
                                     </div>
-                                </motion.div>
+                                </AnimatedCard>
                             </div>
                         </div>
                     </div>
@@ -401,7 +449,7 @@ function Service() {
                     </motion.p>
                     <motion.div
                         variants={fadeUp}
-                        className="mt-12 inline-flex items-center gap-3 px-8 py-3 rounded-md bg-[#e0e0e0] text-[#1a1a1a] text-sm font-medium"
+                        className="mt-12 inline-flex items-center gap-3 px-8 py-3 rounded-full bg-[#e0e0e0] text-[#1a1a1a] text-sm font-medium"
                     >
                         <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
                             <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
@@ -431,24 +479,43 @@ function Service() {
                     variants={fadeUp}
                     className="max-w-6xl mx-auto px-6"
                 >
-                    <div className="relative overflow-hidden rounded-[40px] bg-black min-h-[480px]">
-                        <img
-                            src={gallery6}
-                            alt="Contact Background"
-                            className="absolute inset-0 w-full h-full object-cover opacity-60 scale-105"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
+                    <div className="relative w-full max-w-[1195px] h-auto md:h-[582px] bg-[#0a0a0a] rounded-[40px] overflow-hidden flex flex-col md:flex-row shadow-2xl mx-auto">
+                        {/* Background Image Layer */}
+                        <div className="absolute inset-0 z-0">
+                            <img src={gallery6} alt="Contact" className="w-full h-full object-cover md:object-[center_left] opacity-80 border-none" />
+                            <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#000000] via-[#000000]/60 to-transparent md:from-transparent md:via-[#000000]/40 md:to-[#000000]/90 pointer-events-none"></div>
+                        </div>
 
-                        <div className="relative z-10 p-12 md:p-24 flex flex-col items-center md:items-start justify-center h-full min-h-[480px]">
-                            <div className="md:w-1/2" />
-                            <div className="md:w-1/2 text-white flex flex-col items-center md:items-start">
-                                <h3 className="font-[Playfair_Display] text-5xl md:text-6xl font-normal tracking-wide text-center md:text-left">
+                        {/* Spacer for left half */}
+                        <div className="hidden md:block w-[420px] shrink-0 z-10"></div>
+
+                        {/* Right Content Container */}
+                        <div className="relative z-10 flex-1 flex flex-col pt-12 md:pt-[80.89px] px-8 md:px-0 items-center md:items-start pb-12 md:pb-0">
+
+                            {/* Title area */}
+                            <div className="md:ml-[0px] flex flex-col items-center justify-center w-full max-w-[488px] h-auto md:h-[120px] mb-8 md:mb-[43px]">
+                                <h3 className="font-[Playfair_Display] text-white text-[32px] md:text-[38.5px] font-normal leading-none" style={{ letterSpacing: '0.1em' }}>
                                     BOOK YOUR
                                 </h3>
-                                <h3 className="font-[Playfair_Display] text-5xl md:text-6xl font-normal tracking-[0.1em] mt-3 mr-[-0.1em] text-center md:text-left">
+                                <h3 className="font-[Playfair_Display] text-white text-[24px] md:text-[32px] font-normal leading-none mt-2 md:mt-4 ml-1 md:ml-[14px]" style={{ letterSpacing: '0.35em' }}>
                                     APPOINTMENTS
                                 </h3>
-                                <a href="#contact" className="mt-12 px-12 py-3 rounded-full border border-white/40 hover:bg-white hover:text-black transition-all duration-300 text-sm font-medium tracking-widest uppercase">
+                            </div>
+
+                            {/* Description area */}
+                            <div className="w-full max-w-[592px] h-auto md:h-[149.18px] mb-8 md:mb-[50px]">
+                                <p className="text-[#dfdfdf] text-[15px] md:text-[16px] leading-[1.8] font-[Inter] font-light text-center md:text-left">
+                                    Our team is just a call away. Whether you need expert
+                                    guidance, quick support, or a personalized solution, we're
+                                    here to help you every step of the way. Reach out today
+                                    and experience professional service designed around your
+                                    needs.
+                                </p>
+                            </div>
+
+                            {/* Button area */}
+                            <div className="md:ml-[205px]">
+                                <a href="/contact" className="w-[149px] h-[43.07px] flex items-center justify-center rounded-[21.5px] border border-white/60 text-white text-[14.5px] font-[Inter] font-medium hover:bg-white hover:text-black transition-all bg-white/5 backdrop-blur-md shadow-sm hover:shadow-md">
                                     Contact
                                 </a>
                             </div>
@@ -472,23 +539,29 @@ function Service() {
                         {/* Left — Brand */}
                         <div>
                             <div className="flex items-center gap-4">
-                                <img src={gallery4} alt="SGN Logo" className="w-12 h-12 rounded-full" />
+                                <img src={gallery4} alt="SGN Logo" className="w-14 h-14 rounded-full border border-gray-100 p-1" />
                                 <div>
-                                    <h4 className="font-[Playfair_Display] text-3xl font-bold tracking-wider">S G N</h4>
-                                    <p className="font-[Playfair_Display] text-lg">Roboworks</p>
+                                    <h4 className="font-[Playfair_Display] text-8xl tracking-tighter  leading-none">S G N</h4>
+                                    <p className="font-[Playfair_Display] text-xl text-gray-800 tracking-wide mt-1">Roboworks</p>
                                 </div>
                             </div>
-                            <p className="mt-6 text-gray-500 text-sm">@ 2026 Roboworks</p>
+                            <p className="mt-8 text-gray-400 text-sm font-medium">@ 2026 Roboworks</p>
                         </div>
 
                         {/* Right — Quick Access */}
                         <div>
                             <h5 className="text-lg font-bold mb-6">Quick access</h5>
-                            <ul className="space-y-4">
-                                <li><a href="/" className="text-gray-700 hover:text-black transition-colors">Home</a></li>
-                                <li><a href="/about" className="text-gray-700 hover:text-black transition-colors">About us</a></li>
-                                <li><a href="/service" className="text-gray-700 hover:text-black transition-colors">Services</a></li>
-                                <li><a href="/contact" className="text-gray-700 hover:text-black transition-colors">Contact</a></li>
+                            <ul className="space-y-5">
+                                {navLinks.map((link) => (
+                                    <li key={link}>
+                                        <a
+                                            href={link === 'About' ? '/about' : link === 'Service' ? '/service' : link === 'Contact' ? '/contact' : link === 'Home' ? '/' : '#'}
+                                            className="text-black hover:text-gray transition-colors"
+                                        >
+                                            {link === 'About' ? 'About us' : link === 'Service' ? 'Services' : link}
+                                        </a>
+                                    </li>
+                                ))}
                             </ul>
                         </div>
                     </div>
@@ -500,7 +573,7 @@ function Service() {
                     </div>
                 </motion.div>
             </footer>
-        </div>
+        </div >
     );
 }
 

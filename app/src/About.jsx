@@ -8,8 +8,15 @@ import gallery7 from './assets/gallery-7.png';
 import gallery8 from './assets/gallery-8.png';
 import directorSarath from './assets/director-sarath.jpg';
 import directorGokulnath from './assets/director-gokulnath.jpg';
-import directorNaveen from './assets/director-naveen.jpg';
+import directorNaveen from './assets/direct.jpg';
 import projectsHandshake from './assets/projects-handshake.jpg';
+import gemini1 from './assets/Gemini_Generated_Image_3id6v53id6v53id6.png';
+import gemini2 from './assets/Gemini_Generated_Image_9ubis89ubis89ubi.png';
+import gemini3 from './assets/Gemini_Generated_Image_bui6kcbui6kcbui6.png';
+import gemini4 from './assets/Gemini_Generated_Image_jbe4bkjbe4bkjbe4.png';
+import gemini5 from './assets/Gemini_Generated_Image_t7i1rrt7i1rrt7i1.png';
+import ThreeDImageRing from './ThreeDImageRing';
+import GlareHover from './GlareHover';
 
 // Animation Variants
 const fadeUp = {
@@ -36,9 +43,9 @@ const staggerContainer = {
 const navLinks = ['Home', 'About', 'Service', 'Contact'];
 
 const team = [
-    { name: 'Sarath Kumar Sk', role: 'Managing Director', img: directorSarath },
-    { name: 'N. Gokulnath', role: 'Co-Founder & Director', img: directorGokulnath },
-    { name: 'Naveen NG', role: 'Co-Founder & Director', img: directorNaveen },
+    { name: 'Sarath Kumar Sk', role: 'Managing Director', img: directorGokulnath },
+    { name: 'N. Gokulnath', role: 'Co-Founder & Director', img: directorNaveen },
+    { name: 'Naveen NG', role: 'Co-Founder & Director', img: directorSarath },
 ];
 
 const missionPoints = [
@@ -61,33 +68,34 @@ const directorBios = [
     {
         name: 'Sarath Kumar Sk',
         role: 'Managing Director',
-        desc: 'Expert in Robotic Operations and Machine Learning Integration for Industrial Automation. Holds a Master\'s in Robotics Engineering from the University of Manchester, specializing in intelligent automation and sustainable ecosystems.'
+        desc: "Expert in Robotic Operations and Machine Learning Integration for Industrial Automation. Holds a Master's in Robotics Engineering from the University of Manchester, specializing in intelligent automation and sustainable technology solutions across India.",
+        link: 'https://sarath-online.vercel.app/'
     },
     {
         name: 'N. Gokulnath',
         role: 'Co-Founder & Director',
-        desc: 'Visionary Leader in Industrial IoT and Smart Factory Innovations. 13X Patent Holder in IoT and Robotics Applications, specializing in advanced Electronics, Home Automation, and Adaptive Automation Systems for production.'
+        desc: 'Visionary Leader in Industrial IoT and Smart Factory Innovations. 13X Patent Holder in IoT and Robotics Applications, specializing in advanced Electronics, Home Automation, and Adaptive Automation Systems for diverse industrial environments.',
+        link: 'https://ngokulnath.vercel.app/'
     },
     {
         name: 'Naveen NG',
         role: 'Co-Founder & Director',
-        desc: '5X Patent Holder and Expert in AR/VR Design and minimalist Mechanical Innovation. Specializes in developing optimized solutions in pneumatic, hydraulics, and advanced product engineering for next-generation systems.'
+        desc: '5X Patent Holder and Expert in AR/VR Design and minimalist Mechanical Innovation. Specializes in developing optimized solutions in pneumatic, hydraulics, and advanced product engineering for next-generation smart systems.',
+        link: '#'
     }
 ];
 
 function About() {
-    const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const stickyNavRef = useRef(null);
+    const [isScrolled, setIsScrolled] = useState(false);
     const heroRef = useRef(null);
 
-    // Scroll listener for sticky nav
     useEffect(() => {
         const handleScroll = () => {
-            setScrolled(window.scrollY > window.innerHeight * 0.85);
+            setIsScrolled(window.scrollY > 50);
         };
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
     // Unicorn Studio Initialization & Branding Cleanup
@@ -130,7 +138,9 @@ function About() {
                     '.us-watermark',
                     '[class*="us-brand"]',
                     '[id*="us-brand"]',
-                    'a[href*="unicorn"]'
+                    'a[href*="unicorn"]',
+                    '[style*="2147483647"]',
+                    '#us-canvas-container + div'
                 ];
 
                 selectors.forEach(selector => {
@@ -153,6 +163,18 @@ function About() {
             };
 
             findAndRemove(document.body);
+
+            // 4. Force hide any top-level body children that aren't #root
+            Array.from(document.body.children).forEach(el => {
+                if (el.id !== 'root' &&
+                    !['SCRIPT', 'STYLE'].includes(el.tagName) &&
+                    (el.textContent.toLowerCase().includes('unicorn') ||
+                        el.innerHTML.toLowerCase().includes('unicorn') ||
+                        el.getAttribute('href')?.includes('unicorn'))) {
+                    el.style.setProperty('display', 'none', 'important');
+                    el.remove();
+                }
+            });
         };
 
         // Run immediately
@@ -178,6 +200,17 @@ function About() {
             {/* ═══════════════════════════════════════ */}
             {/* HERO SECTION — Centered Animation        */}
             {/* ═══════════════════════════════════════ */}
+            {/* Hero Title — Positioned bottom-left */}
+            <div className="absolute inset-0 flex flex-col items-start justify-end p-10 md:p-20 z-10 pointer-events-none">
+                <motion.h1
+                    initial={{ opacity: 0, y: 40 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.5 }}
+                    className="font-[Playfair_Display] text-white text-6xl md:text-8xl font-normal tracking-wide"
+                >
+                    ABOUT US
+                </motion.h1>
+            </div>
             <section
                 id="about-hero"
                 ref={heroRef}
@@ -186,6 +219,7 @@ function About() {
                 {/* Animation Container (Background) */}
                 <div
                     className="absolute inset-0 z-0 flex items-center justify-center p-0 m-0"
+                    style={{ transform: 'translateX(0%)' }}
                     data-us-project="gcNwfvcVtYZDlhVdfUiA"
                 ></div>
 
@@ -206,94 +240,99 @@ function About() {
                     initial={{ opacity: 0, y: -30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.3 }}
-                    className="absolute z-20 left-1/2 -translate-x-1/2 top-8"
+                    // Switch from absolute to fixed so it follows the user
+                    className={`fixed z-50 left-1/2 -translate-x-1/2 transition-all duration-300 w-[90%] md:w-auto ${isScrolled ? "top-4" : "top-8"
+                        }`}
                 >
-                    <div className="nav-pill flex items-center justify-center font-medium">
-                        {navLinks.map((link) => (
+                    <div className={`nav-pill flex items-center justify-center font-medium px-8 py-2 rounded-full transition-all duration-300 w-full md:w-auto ${isScrolled
+                        ? "bg-white/90 backdrop-blur-md shadow-md border border-gray-200"
+                        : "bg-transparent"
+                        }`}>
+                        <div className="flex items-center gap-6">
+                            <div className="hidden md:flex items-center gap-6">
+                                {navLinks.map((link) => (
+                                    <a
+                                        key={link}
+                                        href={link === 'About' ? '/about' : link === 'Service' ? '/service' : link === 'Contact' ? '/contact' : link === 'Home' ? '/' : '#'}
+                                        className={`text-[17px] tracking-wide transition-colors duration-300 ${isScrolled ? "text-black hover:text-gray-600" : "text-white hover:opacity-70"
+                                            } drop-shadow-sm`}
+                                    >
+                                        {link}
+                                    </a>
+                                ))}
+                            </div>
                             <a
-                                key={link}
-                                href={link === 'About' ? '/about' : link === 'Service' ? '/service' : link === 'Contact' ? '/contact' : link === 'Home' ? '/' : '#'}
-                                className="text-white text-[17px] tracking-wide hover:opacity-70 transition-opacity drop-shadow-sm"
+                                href="https://aquponics-amig.vercel.app/Aquaponics.html"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={`text-[17px] font-[Playfair_Display] tracking-wide transition-colors duration-300 ${isScrolled ? "text-black" : "text-white"} drop-shadow-sm`}
                             >
-                                {link}
+                                SGN Agritech
                             </a>
-                        ))}
-                        <span className="text-white text-[17px] font-[Playfair_Display] tracking-wide ml-2 drop-shadow-sm">SGN Agritech</span>
+                        </div>
                     </div>
-
-                    {/* Mobile hamburger */}
-                    <button
-                        className="md:hidden absolute right-4 top-1/2 -translate-y-1/2 text-white"
-                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                    >
-                        <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2">
-                            {mobileMenuOpen ? (
-                                <path d="M6 6l12 12M6 18L18 6" />
-                            ) : (
-                                <path d="M4 6h16M4 12h16M4 18h16" />
-                            )}
-                        </svg>
-                    </button>
                 </motion.nav>
 
+                {/* Mobile hamburger */}
+                <button
+                    className={`md:hidden absolute right-4 top-1/2 -translate-y-1/2 transition-colors duration-300 ${isScrolled ? "text-black" : "text-white"}`}
+                    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                >
+                    <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2">
+                        {mobileMenuOpen ? (
+                            <path d="M6 6l12 12M6 18L18 6" />
+                        ) : (
+                            <path d="M4 6h16M4 12h16M4 18h16" />
+                        )}
+                    </svg>
+                </button>
                 {/* Mobile menu dropdown */}
                 {mobileMenuOpen && (
                     <motion.div
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="fixed top-20 left-4 right-4 z-30 glass-card p-6 flex flex-col gap-4 md:hidden"
+                        className={`absolute top-[120%] left-0 right-0 p-6 flex flex-col gap-4 rounded-3xl md:hidden ${isScrolled
+                            ? "bg-white/95 backdrop-blur-md shadow-lg border border-gray-200"
+                            : "glass-card border border-white/20"
+                            }`}
                     >
                         {navLinks.map((link) => (
                             <a
                                 key={link}
                                 href={link === 'About' ? '/about' : link === 'Service' ? '/service' : link === 'Contact' ? '/contact' : link === 'Home' ? '/' : '#'}
-                                className="text-white text-lg"
+                                className={`text-lg font-medium transition-colors ${isScrolled ? "text-gray-800 hover:text-black" : "text-white hover:text-gray-300"}`}
                                 onClick={() => setMobileMenuOpen(false)}
                             >
                                 {link}
                             </a>
                         ))}
-                        <span className="text-white text-lg font-semibold">SGN Agritech</span>
+                        <a
+                            href="https://aquponics-amig.vercel.app/Aquaponics.html"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`text-lg font-semibold ${isScrolled ? "text-black" : "text-white"}`}
+                        >
+                            SGN Agritech
+                        </a>
                     </motion.div>
                 )}
             </section>
 
-            {/* ═══════════════════════════════════════ */}
-            {/* STICKY NAVBAR (appears after hero)      */}
-            {/* ═══════════════════════════════════════ */}
-            <div
-                ref={stickyNavRef}
-                className={`fixed bottom-8 left-1/2 -translate-x-1/2 z-40 flex justify-center py-4 transition-all duration-500 ${scrolled ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
-            >
-                <div className="nav-pill nav-pill-white">
-                    {navLinks.map((link) => (
-                        <a
-                            key={link}
-                            href={link === 'About' ? '/about' : link === 'Service' ? '/service' : link === 'Contact' ? '/contact' : link === 'Home' ? '/' : '#'}
-                            className="text-black text-xs font-semibold tracking-wider hover:opacity-60 transition-opacity"
-                        >
-                            {link}
-                        </a>
-                    ))}
-                    <div className="h-4 w-[1px] bg-black/10 mx-2"></div>
-                    <span className="text-black text-xs font-bold tracking-wider">SGN Agritech</span>
-                </div>
-            </div>
 
             {/* ═══════════════════════════════════════ */}
             {/* INTRO PARAGRAPH                         */}
             {/* ═══════════════════════════════════════ */}
-            <section className="pt-24 pb-16 bg-[#f5f5f5]">
-                <div className="max-w-[48rem] mx-auto px-6 text-center">
+            <section className="pt-24 pb-16 bg-white">
+                <div className="max-w-[50rem] mx-auto px-6 text-center">
                     <motion.p
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true }}
                         variants={fadeUp}
-                        className="text-[#1a1a1a] text-[13px] md:text-[15px] font-medium leading-relaxed"
+                        className="text-[#1a1a1a] text-[18px] md:text-[24px]  leading-relaxed"
                     >
                         Incorporated in 30th July 2025, SGN Roboworks is a rapid prototyping venture with a
-                        clear goal to deliver high-quality IoT ,Robotics etc.. services. And we are evolving
+                        clear goal to deliver high-quality IoT Robotics etc.. services. And we are evolving
                         ourselves better to become a renowned people trusted company.
                     </motion.p>
                 </div>
@@ -302,8 +341,8 @@ function About() {
             {/* ═══════════════════════════════════════ */}
             {/* VISION SHAPING SECTION                  */}
             {/* ═══════════════════════════════════════ */}
-            <section className="py-12 bg-[#f5f5f5]">
-                <div className="max-w-[56rem] mx-auto px-4 md:px-6">
+            <section className="py-12 bg-white">
+                <div className="max-w-[1196px] mx-auto px-4 md:px-6">
                     <motion.div
                         initial="hidden"
                         whileInView="visible"
@@ -321,27 +360,32 @@ function About() {
                         whileInView="visible"
                         viewport={{ once: true }}
                         variants={fadeUp}
-                        className="bg-[#e9e9e9] rounded-[40px] p-6 md:p-10 flex flex-col items-center shadow-md"
+                        className="bg-[#e9e9e9] rounded-[44px] p-6 md:p-10 flex flex-col items-center justify-between shadow-md min-h-[646px]"
                     >
-                        <div className="grid md:grid-cols-3 gap-6 md:gap-8 w-full mb-8">
+                        <div className="flex flex-wrap md:flex-nowrap justify-center gap-6 md:gap-[58px] w-full mb-8">
                             {team.map((member, i) => (
                                 <div
                                     key={i}
-                                    className="flex flex-col w-full h-[320px] md:h-[340px] rounded-[24px] bg-[#898989] p-2 md:p-3 pb-0 overflow-hidden shadow-md transform transition-all duration-300 hover:scale-[1.03]"
+                                    style={{ width: i === 1 ? '346px' : '327px', height: '494px' }}
+                                    className="flex flex-col rounded-[24px] bg-[#898989] p-3 pb-0 overflow-hidden shadow-md transform transition-all duration-300 hover:scale-[1.03]"
                                 >
-                                    <div className="flex-1 w-full rounded-t-[18px] rounded-b-[4px] md:rounded-t-[20px] overflow-hidden border border-black/10">
+                                    <div className="flex-1 w-full rounded-t-[20px] rounded-b-[4px] overflow-hidden border border-black/10">
                                         <img src={member.img} alt={member.name} className="w-full h-full object-cover" />
                                     </div>
-                                    <div className="py-3 text-center">
-                                        <h4 className="text-[#1a1a1a] text-[15px] font-semibold tracking-wide">{member.name}</h4>
-                                        <p className="text-gray-200 text-[9px] mt-0.5 tracking-wider">{member.role}</p>
+                                    <div className="py-4 text-center">
+                                        <h4 className="text-[#1a1a1a] text-[16px] font-semibold tracking-wide">{member.name}</h4>
+                                        <p className="text-gray-200 text-[10px] mt-0.5 tracking-wider">{member.role}</p>
                                     </div>
                                 </div>
                             ))}
                         </div>
-                        <button className="px-5 py-1.5 rounded-full border border-black/20 bg-[#f0f0f0] text-black text-[10px] font-medium hover:bg-black hover:text-white transition-all shadow-sm">
+                        <a
+                            href="/service"
+                            style={{ width: '149px', height: '43px', borderRadius: '21.5px' }}
+                            className="border border-black/20 bg-[#f0f0f0] text-black text-[11px] font-bold hover:bg-black hover:text-white transition-all shadow-sm flex items-center justify-center tracking-wide"
+                        >
                             View Service
-                        </button>
+                        </a>
                     </motion.div>
                 </div>
             </section>
@@ -349,40 +393,58 @@ function About() {
             {/* ═══════════════════════════════════════ */}
             {/* PROJECTS of DIRECTORS                  */}
             {/* ═══════════════════════════════════════ */}
-            <section className="py-12 bg-[#f5f5f5]">
-                <div className="max-w-[56rem] mx-auto px-4 md:px-6">
+            <section className="py-12 bg-white">
+                <div className="max-w-[1196px] mx-auto px-4 md:px-6">
                     <motion.div
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true }}
                         variants={fadeUp}
-                        className="bg-[#e9e9e9] rounded-[40px] p-5 md:p-8 shadow-md"
+                        className="bg-[#e9e9e9] rounded-[44px] p-5 md:p-8 shadow-md min-h-[894px] flex flex-col justify-between"
                     >
-                        <div className="relative h-[250px] md:h-[320px] w-full rounded-[30px] overflow-hidden shadow-sm mb-10">
+                        <GlareHover
+                            glareColor="#ffffff"
+                            glareOpacity={0.4}
+                            glareSize={600}
+                            className="relative h-[250px] md:h-[440px] w-full rounded-[30px] overflow-hidden shadow-sm mb-10"
+                        >
                             <img src={projectsHandshake} alt="Handshake" className="w-full h-full object-cover" />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-8 md:p-12">
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-8 md:p-12 z-10">
                                 <h2 className="font-[Playfair_Display] text-white text-3xl md:text-[3.25rem] font-normal leading-tight tracking-wide drop-shadow-md">
                                     PROJECTS of <br /> DIRECTORS
                                 </h2>
                             </div>
-                        </div>
+                        </GlareHover>
 
                         <div className="px-2 md:px-6 grid md:grid-cols-3 gap-8 md:gap-12 mb-4">
                             {directorBios.map((bio, i) => (
-                                <div key={i} className="flex flex-col items-center md:items-start text-center md:text-left h-full">
-                                    <div className="mb-4 text-center w-full md:text-left">
-                                        <h4 className="text-[#1a1a1a] text-lg font-medium">{bio.name}</h4>
-                                        <p className="text-gray-500 text-[10px] mt-0.5">{bio.role}</p>
+                                <GlareHover
+                                    key={i}
+                                    glareColor="#ffffff"
+                                    glareOpacity={0.4}
+                                    glareSize={400}
+                                    transitionDuration={300}
+                                    className="flex flex-col items-center text-center h-full p-6 rounded-[30px] bg-white/40 backdrop-blur-md border border-white/20 shadow-sm"
+                                >
+                                    <div className="mb-6 text-center w-full">
+                                        <h4 className="text-[#1a1a1a] text-[28px] font-normal leading-tight">{bio.name}</h4>
+                                        <p className="text-gray-400 text-[13px] mt-1.5 font-medium">{bio.role}</p>
                                     </div>
-                                    <p className="text-[#333] text-[9.5px] md:text-[10px] font-medium leading-[1.6] mb-8 flex-1 w-full max-w-[280px] mx-auto md:mx-0">
+                                    <p className="text-[#1a1a1a] text-[13px] font-normal leading-[1.6] mb-12 flex-1 w-full max-w-[340px] mx-auto">
                                         {bio.desc}
                                     </p>
                                     <div className="w-full flex justify-center mt-auto">
-                                        <button className="px-5 py-1 rounded-full bg-white border border-gray-300 text-black text-[9px] font-bold hover:bg-black hover:text-white transition-all shadow-sm tracking-wide">
+                                        <a
+                                            href={bio.link}
+                                            target={bio.link !== '#' ? '_blank' : '_self'}
+                                            rel="noopener noreferrer"
+                                            style={{ width: '135px', height: '38px', borderRadius: '19px' }}
+                                            className="bg-white border border-gray-100 text-[#1a1a1a] text-[11px] font-semibold hover:bg-black hover:text-white transition-all shadow-[0_2px_10px_rgba(0,0,0,0.04)] tracking-wide flex items-center justify-center relative z-20"
+                                        >
                                             View Project
-                                        </button>
+                                        </a>
                                     </div>
-                                </div>
+                                </GlareHover>
                             ))}
                         </div>
                     </motion.div>
@@ -390,39 +452,99 @@ function About() {
             </section>
 
             {/* ═══════════════════════════════════════ */}
+            {/* DIVERSITY & INCLUSION SECTION           */}
+            {/* ═══════════════════════════════════════ */}
+            <section className="pt-24 pb-20 bg-white">
+                <div className="max-w-[48rem] mx-auto px-6 text-center">
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        variants={fadeUp}
+                    >
+                        <h2 className="font-[Playfair_Display] text-[2.5rem] md:text-[3.5rem] font-normal text-black leading-tight tracking-wide mb-12">
+                            Diversity & Inclusion
+                        </h2>
+                        <p className="text-[#1a1a1a] text-[15px] md:text-[18px] font-medium leading-relaxed">
+                            At SGN Roboworks, we believe innovation thrives on diverse perspectives. We are
+                            committed to building an inclusive environment where individuals are valued for their
+                            skills, ideas, and contributions—regardless of background or identity. By fostering
+                            equal opportunity and interdisciplinary collaboration, we strengthen our ability to
+                            engineer intelligent, resilient, and future-ready systems for global industries.
+                        </p>
+                    </motion.div>
+                </div>
+            </section>
+
+            {/* 3D IMAGE RING SECTION */}
+            <section className="py-10 bg-white overflow-hidden">
+                <div className="max-w-10xl mx-auto px-6 h-[500px] flex items-center justify-center">
+                    <ThreeDImageRing
+                        images={[gemini1, gemini2, gemini3, gemini4, gemini5]}
+                        titles={[
+                            "IoT & Robotics",
+                            "AI-Based Products",
+                            "Smart Home Automation",
+                            "Sustainable Hydro-ponics",
+                            "Electronics Component Supply"
+                        ]}
+                        width={850}
+                        height={450}
+                        imageDistance={900}
+                        autoRotate={true}
+                        autoRotateSpeed={0.15}
+                    />
+                </div>
+            </section>
+
+            {/* ═══════════════════════════════════════ */}
             {/* APPOINTMENT SECTION (Match Home)        */}
             {/* ═══════════════════════════════════════ */}
-            <section className="py-24 bg-[#f5f5f5]">
+            <section className="py-24 bg-white">
                 <div className="max-w-6xl mx-auto px-6">
                     <motion.div
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true }}
                         variants={fadeUp}
-                        style={{ background: '#111', borderRadius: '40px', overflow: 'hidden', position: 'relative', minHeight: '450px', display: 'flex' }}
-                        className="flex-col md:flex-row"
+                        className="relative w-full max-w-[1195px] h-auto md:h-[582px] bg-[#0a0a0a] rounded-[40px] overflow-hidden flex flex-col md:flex-row shadow-2xl mx-auto"
                     >
-                        {/* Background image — left half */}
-                        <div className="hidden md:block md:w-1/2 relative overflow-hidden">
-                            <img src={gallery6} alt="Contact" className="w-full h-full object-cover opacity-70" />
+                        {/* Background Image Layer */}
+                        <div className="absolute inset-0 z-0">
+                            <img src={gallery6} alt="Contact" className="w-full h-full object-cover md:object-[center_left] opacity-80 border-none" />
+                            <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#000000] via-[#000000]/60 to-transparent md:from-transparent md:via-[#000000]/40 md:to-[#000000]/90 pointer-events-none"></div>
                         </div>
-                        {/* Text — right half */}
-                        <div className="flex-1 p-12 md:p-16 flex flex-col justify-center">
-                            <h3 className="font-[Playfair_Display] text-white text-5xl font-bold tracking-wider mb-2">
-                                BOOK YOUR
-                            </h3>
-                            <h3 className="font-[Playfair_Display] text-white text-4xl font-bold tracking-[0.2em] mb-8">
-                                APPOINTMENTS
-                            </h3>
-                            <p className="text-gray-400 text-base leading-relaxed mb-10 max-w-sm">
-                                Our team is just a call away. Whether you need expert
-                                guidance, quick support, or a personalized solution, we're
-                                here to help you every step of the way. Reach out today
-                                and experience professional service designed around your
-                                needs.
-                            </p>
-                            <div>
-                                <a href="/contact" className="px-10 py-3 rounded-full border border-white/30 text-white text-sm font-medium hover:bg-white hover:text-black transition-all inline-block">
+
+                        {/* Spacer for left half */}
+                        <div className="hidden md:block w-[420px] shrink-0 z-10"></div>
+
+                        {/* Right Content Container */}
+                        <div className="relative z-10 flex-1 flex flex-col pt-12 md:pt-[80.89px] px-8 md:px-0 items-center md:items-start pb-12 md:pb-0">
+
+                            {/* Title area */}
+                            <div className="md:ml-[0px] flex flex-col items-center justify-center w-full max-w-[488px] h-auto md:h-[120px] mb-8 md:mb-[43px]">
+                                <h3 className="font-[Playfair_Display] text-white text-[32px] md:text-[38.5px] font-normal leading-none" style={{ letterSpacing: '0.1em' }}>
+                                    BOOK YOUR
+                                </h3>
+                                <h3 className="font-[Playfair_Display] text-white text-[24px] md:text-[32px] font-normal leading-none mt-2 md:mt-4 ml-1 md:ml-[14px]" style={{ letterSpacing: '0.35em' }}>
+                                    APPOINTMENTS
+                                </h3>
+                            </div>
+
+                            {/* Description area */}
+                            <div className="w-full max-w-[592px] h-auto md:h-[149.18px] mb-8 md:mb-[50px]">
+                                <p className="text-[#dfdfdf] text-[15px] md:text-[16px] leading-[1.8] font-[Inter] font-light text-center md:text-left">
+                                    Our team is just a call away. Whether you need expert
+                                    guidance, quick support, or a personalized solution, we're
+                                    here to help you every step of the way. Reach out today
+                                    and experience professional service designed around your
+                                    needs.
+                                </p>
+                            </div>
+
+                            {/* Button area */}
+                            <div className="md:ml-[205px]">
+                                <a href="/contact" className="w-[149px] h-[43.07px] flex items-center justify-center rounded-[21.5px] border border-white/60 text-white text-[14.5px] font-[Inter] font-medium hover:bg-white hover:text-black transition-all bg-white/5 backdrop-blur-md shadow-sm hover:shadow-md">
                                     Contact
                                 </a>
                             </div>
@@ -442,8 +564,8 @@ function About() {
                             <div className="flex items-center gap-4">
                                 <img src={gallery4} alt="SGN Logo" className="w-12 h-12 rounded-full" />
                                 <div>
-                                    <h4 className="font-[Playfair_Display] text-3xl font-bold tracking-wider">
-                                        S G N
+                                    <h4 className="font-[Playfair_Display] text-8xl  tracking-wider">
+                                        SGN
                                     </h4>
                                     <p className="font-[Playfair_Display] text-lg">Roboworks</p>
                                 </div>
@@ -454,11 +576,11 @@ function About() {
                         {/* Right — Quick Access */}
                         <div>
                             <h5 className="text-lg font-bold mb-6">Quick access</h5>
-                            <ul className="space-y-4">
-                                <li><a href="/" className="text-gray-700 hover:text-black transition-colors">Home</a></li>
-                                <li><a href="/about" className="text-gray-700 hover:text-black transition-colors">About us</a></li>
-                                <li><a href="/service" className="text-gray-700 hover:text-black transition-colors">Services</a></li>
-                                <li><a href="/contact" className="text-gray-700 hover:text-black transition-colors">Contact</a></li>
+                            <ul className="space-y-5">
+                                <li><a href="/" className="text-black-700 hover:text-gray transition-colors">Home</a></li>
+                                <li><a href="/about" className="text-black-700 hover:text-gray transition-colors">About us</a></li>
+                                <li><a href="/service" className="text-black-700 hover:text-gray transition-colors">Services</a></li>
+                                <li><a href="/contact" className="text-black-700 hover:text-gray transition-colors">Contact</a></li>
                             </ul>
                         </div>
                     </div>
@@ -469,7 +591,7 @@ function About() {
                     </div>
                 </div>
             </footer>
-        </div>
+        </div >
     );
 }
 
