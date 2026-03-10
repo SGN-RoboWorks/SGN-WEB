@@ -95,7 +95,7 @@ function Home() {
                     <img
                         src={gallery9}
                         alt="SGN Robot"
-                        className="w-full h-[140vh] md:h-[160vh] object-cover object-[center_30%]"
+                        className="w-full h-[160vh] object-cover"
                     />
                 </motion.div>
 
@@ -125,6 +125,14 @@ function Home() {
                                     </a>
                                 ))}
                             </div>
+                            <a
+                                href="https://aquponics-amig.vercel.app/Aquaponics.html"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={`text-[15px] md:text-[17px] font-[Playfair_Display] tracking-wide transition-colors duration-300 ${isScrolled ? "text-black" : "text-white"} drop-shadow-sm hidden md:flex`}
+                            >
+                                SGN Agritech
+                            </a>
                         </div>
                     </div>
 
@@ -161,6 +169,14 @@ function Home() {
                                     {link}
                                 </a>
                             ))}
+                            <a
+                                href="https://aquponics-amig.vercel.app/Aquaponics.html"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={`text-lg font-semibold ${isScrolled ? "text-black" : "text-white"}`}
+                            >
+                                SGN Agritech
+                            </a>
                         </motion.div>
                     )}
                 </motion.nav>
@@ -241,7 +257,40 @@ function Home() {
                     {/* Feature Cards — Alternating Horizontal */}
                     <div className="flex flex-col gap-6 relative z-20 w-full px-4" ref={aboutCardsRef}>
 
+                        {/* Card 1: Agritech */}
+                        <motion.div
+                            initial="hidden"
+                            animate={aboutCardsInView ? 'visible' : 'hidden'}
+                            variants={fadeUp}
+                            className="w-full max-w-[1100px] mx-auto bg-[#d9d9d9] rounded-[45px] p-4 md:p-5 flex flex-col md:flex-row items-stretch gap-4 md:gap-5 md:h-[420px] shadow-sm"
+                        >
+                            {/* Image Side with thick frame */}
+                            <div className="w-full md:w-[40%] h-[250px] md:h-full rounded-[35px] overflow-hidden border-[8px] border-[#a1a1a1] shrink-0 bg-[#333] shadow-md">
+                                <img src={gallery11} alt="Agritech" className="w-full h-full object-cover" />
+                            </div>
 
+                            {/* Text Side - perfectly aligned white box */}
+                            <div className="flex-1 bg-white rounded-[35px] p-8 md:p-12 flex flex-col items-center justify-center text-center shadow-inner">
+                                <h3 className="font-[Playfair_Display] text-[32px] md:text-[52px] font-normal text-black mb-1 border-b-[3px] border-black pb-1 leading-none inline-block">
+                                    SGN Agritech
+                                </h3>
+                                <p className="text-[14px] md:text-[15px] text-gray-500 leading-relaxed mt-8 mb-10 max-w-[520px] font-medium">
+                                    SGN Aquaponics is a sustainable way of growing food by combining fish
+                                    farming and plant cultivation in one shared system. The fish provide
+                                    natural nutrients through their waste, which feeds the plants, while the
+                                    plants filter and clean the water that returns to the fish. This creates a
+                                    balanced, low-waste cycle that uses less water, avoids chemical
+                                    fertilizers, and produces fresh vegetables and fish in a natural, efficient
+                                    way.
+                                </p>
+                                <a
+                                    href="/about"
+                                    className="px-10 py-1.5 rounded-full border border-black/30 text-[12px] md:text-[13px] font-medium text-black hover:bg-black hover:text-white transition-all transform hover:scale-105 tracking-wider shadow-sm"
+                                >
+                                    explore
+                                </a>
+                            </div>
+                        </motion.div>
 
                         {/* Card 2: Roboworks */}
                         <motion.div
@@ -435,17 +484,17 @@ function Home() {
             {/* ═══════════════════════════════════════ */}
             {/* WE ARE NOT LIMITED SECTION               */}
             {/* ═══════════════════════════════════════ */}
-            <section className="py-32 md:py-40 bg-white relative z-40" ref={limitedRef}>
+            <section className="py-24 bg-white " ref={limitedRef}>
                 <motion.div
                     initial="hidden"
                     animate={limitedInView ? 'visible' : 'hidden'}
                     variants={fadeIn}
                     className="max-w-5xl mx-auto px-6 text-center"
                 >
-                    <h2 className="font-[Playfair_Display] text-4xl md:text-7xl font-normal text-[#1a1a1a] mb-8 md:mb-12" style={{ fontVariant: 'small-caps' }}>
+                    <h2 className="font-[Playfair_Display] text-5xl mt-20 md:text-7xl font-normal text-[#1a1a1a] mb-8" style={{ fontVariant: 'small-caps' }}>
                         We Are Not Limited !
                     </h2>
-                    <p className="text-gray-600 text-lg md:text-2xl leading-relaxed max-w-3xl mx-auto font-light">
+                    <p className="text-gray-600 text-xl leading-relaxed max-w-3xl mx-auto">
                         we are not limited with these services, but we are upgrading ourselves
                         greater with more upcoming new services.
                     </p>

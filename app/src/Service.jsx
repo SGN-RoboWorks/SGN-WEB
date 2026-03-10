@@ -159,7 +159,7 @@ function Service() {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.5 }}
-                        className="font-[Playfair_Display] text-white text-6xl md:text-8xl font-normal tracking-wide"
+                        className="font-[Playfair_Display] text-white text-5xl md:text-8xl font-normal tracking-wide"
                     >
                         OUR SERVICES
                     </motion.h1>
@@ -174,31 +174,23 @@ function Service() {
                     className={`fixed z-50 left-1/2 -translate-x-1/2 transition-all duration-300 w-[90%] md:w-auto ${isScrolled ? "top-4" : "top-8"
                         }`}
                 >
-                    <div className={`nav-pill flex items-center justify-center font-medium px-8 py-2 rounded-full transition-all duration-300 w-full md:w-auto ${isScrolled
+                    <div className={`nav-pill flex items-center justify-center font-medium px-4 md:px-8 py-2 rounded-full transition-all duration-300 w-full md:w-auto ${isScrolled
                         ? "bg-white/90 backdrop-blur-md shadow-md border border-gray-200"
                         : "bg-transparent"
                         }`}>
-                        <div className="flex items-center gap-6">
-                            <div className="hidden md:flex items-center gap-6">
+                        <div className="flex items-center gap-4 md:gap-6">
+                            <div className="flex items-center gap-4 md:gap-6">
                                 {navLinks.map((link) => (
                                     <a
                                         key={link}
                                         href={link === 'About' ? '/about' : link === 'Service' ? '/service' : link === 'Contact' ? '/contact' : link === 'Home' ? '/' : '#'}
-                                        className={`text-[17px] tracking-wide transition-colors duration-300 ${isScrolled ? "text-black hover:text-gray-600" : "text-white hover:opacity-70"
-                                            } drop-shadow-sm`}
+                                        className={`text-[15px] md:text-[17px] tracking-wide transition-colors duration-300 ${isScrolled ? "text-black hover:text-gray-600" : "text-white hover:opacity-70"
+                                            } drop-shadow-sm ${link === 'Service' ? 'flex' : 'hidden md:flex'}`}
                                     >
                                         {link}
                                     </a>
                                 ))}
                             </div>
-                            <a
-                                href="https://aquponics-amig.vercel.app/Aquaponics.html"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className={`text-[17px] font-[Playfair_Display] tracking-wide transition-colors duration-300 ${isScrolled ? "text-black" : "text-white"} drop-shadow-sm`}
-                            >
-                                SGN Agritech
-                            </a>
                         </div>
                     </div>
 
@@ -235,14 +227,6 @@ function Service() {
                                     {link}
                                 </a>
                             ))}
-                            <a
-                                href="https://aquponics-amig.vercel.app/Aquaponics.html"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className={`text-lg font-semibold ${isScrolled ? "text-black" : "text-white"}`}
-                            >
-                                SGN Agritech
-                            </a>
                         </motion.div>
                     )}
                 </motion.nav>
@@ -263,7 +247,7 @@ function Service() {
                 >
                     <motion.p
                         variants={fadeUp}
-                        className="text-gray-600 text-lg md:text-xl leading-relaxed font-normal"
+                        className="text-gray-600 text-[16px] md:text-xl leading-relaxed font-normal"
                     >
                         SGN RoboWorks delivers services through a structured engineering process—
                         analyzing client requirements, designing intelligent system architectures, integrating
@@ -302,9 +286,9 @@ function Service() {
                                     backgroundColor: '#1a1a1a',
                                     transition: { duration: 0.2, ease: 'easeOut' }
                                 }}
-                                className="group rounded-[20px] p-10 flex flex-col justify-end min-h-[290px] bg-white border border-black transition-colors duration-200 cursor-pointer"
+                                className="group rounded-[20px] p-8 md:p-10 flex flex-col justify-end min-h-[200px] md:min-h-[290px] bg-white border border-black transition-colors duration-200 cursor-pointer"
                             >
-                                <span className="font-medium text-[24px] leading-[1.2] text-[#1a1a1a] group-hover:text-white transition-colors duration-200 max-w-[180px]">
+                                <span className="font-medium text-[20px] md:text-[24px] leading-[1.2] text-[#1a1a1a] group-hover:text-white transition-colors duration-200 max-w-[180px]">
                                     {sol.name}
                                 </span>
                             </motion.div>
@@ -326,7 +310,7 @@ function Service() {
                 >
                     <motion.h2
                         variants={fadeUp}
-                        className="font-[Playfair_Display] text-[3.5rem] font-normal text-left mb-16 tracking-tight"
+                        className="font-[Playfair_Display] text-[2.5rem] md:text-[3.5rem] font-normal text-left mb-12 md:mb-16 tracking-tight"
                     >
                         Why Choosing SGN Roboworks?
                     </motion.h2>
@@ -435,7 +419,7 @@ function Service() {
                 >
                     <motion.h2
                         variants={fadeUp}
-                        className="font-[Playfair_Display] text-5xl md:text-7xl font-normal text-[#1a1a1a]"
+                        className="font-[Playfair_Display] text-4xl md:text-7xl font-normal text-[#1a1a1a]"
                     >
                         Our Locations
                     </motion.h2>
@@ -541,8 +525,8 @@ function Service() {
                             <div className="flex items-center gap-4">
                                 <img src={gallery4} alt="SGN Logo" className="w-14 h-14 rounded-full border border-gray-100 p-1" />
                                 <div>
-                                    <h4 className="font-[Playfair_Display] text-8xl tracking-tighter  leading-none">S G N</h4>
-                                    <p className="font-[Playfair_Display] text-xl text-gray-800 tracking-wide mt-1">Roboworks</p>
+                                    <h4 className="font-[Playfair_Display] text-6xl md:text-8xl tracking-tighter  leading-none">S G N</h4>
+                                    <p className="font-[Playfair_Display] text-base md:text-xl text-gray-800 tracking-wide mt-1">Roboworks</p>
                                 </div>
                             </div>
                             <p className="mt-8 text-gray-400 text-sm font-medium">@ 2026 Roboworks</p>

@@ -31,6 +31,7 @@ export function ThreeDImageRing({
     inertiaVelocityMultiplier = 20, // Default multiplier for initial spin
     autoRotate = true,
     autoRotateSpeed = 0.1,
+    borderRadius = 20,
 }) {
     const containerRef = useRef(null);
     const ringRef = useRef(null);
@@ -40,11 +41,24 @@ export function ThreeDImageRing({
     const currentRotationY = useRef(initialRotation);
     const isDragging = useRef(false);
     const velocity = useRef(0); // To track drag velocity
+    const isInertiaActive = useRef(false);
 
+    const [activeIndex, setActiveIndex] = useState(0);
     const [currentScale, setCurrentScale] = useState(1);
     const [showImages, setShowImages] = useState(false);
-    const [activeIndex, setActiveIndex] = useState(0);
-    const isInertiaActive = useRef(false);
+
+    const imageVariants = {
+        hidden: { opacity: 0, scale: 0.8 },
+        visible: (index) => ({
+            opacity: 1,
+            scale: 1,
+        }),
+    };
+
+    const [dimensions, setDimensions] = useState({
+        width: typeof window !== 'undefined' ? window.innerWidth : 1200,
+        height: typeof window !== 'undefined' ? window.innerHeight : 800
+    });
 
     const angle = useMemo(() => 360 / images.length, [images.length]);
 
@@ -77,7 +91,16 @@ export function ThreeDImageRing({
     useEffect(() => {
         const handleResize = () => {
             const viewportWidth = window.innerWidth;
-            const newScale = viewportWidth <= mobileBreakpoint ? mobileScaleFactor : 1;
+            const viewportHeight = window.innerHeight;
+            setDimensions({ width: viewportWidth, height: viewportHeight });
+
+            // More aggressive scaling for very small screens
+            let newScale = 1;
+            if (viewportWidth <= 480) {
+                newScale = 0.5;
+            } else if (viewportWidth <= mobileBreakpoint) {
+                newScale = mobileScaleFactor;
+            }
             setCurrentScale(newScale);
         };
 
@@ -167,21 +190,32 @@ export function ThreeDImageRing({
     });
 
 
-    // Corrected imageVariants: no function for 'visible' state
-    const imageVariants = {
-        hidden: { y: 200, opacity: 0 },
-        visible: {
-            y: 0,
-            opacity: 1,
-            // Transition properties will be defined directly on the motion.div using `custom` prop
-        },
-    };
+    // Calculate responsive distance
+    const responsiveDistance = useMemo(() => {
+        if (dimensions.width <= 480) return imageDistance * 0.4;
+        if (dimensions.width <= 768) return imageDistance * 0.7;
+        return imageDistance;
+    }, [dimensions.width, imageDistance]);
+
+    // Calculate responsive card size
+    const cardWidth = useMemo(() => {
+        if (dimensions.width <= 480) return width * 0.6;
+        if (dimensions.width <= 768) return width * 0.8;
+        return width;
+    }, [dimensions.width, width]);
+
+    const cardHeight = useMemo(() => {
+        const h = height || width * 1.5;
+        if (dimensions.width <= 480) return h * 0.6;
+        if (dimensions.width <= 768) return h * 0.8;
+        return h;
+    }, [dimensions.width, height, width]);
 
     return (
         <div
             ref={containerRef}
             className={cn(
-                "w-full h-full overflow-hidden select-none relative",
+                "w-full h-full overflow-hidden select-none relative flex items-center justify-center",
                 containerClassName
             )}
             style={{
@@ -189,12 +223,11 @@ export function ThreeDImageRing({
                 transform: `scale(${currentScale})`,
                 transformOrigin: "center center",
             }}
-            // Attach initial drag start listeners only
             onMouseDown={draggable ? handleDragStart : undefined}
             onTouchStart={draggable ? handleDragStart : undefined}
         >
-            {/* Title Display */}
-            <div className="absolute bottom-2 left-0 w-full z-10 flex justify-center pointer-events-none">
+            {/* Title Display - Moved higher up on mobile */}
+            <div className="absolute top-[10%] md:top-auto md:bottom-2 left-0 w-full z-10 flex justify-center pointer-events-none">
                 <AnimatePresence mode="wait">
                     {titles[activeIndex] && (
                         <motion.div
@@ -203,7 +236,7 @@ export function ThreeDImageRing({
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -10 }}
                             transition={{ duration: 0.3 }}
-                            className="text-2xl md:text-3xl font-semibold text-gray-800 tracking-tight text-center px-4"
+                            className="text-xl md:text-3xl font-semibold text-gray-800 tracking-tight text-center px-6"
                             style={{
                                 textShadow: '0 2px 10px rgba(0,0,0,0.1)',
                                 fontFamily: 'var(--font-outfit), sans-serif'
@@ -218,12 +251,9 @@ export function ThreeDImageRing({
             <div
                 style={{
                     perspective: `${perspective}px`,
-                    width: `${width}px`,
-                    height: `${height}px`,
-                    position: "absolute",
-                    left: "50%",
-                    top: "50%",
-                    transform: "translate(-50%, -50%)",
+                    width: `${cardWidth}px`,
+                    height: `${cardHeight}px`,
+                    position: "relative",
                 }}
             >
                 <motion.div
@@ -243,7 +273,7 @@ export function ThreeDImageRing({
                             <motion.div
                                 key={index}
                                 className={cn(
-                                    "w-full h-full absolute rounded-[15px] overflow-hidden shadow-lg",
+                                    "w-full h-full absolute overflow-hidden shadow-lg",
                                     imageClassName
                                 )}
                                 style={{
@@ -253,9 +283,10 @@ export function ThreeDImageRing({
                                     backgroundRepeat: "no-repeat",
                                     backfaceVisibility: "hidden",
                                     rotateY: index * -angle,
-                                    z: -imageDistance * currentScale,
-                                    transformOrigin: `50% 50% ${imageDistance * currentScale}px`,
+                                    z: -responsiveDistance * currentScale,
+                                    transformOrigin: `50% 50% ${responsiveDistance * currentScale}px`,
                                     backgroundPosition: "50% 50%",
+                                    borderRadius: `${borderRadius}px`,
                                 }}
                                 initial="hidden"
                                 animate="visible"

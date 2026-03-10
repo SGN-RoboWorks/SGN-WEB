@@ -75,7 +75,7 @@ const directorBios = [
         name: 'N. Gokulnath',
         role: 'Co-Founder & Director',
         desc: 'Visionary Leader in Industrial IoT and Smart Factory Innovations. 13X Patent Holder in IoT and Robotics Applications, specializing in advanced Electronics, Home Automation, and Adaptive Automation Systems for diverse industrial environments.',
-        link: 'https://ngokulnath.vercel.app/'
+        link: 'https://github.com/zengamer006/Zengamer.git'
     },
     {
         name: 'Naveen NG',
@@ -196,21 +196,11 @@ function About() {
     }, []);
 
     return (
-        <div className="bg-[#f5f5f5] min-h-screen">
+        <div className="bg-[#f5f5f5] min-h-screen overflow-x-hidden">
             {/* ═══════════════════════════════════════ */}
             {/* HERO SECTION — Centered Animation        */}
             {/* ═══════════════════════════════════════ */}
             {/* Hero Title — Positioned bottom-left */}
-            <div className="absolute inset-0 flex flex-col items-start justify-end p-10 md:p-20 z-10 pointer-events-none">
-                <motion.h1
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.5 }}
-                    className="font-[Playfair_Display] text-white text-6xl md:text-8xl font-normal tracking-wide"
-                >
-                    ABOUT US
-                </motion.h1>
-            </div>
             <section
                 id="about-hero"
                 ref={heroRef}
@@ -261,14 +251,6 @@ function About() {
                                     </a>
                                 ))}
                             </div>
-                            <a
-                                href="https://aquponics-amig.vercel.app/Aquaponics.html"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className={`text-[17px] font-[Playfair_Display] tracking-wide transition-colors duration-300 ${isScrolled ? "text-black" : "text-white"} drop-shadow-sm`}
-                            >
-                                SGN Agritech
-                            </a>
                         </div>
                     </div>
                 </motion.nav>
@@ -306,14 +288,6 @@ function About() {
                                 {link}
                             </a>
                         ))}
-                        <a
-                            href="https://aquponics-amig.vercel.app/Aquaponics.html"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={`text-lg font-semibold ${isScrolled ? "text-black" : "text-white"}`}
-                        >
-                            SGN Agritech
-                        </a>
                     </motion.div>
                 )}
             </section>
@@ -339,7 +313,7 @@ function About() {
             </section>
 
             {/* ═══════════════════════════════════════ */}
-            {/* VISION SHAPING SECTION                  */}
+            {/* VISION SHAPING & DIRECTORS PROJECTS     */}
             {/* ═══════════════════════════════════════ */}
             <section className="py-12 bg-white">
                 <div className="max-w-[1196px] mx-auto px-4 md:px-6">
@@ -360,92 +334,54 @@ function About() {
                         whileInView="visible"
                         viewport={{ once: true }}
                         variants={fadeUp}
-                        className="bg-[#e9e9e9] rounded-[44px] p-6 md:p-10 flex flex-col items-center justify-between shadow-md min-h-[646px]"
-                    >
-                        <div className="flex flex-wrap md:flex-nowrap justify-center gap-6 md:gap-[58px] w-full mb-8">
-                            {team.map((member, i) => (
-                                <div
-                                    key={i}
-                                    style={{ width: i === 1 ? '346px' : '327px', height: '494px' }}
-                                    className="flex flex-col rounded-[24px] bg-[#898989] p-3 pb-0 overflow-hidden shadow-md transform transition-all duration-300 hover:scale-[1.03]"
-                                >
-                                    <div className="flex-1 w-full rounded-t-[20px] rounded-b-[4px] overflow-hidden border border-black/10">
-                                        <img src={member.img} alt={member.name} className="w-full h-full object-cover" />
-                                    </div>
-                                    <div className="py-4 text-center">
-                                        <h4 className="text-[#1a1a1a] text-[16px] font-semibold tracking-wide">{member.name}</h4>
-                                        <p className="text-gray-200 text-[10px] mt-0.5 tracking-wider">{member.role}</p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                        <a
-                            href="/service"
-                            style={{ width: '149px', height: '43px', borderRadius: '21.5px' }}
-                            className="border border-black/20 bg-[#f0f0f0] text-black text-[11px] font-bold hover:bg-black hover:text-white transition-all shadow-sm flex items-center justify-center tracking-wide"
-                        >
-                            View Service
-                        </a>
-                    </motion.div>
-                </div>
-            </section>
-
-            {/* ═══════════════════════════════════════ */}
-            {/* PROJECTS of DIRECTORS                  */}
-            {/* ═══════════════════════════════════════ */}
-            <section className="py-12 bg-white">
-                <div className="max-w-[1196px] mx-auto px-4 md:px-6">
-                    <motion.div
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        variants={fadeUp}
-                        className="bg-[#e9e9e9] rounded-[44px] p-5 md:p-8 shadow-md min-h-[894px] flex flex-col justify-between"
+                        className="bg-[#e9e9e9] rounded-[44px] p-6 md:p-10 shadow-md flex flex-col"
                     >
                         <GlareHover
                             glareColor="#ffffff"
                             glareOpacity={0.4}
                             glareSize={600}
-                            className="relative h-[250px] md:h-[440px] w-full rounded-[30px] overflow-hidden shadow-sm mb-10"
+                            className="relative h-[250px] md:h-[350px] w-full rounded-[30px] overflow-hidden shadow-sm mb-12"
                         >
                             <img src={projectsHandshake} alt="Handshake" className="w-full h-full object-cover" />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-8 md:p-12 z-10">
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-8 md:p-12 z-10">
                                 <h2 className="font-[Playfair_Display] text-white text-3xl md:text-[3.25rem] font-normal leading-tight tracking-wide drop-shadow-md">
                                     PROJECTS of <br /> DIRECTORS
                                 </h2>
                             </div>
                         </GlareHover>
 
-                        <div className="px-2 md:px-6 grid md:grid-cols-3 gap-8 md:gap-12 mb-4">
-                            {directorBios.map((bio, i) => (
-                                <GlareHover
-                                    key={i}
-                                    glareColor="#ffffff"
-                                    glareOpacity={0.4}
-                                    glareSize={400}
-                                    transitionDuration={300}
-                                    className="flex flex-col items-center text-center h-full p-6 rounded-[30px] bg-white/40 backdrop-blur-md border border-white/20 shadow-sm"
-                                >
-                                    <div className="mb-6 text-center w-full">
-                                        <h4 className="text-[#1a1a1a] text-[28px] font-normal leading-tight">{bio.name}</h4>
-                                        <p className="text-gray-400 text-[13px] mt-1.5 font-medium">{bio.role}</p>
+                        <div className="px-2 md:px-4 grid md:grid-cols-3 gap-8 md:gap-10 mb-4">
+                            {team.map((member, i) => {
+                                const bio = directorBios[i];
+                                return (
+                                    <div key={i} className="flex flex-col items-center text-center">
+                                        <div className="w-full max-w-[320px] aspect-[4/5] rounded-[24px] bg-[#757575] p-[10px] shadow-sm mb-6 mx-auto transform transition-all duration-300 hover:scale-[1.03]">
+                                            <div className="w-full h-full rounded-[16px] overflow-hidden border border-black/10">
+                                                <img src={member.img} alt={member.name} className="w-full h-full object-cover" />
+                                            </div>
+                                        </div>
+                                        <div className="mb-4">
+                                            <h4 className="text-[#1a1a1a] text-[24px] font-normal leading-tight">{member.name}</h4>
+                                            <p className="text-gray-500 text-[12px] mt-1 tracking-wider">{member.role}</p>
+                                        </div>
+                                        <div className={`flex-1 w-full max-w-[280px] mx-auto flex flex-col ${i === 0 ? 'items-start' : i === 2 ? 'items-end' : 'items-center'}`}>
+                                            <p className={`text-[#1a1a1a] text-[12px] font-medium leading-[1.6] mb-8 text-opacity-80 ${i === 0 ? 'text-left' : i === 2 ? 'text-right' : 'text-center'}`}>
+                                                {bio.desc}
+                                            </p>
+                                            <div className="w-full mt-auto mb-2 flex justify-center">
+                                                <a
+                                                    href={bio.link}
+                                                    target={bio.link !== '#' ? '_blank' : '_self'}
+                                                    rel="noopener noreferrer"
+                                                    className="bg-white border border-gray-200 text-[#1a1a1a] text-[11px] font-semibold hover:bg-black hover:text-white transition-all shadow-sm tracking-wide flex items-center justify-center px-8 py-2.5 rounded-full"
+                                                >
+                                                    View Project
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <p className="text-[#1a1a1a] text-[13px] font-normal leading-[1.6] mb-12 flex-1 w-full max-w-[340px] mx-auto">
-                                        {bio.desc}
-                                    </p>
-                                    <div className="w-full flex justify-center mt-auto">
-                                        <a
-                                            href={bio.link}
-                                            target={bio.link !== '#' ? '_blank' : '_self'}
-                                            rel="noopener noreferrer"
-                                            style={{ width: '135px', height: '38px', borderRadius: '19px' }}
-                                            className="bg-white border border-gray-100 text-[#1a1a1a] text-[11px] font-semibold hover:bg-black hover:text-white transition-all shadow-[0_2px_10px_rgba(0,0,0,0.04)] tracking-wide flex items-center justify-center relative z-20"
-                                        >
-                                            View Project
-                                        </a>
-                                    </div>
-                                </GlareHover>
-                            ))}
+                                );
+                            })}
                         </div>
                     </motion.div>
                 </div>
@@ -477,6 +413,7 @@ function About() {
             </section>
 
             {/* 3D IMAGE RING SECTION */}
+            {/* 3D IMAGE RING SECTION */}
             <section className="py-10 bg-white overflow-hidden">
                 <div className="max-w-10xl mx-auto px-6 h-[500px] flex items-center justify-center">
                     <ThreeDImageRing
@@ -493,6 +430,7 @@ function About() {
                         imageDistance={900}
                         autoRotate={true}
                         autoRotateSpeed={0.15}
+                        borderRadius={40}
                     />
                 </div>
             </section>
@@ -562,9 +500,9 @@ function About() {
                         {/* Left — Brand */}
                         <div>
                             <div className="flex items-center gap-4">
-                                <img src={gallery4} alt="SGN Logo" className="w-12 h-12 rounded-full" />
+                                <img src={gallery4} alt="SGN Logo" className="w-12 h-12 rounded-full border border-gray-100 p-1" />
                                 <div>
-                                    <h4 className="font-[Playfair_Display] text-8xl  tracking-wider">
+                                    <h4 className="font-[Playfair_Display] text-6xl md:text-8xl tracking-wider leading-none">
                                         SGN
                                     </h4>
                                     <p className="font-[Playfair_Display] text-lg">Roboworks</p>

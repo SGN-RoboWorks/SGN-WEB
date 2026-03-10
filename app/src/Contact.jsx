@@ -57,7 +57,7 @@ function Contact() {
     };
 
     return (
-        <div className="bg-[#f5f5f5] min-h-screen">
+        <div className="bg-[#f5f5f5] min-h-screen overflow-x-hidden">
             {/* ═══════════════════════════════════════ */}
             {/* HERO SECTION                             */}
             {/* ═══════════════════════════════════════ */}
@@ -79,31 +79,23 @@ function Contact() {
                     className={`fixed z-50 left-1/2 -translate-x-1/2 transition-all duration-300 w-[90%] md:w-auto ${isScrolled ? "top-4" : "top-8"
                         }`}
                 >
-                    <div className={`nav-pill flex items-center justify-center font-medium px-8 py-2 rounded-full transition-all duration-300 w-full md:w-auto ${isScrolled
+                    <div className={`nav-pill flex items-center justify-center font-medium px-4 md:px-8 py-2 rounded-full transition-all duration-300 w-full md:w-auto ${isScrolled
                         ? "bg-white/90 backdrop-blur-md shadow-md border border-gray-200"
                         : "bg-transparent"
                         }`}>
-                        <div className="flex items-center gap-6">
-                            <div className="hidden md:flex items-center gap-6">
+                        <div className="flex items-center gap-4 md:gap-6">
+                            <div className="flex items-center gap-4 md:gap-6">
                                 {navLinks.map((link) => (
                                     <a
                                         key={link}
                                         href={link === 'About' ? '/about' : link === 'Service' ? '/service' : link === 'Contact' ? '/contact' : link === 'Home' ? '/' : '#'}
-                                        className={`text-[17px] tracking-wide transition-colors duration-300 ${isScrolled ? "text-black hover:text-gray-600" : "text-white hover:opacity-70"
-                                            } drop-shadow-sm`}
+                                        className={`text-[15px] md:text-[17px] tracking-wide transition-colors duration-300 ${isScrolled ? "text-black hover:text-gray-600" : "text-white hover:opacity-70"
+                                            } drop-shadow-sm ${link === 'Contact' ? 'flex' : 'hidden md:flex'}`}
                                     >
                                         {link}
                                     </a>
                                 ))}
                             </div>
-                            <a
-                                href="https://aquponics-amig.vercel.app/Aquaponics.html"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className={`text-[17px] font-[Playfair_Display] tracking-wide transition-colors duration-300 ${isScrolled ? "text-black" : "text-white"} drop-shadow-sm`}
-                            >
-                                SGN Agritech
-                            </a>
                         </div>
                     </div>
 
@@ -140,14 +132,6 @@ function Contact() {
                                     {link}
                                 </a>
                             ))}
-                            <a
-                                href="https://aquponics-amig.vercel.app/Aquaponics.html"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className={`text-lg font-semibold ${isScrolled ? "text-black" : "text-white"}`}
-                            >
-                                SGN Agritech
-                            </a>
                         </motion.div>
                     )}
                 </motion.nav>
@@ -158,7 +142,7 @@ function Contact() {
                         initial={{ opacity: 0, x: -30 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8, delay: 0.5 }}
-                        className="font-[Playfair_Display] text-white text-7xl md:text-9xl font-normal tracking-wider"
+                        className="font-[Playfair_Display] text-white text-5xl md:text-9xl font-normal tracking-wider"
                     >
                         CONTACT US
                     </motion.h1>
@@ -178,42 +162,48 @@ function Contact() {
                         viewport={{ once: true }}
                         variants={fadeUp}
                     >
-                        <h2 className="text-[48px] leading-[1.25] font-normal mb-0 text-[#1a1a1a] max-w-[483px]">
+                        <h2 className="text-[32px] md:text-[48px] leading-[1.25] font-normal mb-0 text-[#1a1a1a] max-w-[483px]">
                             Questions ? <br />
                             We Got All Answers !
                         </h2>
-                        <p className="text-[#666666] text-[16px] mt-[23px] max-w-[496px] font-normal">
+                        <p className="text-[#666666] text-[14px] md:text-[16px] mt-6 md:mt-[23px] max-w-[496px] font-normal">
                             Fill in the form or contact us. Our team will get back to you shortly.
                         </p>
 
                         <div className="mt-[145px] space-y-10">
                             <div className="flex items-center gap-0 relative">
-                                <div className="text-[#1a1a1a] w-[60px] flex justify-start">
+                                <div className="text-[#1a1a1a] w-[40px] md:w-[60px] flex justify-start shrink-0">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                                         <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.81 12.81 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                                     </svg>
                                 </div>
-                                <span className="text-[#1a1a1a] text-[18px] font-normal max-w-[527px]">+91 9952915707 +91 8610284297 +91 6381207641</span>
+                                <div className="text-[#1a1a1a] text-[16px] md:text-[18px] font-normal flex-1 flex flex-col md:flex-row md:flex-wrap md:gap-2">
+                                    <span>+91 9952915707</span>
+                                    <span className="hidden md:inline text-gray-400">|</span>
+                                    <span>+91 8610284297</span>
+                                    <span className="hidden md:inline text-gray-400">|</span>
+                                    <span>+91 6381207641</span>
+                                </div>
                             </div>
 
                             <div className="flex items-center gap-0">
-                                <div className="text-[#1a1a1a] w-[60px] flex justify-start">
+                                <div className="text-[#1a1a1a] w-[40px] md:w-[60px] flex justify-start shrink-0">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                                         <rect x="2" y="4" width="20" height="16" rx="2" />
                                         <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
                                     </svg>
                                 </div>
-                                <span className="text-[#1a1a1a] text-[18px] font-normal">sgnroboworks@gmail.com</span>
+                                <span className="text-[#1a1a1a] text-[15px] md:text-[18px] font-normal break-all">sgnroboworks@gmail.com</span>
                             </div>
 
                             <div className="flex items-center gap-0">
-                                <div className="text-[#1a1a1a] w-[60px] flex justify-start">
+                                <div className="text-[#1a1a1a] w-[40px] md:w-[60px] flex justify-start shrink-0">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                                         <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
                                         <circle cx="12" cy="10" r="3" />
                                     </svg>
                                 </div>
-                                <span className="text-[#1a1a1a] text-[18px] font-normal">Kodungaiyur, Chennai-600051</span>
+                                <span className="text-[#1a1a1a] text-[15px] md:text-[18px] font-normal break-words">Kodungaiyur, Chennai-600051</span>
                             </div>
                         </div>
                     </motion.div>
@@ -254,7 +244,7 @@ function Contact() {
             {/* ═══════════════════════════════════════ */}
             <section className="py-24 bg-white">
                 <div className="max-w-4xl mx-auto px-6">
-                    <h2 className="text-4xl md:text-5xl font-normal text-center mb-16">
+                    <h2 className="text-3xl md:text-5xl font-normal text-center mb-12 md:mb-16">
                         Frequently Asked Question ( FAQ’s )
                     </h2>
 
@@ -298,9 +288,9 @@ function Contact() {
             {/* ═══════════════════════════════════════ */}
             <section className="py-24 bg-white">
                 <div className="max-w-6xl mx-auto px-6 py-10">
-                    <h3 className="text-4xl font-normal mb-10 text-gray-800">Reach us on</h3>
+                    <h3 className="text-3xl md:text-4xl font-normal mb-8 md:mb-10 text-gray-800 text-center md:text-left">Reach us on</h3>
 
-                    <div className="flex gap-5 items-center">
+                    <div className="flex flex-wrap gap-5 items-center justify-center md:justify-start">
                         {/* LinkedIn */}
                         <a href="https://www.linkedin.com/company/sgn-roboworks/?originalSubdomain=in" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
                             <svg width="40" height="40" viewBox="0 0 256 256">
@@ -352,8 +342,8 @@ function Contact() {
                             <div className="flex items-center gap-4">
                                 <img src={gallery4} alt="SGN Logo" className="w-14 h-14 rounded-full border border-gray-100 p-1" />
                                 <div>
-                                    <h3 className="font-[Playfair_Display] text-8xl  tracking-tighter text-black leading-none">S G N</h3>
-                                    <p className="font-[Playfair_Display] text-xl text-gray-800 tracking-wide mt-1">Roboworks</p>
+                                    <h3 className="font-[Playfair_Display] text-6xl md:text-8xl  tracking-tighter text-black leading-none">S G N</h3>
+                                    <p className="font-[Playfair_Display] text-base md:text-xl text-gray-800 tracking-wide mt-1">Roboworks</p>
                                 </div>
                             </div>
                             <p className="mt-8 text-gray-400 text-sm font-medium">@ 2026 Roboworks</p>
