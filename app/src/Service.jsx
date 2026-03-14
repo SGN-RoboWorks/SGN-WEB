@@ -136,7 +136,7 @@ function Service() {
 
     const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
     const heroY = useTransform(scrollYProgress, [0, 1], [0, 150]);
-    const heroScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
+    const heroScale = useTransform(scrollYProgress, [0, 1], [1.15, 1.25]);
 
     return (
         <div className="min-h-screen bg-[#f5f5f5] text-[#1a1a1a] overflow-x-hidden">
@@ -145,11 +145,11 @@ function Service() {
             {/* HERO — Dark bg + metallic swirl asset   */}
             {/* ═══════════════════════════════════════ */}
             <section id="home" ref={heroRef} className="relative h-screen overflow-hidden bg-black">
-                <motion.div className="absolute inset-0 z-0" style={{ y: heroY, scale: heroScale }}>
+                <motion.div className="absolute inset-0 z-0 origin-top-left" style={{ y: heroY, scale: heroScale }}>
                     <img
                         src={newServiceHero}
                         alt="SGN Services"
-                        className="w-full h-full object-cover opacity-80"
+                        className="w-full h-full object-cover object-right md:object-center opacity-80"
                     />
                 </motion.div>
 
@@ -327,7 +327,7 @@ function Service() {
                                 <img
                                     src={whyImgLeft}
                                     alt="Value-Driven Automation"
-                                    className="w-full h-full object-cover"
+                                    className="w-full h-full object-cover scale-[1.2] md:scale-[1.1] origin-left"
                                 />
                             </div>
                             <div className="p-10">
@@ -346,11 +346,11 @@ function Service() {
                                 variants={fadeUp}
                                 className="border border-black/[0.12] rounded-[32px] overflow-hidden bg-white shadow-sm flex flex-col"
                             >
-                                <div className="h-[260px] overflow-hidden">
+                                <div className="h-[200px] md:h-[260px] overflow-hidden">
                                     <img
                                         src={whyImgTopR}
                                         alt="Global AI, Local Hardware"
-                                        className="w-full h-full object-cover"
+                                        className="w-full h-full object-cover scale-[1.4]"
                                     />
                                 </div>
                                 <div className="p-10">
@@ -478,10 +478,10 @@ function Service() {
 
                             {/* Title area */}
                             <div className="md:ml-[0px] flex flex-col items-center justify-center w-full max-w-[488px] h-auto md:h-[120px] mb-8 md:mb-[43px]">
-                                <h3 className="font-[Playfair_Display] text-white text-[32px] md:text-[38.5px] font-normal leading-none" style={{ letterSpacing: '0.1em' }}>
+                                <h3 className="font-[Playfair_Display] text-white text-[26px] md:text-[38.5px] font-normal leading-none tracking-[0.05em] md:tracking-[0.1em]">
                                     BOOK YOUR
                                 </h3>
-                                <h3 className="font-[Playfair_Display] text-white text-[24px] md:text-[32px] font-normal leading-none mt-2 md:mt-4 ml-1 md:ml-[14px]" style={{ letterSpacing: '0.35em' }}>
+                                <h3 className="font-[Playfair_Display] text-white text-[20px] md:text-[32px] font-normal leading-none mt-2 md:mt-4 ml-1 md:ml-[14px] tracking-[0.15em] md:tracking-[0.35em]">
                                     APPOINTMENTS
                                 </h3>
                             </div>

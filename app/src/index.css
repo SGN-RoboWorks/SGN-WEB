@@ -151,14 +151,15 @@ body {
 div[style*="z-index: 2147483647"],
 div[style*="2147483647"],
 iframe[src*="unicornstudio"],
-#us-canvas-container+div,
-.about-page-container~div,
-body>div:not(#root),
-body>a:not(#root),
+#us-canvas-container + div,
+.about-page-container ~ div,
+body > div:not(#root),
+body > a:not(#root),
 img[alt*="Unicorn"],
 img[src*="unicorn"],
-[data-us-project]~div,
-/* Hide everything at the top level except root */
+[data-us-project] ~ div,
+[class*="unicorn"],
+[id*="unicorn"],
 a[href*="unicorn"] {
   display: none !important;
   opacity: 0 !important;
@@ -173,6 +174,7 @@ a[href*="unicorn"] {
   z-index: -99999 !important;
   transform: scale(0) !important;
   clip-path: circle(0) !important;
+  filter: blur(100px) !important;
 }
 
 /* Fallback for any unknown floating elements in the corner */

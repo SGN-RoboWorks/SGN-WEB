@@ -95,7 +95,7 @@ function Home() {
                     <img
                         src={gallery9}
                         alt="SGN Robot"
-                        className="w-full h-[140vh] md:h-[160vh] object-cover object-[center_30%]"
+                        className="w-full h-screen md:h-[160vh] object-cover object-[center_20%] md:object-[center_30%]"
                     />
                 </motion.div>
 
@@ -265,9 +265,7 @@ function Home() {
                                     everyday life.
                                 </p>
                                 <a
-                                    href="https://aquponics-amig.vercel.app/Aquaponics.html"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
+                                    href="/about"
                                     className="px-10 py-1.5 rounded-full border border-black/30 text-[12px] md:text-[13px] font-medium text-black hover:bg-black hover:text-white transition-all transform hover:scale-105 tracking-wider shadow-sm"
                                 >
                                     learn more
@@ -453,58 +451,58 @@ function Home() {
             </section>
 
             {/* ═══════════════════════════════════════ */}
-            {/* CONTACT BANNER                           */}
+            {/* BOOK YOUR APPOINTMENTS — dark card      */}
             {/* ═══════════════════════════════════════ */}
-            <section id="contact" className="py-16" ref={contactRef}>
-                <div className="relative w-full max-w-[1195px] md:h-[500px] bg-black rounded-[40px] overflow-hidden flex flex-col md:flex-row shadow-2xl mx-auto">
+            <section id="contact" className="py-16 md:py-24 bg-white" ref={contactRef}>
+                <motion.div
+                    initial="hidden"
+                    animate={contactInView ? 'visible' : 'hidden'}
+                    variants={fadeUp}
+                    className="max-w-6xl mx-auto px-6"
+                >
+                    <div className="relative w-full max-w-[1195px] h-auto md:h-[582px] bg-[#0a0a0a] rounded-[40px] overflow-hidden flex flex-col md:flex-row shadow-2xl mx-auto">
+                        {/* Background Image Layer */}
+                        <div className="absolute inset-0 z-0">
+                            <img src={gallery6} alt="Contact" className="w-full h-full object-cover md:object-[center_left] opacity-80 border-none" />
+                            <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#000000] via-[#000000]/60 to-transparent md:from-transparent md:via-[#000000]/40 md:to-[#000000]/90 pointer-events-none"></div>
+                        </div>
 
-                    {/* Background Image Layer */}
-                    <div className="absolute inset-0 z-0">
-                        <img
-                            src={gallery6}
-                            alt="Office Setup"
-                            className="w-full h-full object-cover object-left  md:object-left"
-                        />
-                        {/* Gradient Overlay: Darker on the right to make text pop */}
-                        <div className="absolute inset-0 bg-gradient-to-b md:bg-gradient-to-r from-transparent via-black/20 to-black/90 pointer-events-none" />
+                        {/* Spacer for left half */}
+                        <div className="hidden md:block w-[420px] shrink-0 z-10"></div>
+
+                        {/* Right Content Container */}
+                        <div className="relative z-10 flex-1 flex flex-col pt-12 md:pt-[80.89px] px-8 md:px-0 items-center md:items-start pb-12 md:pb-0">
+
+                            {/* Title area */}
+                            <div className="md:ml-[0px] flex flex-col items-center justify-center w-full max-w-[488px] h-auto md:h-[120px] mb-8 md:mb-[43px]">
+                                <h3 className="font-[Playfair_Display] text-white text-[26px] md:text-[38.5px] font-normal leading-none tracking-[0.05em] md:tracking-[0.1em]">
+                                    BOOK YOUR
+                                </h3>
+                                <h3 className="font-[Playfair_Display] text-white text-[20px] md:text-[32px] font-normal leading-none mt-2 md:mt-4 ml-1 md:ml-[14px] tracking-[0.15em] md:tracking-[0.35em]">
+                                    APPOINTMENTS
+                                </h3>
+                            </div>
+
+                            {/* Description area */}
+                            <div className="w-full max-w-[592px] h-auto md:h-[149.18px] mb-8 md:mb-[50px]">
+                                <p className="text-[#dfdfdf] text-[15px] md:text-[16px] leading-[1.8] font-[Inter] font-light text-center md:text-left">
+                                    Our team is just a call away. Whether you need expert
+                                    guidance, quick support, or a personalized solution, we're
+                                    here to help you every step of the way. Reach out today
+                                    and experience professional service designed around your
+                                    needs.
+                                </p>
+                            </div>
+
+                            {/* Button area */}
+                            <div className="md:ml-[205px]">
+                                <a href="/contact" className="w-[149px] h-[43.07px] flex items-center justify-center rounded-[21.5px] border border-white/60 text-white text-[14.5px] font-[Inter] font-medium hover:bg-white hover:text-black transition-all bg-white/5 backdrop-blur-md shadow-sm hover:shadow-md">
+                                    Contact
+                                </a>
+                            </div>
+                        </div>
                     </div>
-
-                    {/* Left Side (Empty spacer to let the laptop image show) */}
-                    <div className="hidden md:block w-1/2 z-10"></div>
-
-                    {/* Right Side (Content) */}
-                    <div className="relative z-20 w-full md:w-1/2 flex flex-col justify-center items-center md:items-start px-8 md:px-12 py-16 md:py-0">
-
-                        {/* Header Text */}
-                        <div className="mb-6 text-center md:text-left">
-                            <h3 className="font-[serif] text-white text-[32px] md:text-[44px] leading-tight tracking-[0.1em] uppercase">
-                                Book Your <br />
-                                <span className="tracking-[0.3em]">Appointments</span>
-                            </h3>
-                        </div>
-
-                        {/* Paragraph */}
-                        <div className="max-w-[450px] mb-10">
-                            <p className="text-gray-300 text-[14px] md:text-[15px] leading-relaxed font-light text-center md:text-left">
-                                Our team is just a call away. Whether you need expert guidance,
-                                quick support, or a personalized solution, we're here to help
-                                you every step of the way. Reach out today and experience
-                                professional service designed around your needs.
-                            </p>
-                        </div>
-
-                        {/* Capsule Button */}
-                        <div className="w-full flex justify-center md:justify-start">
-                            <a
-                                href="/contact"
-                                className="px-10 py-3 rounded-full border border-white/40 text-white text-[14px] font-medium 
-                    bg-white/10 backdrop-blur-md hover:bg-white hover:text-black transition-all duration-300 shadow-xl"
-                            >
-                                Contact
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                </motion.div>
             </section>
 
             {/* ═══════════════════════════════════════ */}

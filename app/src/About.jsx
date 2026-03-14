@@ -75,7 +75,7 @@ const directorBios = [
         name: 'N. Gokulnath',
         role: 'Co-Founder & Director',
         desc: 'Visionary Leader in Industrial IoT and Smart Factory Innovations. 13X Patent Holder in IoT and Robotics Applications, specializing in advanced Electronics, Home Automation, and Adaptive Automation Systems for diverse industrial environments.',
-        link: 'https://github.com/zengamer006/Zengamer.git'
+        link: 'https://ngokulnath.vercel.app/experience.html'
     },
     {
         name: 'Naveen NG',
@@ -196,56 +196,47 @@ function About() {
     }, []);
 
     return (
-        <div className="bg-[#f5f5f5] min-h-screen overflow-x-hidden">
+        <div className="relative bg-[#f5f5f5] min-h-screen overflow-x-hidden">
+
+
             {/* ═══════════════════════════════════════ */}
             {/* HERO SECTION — Centered Animation        */}
             {/* ═══════════════════════════════════════ */}
-            {/* Hero Title — Positioned bottom-left */}
             <section
                 id="about-hero"
                 ref={heroRef}
                 className="relative w-full h-screen flex justify-center items-center bg-black overflow-hidden"
             >
-                {/* Animation Container (Background) */}
-                <div
-                    className="absolute inset-0 z-0 flex items-center justify-center p-0 m-0"
-                    style={{ transform: 'translateX(0%)' }}
+                {/* Optimized 3D Animation Container — "Goldilocks" ratio for mobile: 82vh vertical height removes big black empty gaps, while 180vw horizontal width forces the intrinsic 3D camera to zoom out enough to perfectly reveal both ears. */}
+                <div 
                     data-us-project="gcNwfvcVtYZDlhVdfUiA"
+                    className="absolute top-[9vh] left-1/2 -translate-x-1/2 h-[82vh] w-[180vw] md:inset-0 md:h-screen md:w-full md:left-0 md:transform-none md:translate-x-[5%] z-0 flex items-center justify-center p-0 m-0"
                 ></div>
 
-                {/* Hero Text — "ABOUT US" (Overlay - Bottom Left) */}
-                <div className="absolute bottom-16 left-8 md:left-16 z-10 pointer-events-none">
-                    <motion.h1
-                        initial={{ opacity: 0, x: -30 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8, delay: 0.5 }}
-                        className="font-[Playfair_Display] text-white text-6xl md:text-8xl font-normal tracking-wider"
-                    >
-                        ABOUT US
-                    </motion.h1>
-                </div>
+                {/* Mobile Edge Fade Overlay to seamlessly blend the animation boundaries into the black background */}
+                <div 
+                    className="absolute inset-0 pointer-events-none z-[1] md:hidden"
+                    style={{ background: 'linear-gradient(to bottom, #000 10%, transparent 20%, transparent 80%, #000 90%)' }}
+                ></div>
 
-                {/* Top Navbar — Glassmorphic Pill */}
                 <motion.nav
                     initial={{ opacity: 0, y: -30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.3 }}
-                    // Switch from absolute to fixed so it follows the user
-                    className={`fixed z-50 left-1/2 -translate-x-1/2 transition-all duration-300 w-[90%] md:w-auto ${isScrolled ? "top-4" : "top-8"
-                        }`}
+                    className={`fixed z-50 left-1/2 -translate-x-1/2 transition-all duration-300 w-[95%] md:w-auto ${isScrolled ? "top-4" : "top-8"}`}
                 >
-                    <div className={`nav-pill flex items-center justify-center font-medium px-8 py-2 rounded-full transition-all duration-300 w-full md:w-auto ${isScrolled
+                    <div className={`nav-pill flex items-center justify-center font-medium px-6 md:px-8 py-2 rounded-full transition-all duration-300 w-full md:w-auto ${isScrolled
                         ? "bg-white/90 backdrop-blur-md shadow-md border border-gray-200"
                         : "bg-transparent"
                         }`}>
-                        <div className="flex items-center gap-6">
-                            <div className="hidden md:flex items-center gap-6">
+                        <div className="flex items-center gap-4 md:gap-6">
+                            <div className="flex items-center gap-4 md:gap-6">
                                 {navLinks.map((link) => (
                                     <a
                                         key={link}
                                         href={link === 'About' ? '/about' : link === 'Service' ? '/service' : link === 'Contact' ? '/contact' : link === 'Home' ? '/' : '#'}
-                                        className={`text-[17px] tracking-wide transition-colors duration-300 ${isScrolled ? "text-black hover:text-gray-600" : "text-white hover:opacity-70"
-                                            } drop-shadow-sm`}
+                                        className={`text-[15px] md:text-[17px] tracking-wide transition-colors duration-300 ${isScrolled ? "text-black hover:text-gray-600" : "text-white hover:opacity-70"
+                                            } drop-shadow-sm ${link === 'About' ? 'flex' : 'hidden md:flex'}`}
                                     >
                                         {link}
                                     </a>
@@ -253,44 +244,56 @@ function About() {
                             </div>
                         </div>
                     </div>
-                </motion.nav>
 
-                {/* Mobile hamburger */}
-                <button
-                    className={`md:hidden absolute right-4 top-1/2 -translate-y-1/2 transition-colors duration-300 ${isScrolled ? "text-black" : "text-white"}`}
-                    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                >
-                    <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2">
-                        {mobileMenuOpen ? (
-                            <path d="M6 6l12 12M6 18L18 6" />
-                        ) : (
-                            <path d="M4 6h16M4 12h16M4 18h16" />
-                        )}
-                    </svg>
-                </button>
-                {/* Mobile menu dropdown */}
-                {mobileMenuOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className={`absolute top-[120%] left-0 right-0 p-6 flex flex-col gap-4 rounded-3xl md:hidden ${isScrolled
-                            ? "bg-white/95 backdrop-blur-md shadow-lg border border-gray-200"
-                            : "glass-card border border-white/20"
-                            }`}
+                    {/* Mobile hamburger */}
+                    <button
+                        className={`md:hidden absolute right-4 top-1/2 -translate-y-1/2 transition-colors duration-300 ${isScrolled ? "text-black" : "text-white"}`}
+                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                     >
-                        {navLinks.map((link) => (
-                            <a
-                                key={link}
-                                href={link === 'About' ? '/about' : link === 'Service' ? '/service' : link === 'Contact' ? '/contact' : link === 'Home' ? '/' : '#'}
-                                className={`text-lg font-medium transition-colors ${isScrolled ? "text-gray-800 hover:text-black" : "text-white hover:text-gray-300"}`}
-                                onClick={() => setMobileMenuOpen(false)}
-                            >
-                                {link}
-                            </a>
-                        ))}
-                    </motion.div>
-                )}
+                        <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2">
+                            {mobileMenuOpen ? (
+                                <path d="M6 6l12 12M6 18L18 6" />
+                            ) : (
+                                <path d="M4 6h16M4 12h16M4 18h16" />
+                            )}
+                        </svg>
+                    </button>
+                    {/* Mobile menu dropdown */}
+                    {mobileMenuOpen && (
+                        <motion.div
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className={`absolute top-[120%] left-0 right-0 p-6 flex flex-col gap-4 rounded-3xl md:hidden ${isScrolled
+                                ? "bg-white/95 backdrop-blur-md shadow-lg border border-gray-200"
+                                : "glass-card border border-white/20"
+                                }`}
+                        >
+                            {navLinks.map((link) => (
+                                <a
+                                    key={link}
+                                    href={link === 'About' ? '/about' : link === 'Service' ? '/service' : link === 'Contact' ? '/contact' : link === 'Home' ? '/' : '#'}
+                                    className={`text-lg font-medium transition-colors ${isScrolled ? "text-gray-800 hover:text-black" : "text-white hover:text-gray-300"}`}
+                                    onClick={() => setMobileMenuOpen(false)}
+                                >
+                                    {link}
+                                </a>
+                            ))}
+                        </motion.div>
+                    )}
+                </motion.nav>
             </section>
+            
+            {/* Hero Text — "ABOUT US" (Overlay) - Pushed down slightly via pb-8 on mobile to clear the face */}
+            <div className="absolute top-0 left-0 w-full h-screen pointer-events-none z-[1000] flex flex-col items-center md:items-start justify-end p-10 pb-8 md:pb-36 md:p-20">
+                <motion.h1
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.5 }}
+                    className="font-[Playfair_Display] text-white text-[3rem] md:text-8xl font-normal tracking-wide drop-shadow-2xl z-20 relative"
+                >
+                    ABOUT US
+                </motion.h1>
+            </div>
 
 
             {/* ═══════════════════════════════════════ */}
@@ -436,17 +439,17 @@ function About() {
             </section>
 
             {/* ═══════════════════════════════════════ */}
-            {/* APPOINTMENT SECTION (Match Home)        */}
+            {/* BOOK YOUR APPOINTMENTS — dark card      */}
             {/* ═══════════════════════════════════════ */}
-            <section className="py-24 bg-white">
-                <div className="max-w-6xl mx-auto px-6">
-                    <motion.div
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        variants={fadeUp}
-                        className="relative w-full max-w-[1195px] h-auto md:h-[582px] bg-[#0a0a0a] rounded-[40px] overflow-hidden flex flex-col md:flex-row shadow-2xl mx-auto"
-                    >
+            <section id="contact" className="py-16 md:py-24 bg-white">
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ margin: '-100px' }}
+                    variants={fadeUp}
+                    className="max-w-6xl mx-auto px-6"
+                >
+                    <div className="relative w-full max-w-[1195px] h-auto md:h-[582px] bg-[#0a0a0a] rounded-[40px] overflow-hidden flex flex-col md:flex-row shadow-2xl mx-auto">
                         {/* Background Image Layer */}
                         <div className="absolute inset-0 z-0">
                             <img src={gallery6} alt="Contact" className="w-full h-full object-cover md:object-[center_left] opacity-80 border-none" />
@@ -461,10 +464,10 @@ function About() {
 
                             {/* Title area */}
                             <div className="md:ml-[0px] flex flex-col items-center justify-center w-full max-w-[488px] h-auto md:h-[120px] mb-8 md:mb-[43px]">
-                                <h3 className="font-[Playfair_Display] text-white text-[32px] md:text-[38.5px] font-normal leading-none" style={{ letterSpacing: '0.1em' }}>
+                                <h3 className="font-[Playfair_Display] text-white text-[26px] md:text-[38.5px] font-normal leading-none tracking-[0.05em] md:tracking-[0.1em]">
                                     BOOK YOUR
                                 </h3>
-                                <h3 className="font-[Playfair_Display] text-white text-[24px] md:text-[32px] font-normal leading-none mt-2 md:mt-4 ml-1 md:ml-[14px]" style={{ letterSpacing: '0.35em' }}>
+                                <h3 className="font-[Playfair_Display] text-white text-[20px] md:text-[32px] font-normal leading-none mt-2 md:mt-4 ml-1 md:ml-[14px] tracking-[0.15em] md:tracking-[0.35em]">
                                     APPOINTMENTS
                                 </h3>
                             </div>
@@ -487,8 +490,8 @@ function About() {
                                 </a>
                             </div>
                         </div>
-                    </motion.div>
-                </div>
+                    </div>
+                </motion.div>
             </section>
 
             {/* ═══════════════════════════════════════ */}

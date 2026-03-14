@@ -66,7 +66,7 @@ function Contact() {
                     <img
                         src={contactHero}
                         alt="Contact Hero"
-                        className="w-full h-full object-cover opacity-80"
+                        className="w-full h-full object-cover object-center md:object-center opacity-80"
                     />
                 </div>
 

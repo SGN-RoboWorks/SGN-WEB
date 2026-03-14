@@ -94,21 +94,15 @@ export function ThreeDImageRing({
             const viewportHeight = window.innerHeight;
             setDimensions({ width: viewportWidth, height: viewportHeight });
 
-            // More aggressive scaling for very small screens
-            let newScale = 1;
-            if (viewportWidth <= 480) {
-                newScale = 0.5;
-            } else if (viewportWidth <= mobileBreakpoint) {
-                newScale = mobileScaleFactor;
-            }
-            setCurrentScale(newScale);
+            // Removed aggressive scaling transformation; dimensions now handled parametrically.
+            setCurrentScale(1);
         };
 
         window.addEventListener("resize", handleResize);
         handleResize();
 
         return () => window.removeEventListener("resize", handleResize);
-    }, [mobileBreakpoint, mobileScaleFactor]);
+    }, []);
 
     useEffect(() => {
         setShowImages(true);
@@ -192,22 +186,22 @@ export function ThreeDImageRing({
 
     // Calculate responsive distance
     const responsiveDistance = useMemo(() => {
-        if (dimensions.width <= 480) return imageDistance * 0.4;
-        if (dimensions.width <= 768) return imageDistance * 0.7;
+        if (dimensions.width <= 480) return imageDistance * 0.35;
+        if (dimensions.width <= 768) return imageDistance * 0.55;
         return imageDistance;
     }, [dimensions.width, imageDistance]);
 
     // Calculate responsive card size
     const cardWidth = useMemo(() => {
-        if (dimensions.width <= 480) return width * 0.6;
-        if (dimensions.width <= 768) return width * 0.8;
+        if (dimensions.width <= 480) return width * 0.35;
+        if (dimensions.width <= 768) return width * 0.55;
         return width;
     }, [dimensions.width, width]);
 
     const cardHeight = useMemo(() => {
         const h = height || width * 1.5;
-        if (dimensions.width <= 480) return h * 0.6;
-        if (dimensions.width <= 768) return h * 0.8;
+        if (dimensions.width <= 480) return h * 0.35;
+        if (dimensions.width <= 768) return h * 0.55;
         return h;
     }, [dimensions.width, height, width]);
 
@@ -226,8 +220,8 @@ export function ThreeDImageRing({
             onMouseDown={draggable ? handleDragStart : undefined}
             onTouchStart={draggable ? handleDragStart : undefined}
         >
-            {/* Title Display - Moved higher up on mobile */}
-            <div className="absolute top-[10%] md:top-auto md:bottom-2 left-0 w-full z-10 flex justify-center pointer-events-none">
+            {/* Title Display - Moved to bottom consistently */}
+            <div className="absolute bottom-[8%] md:bottom-2 left-0 w-full z-10 flex justify-center pointer-events-none">
                 <AnimatePresence mode="wait">
                     {titles[activeIndex] && (
                         <motion.div
@@ -236,7 +230,7 @@ export function ThreeDImageRing({
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -10 }}
                             transition={{ duration: 0.3 }}
-                            className="text-xl md:text-3xl font-semibold text-gray-800 tracking-tight text-center px-6"
+                            className="text-[1.35rem] md:text-3xl font-semibold text-gray-800 tracking-tight text-center px-6"
                             style={{
                                 textShadow: '0 2px 10px rgba(0,0,0,0.1)',
                                 fontFamily: 'var(--font-outfit), sans-serif'
