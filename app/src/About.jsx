@@ -208,13 +208,13 @@ function About() {
                 className="relative w-full h-screen flex justify-center items-center bg-black overflow-hidden"
             >
                 {/* Optimized 3D Animation Container — "Goldilocks" ratio for mobile: 82vh vertical height removes big black empty gaps, while 180vw horizontal width forces the intrinsic 3D camera to zoom out enough to perfectly reveal both ears. */}
-                <div 
+                <div
                     data-us-project="gcNwfvcVtYZDlhVdfUiA"
                     className="absolute top-[9vh] left-1/2 -translate-x-1/2 h-[82vh] w-[180vw] md:inset-0 md:h-screen md:w-full md:left-0 md:transform-none md:translate-x-[5%] z-0 flex items-center justify-center p-0 m-0"
                 ></div>
 
                 {/* Mobile Edge Fade Overlay to seamlessly blend the animation boundaries into the black background */}
-                <div 
+                <div
                     className="absolute inset-0 pointer-events-none z-[1] md:hidden"
                     style={{ background: 'linear-gradient(to bottom, #000 10%, transparent 20%, transparent 80%, #000 90%)' }}
                 ></div>
@@ -282,7 +282,7 @@ function About() {
                     )}
                 </motion.nav>
             </section>
-            
+
             {/* Hero Text — "ABOUT US" (Overlay) - Pushed down slightly via pb-8 on mobile to clear the face */}
             <div className="absolute top-0 left-0 w-full h-screen pointer-events-none z-[1000] flex flex-col items-center md:items-start justify-end p-10 pb-8 md:pb-36 md:p-20">
                 <motion.h1
@@ -339,19 +339,27 @@ function About() {
                         variants={fadeUp}
                         className="bg-[#e9e9e9] rounded-[44px] p-6 md:p-10 shadow-md flex flex-col"
                     >
-                        <GlareHover
-                            glareColor="#ffffff"
-                            glareOpacity={0.4}
-                            glareSize={600}
-                            className="relative h-[250px] md:h-[350px] w-full rounded-[30px] overflow-hidden shadow-sm mb-12"
-                        >
-                            <img src={projectsHandshake} alt="Handshake" className="w-full h-full object-cover" />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-8 md:p-12 z-10">
-                                <h2 className="font-[Playfair_Display] text-white text-3xl md:text-[3.25rem] font-normal leading-tight tracking-wide drop-shadow-md">
-                                    PROJECTS of <br /> DIRECTORS
-                                </h2>
-                            </div>
-                        </GlareHover>
+                        <div className="relative h-[250px] md:h-[350px] w-full rounded-[30px] mb-12">
+                            <GlareHover
+                                width="100%"
+                                height="100%"
+                                background="transparent"
+                                borderRadius="30px"
+                                borderColor="transparent"
+                                glareColor="#ffffff"
+                                glareOpacity={0.3}
+                                glareSize={300}
+                                transitionDuration={800}
+                                className="w-full h-full shadow-sm"
+                            >
+                                <img src={projectsHandshake} alt="Handshake" className="w-full h-full object-cover" />
+                                <div className="absolute inset-0 flex items-end p-8 md:p-12 z-10">
+                                    <h2 className="font-[Playfair_Display] text-white text-3xl md:text-[3.25rem] font-normal leading-tight tracking-wide drop-shadow-md">
+                                        PROJECTS of <br /> DIRECTORS
+                                    </h2>
+                                </div>
+                            </GlareHover>
+                        </div>
 
                         <div className="px-2 md:px-4 grid md:grid-cols-3 gap-8 md:gap-10 mb-4">
                             {team.map((member, i) => {
