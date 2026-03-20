@@ -27,7 +27,7 @@ function Contact() {
     // Form State
     const [formData, setFormData] = useState({
         fullName: '',
-        email: '',
+        mobile: '',
         serviceInterest: '',
         message: ''
     });
@@ -38,6 +38,16 @@ function Contact() {
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
+
+        if (name === 'mobile') {
+            const numericValue = value.replace(/\D/g, '').slice(0, 10);
+            setFormData(prev => ({
+                ...prev,
+                [name]: numericValue
+            }));
+            return;
+        }
+
         setFormData(prev => ({
             ...prev,
             [name]: value
@@ -64,7 +74,7 @@ function Contact() {
                 setSubmitStatus({ type: 'success', message: 'Message sent successfully!' });
                 setFormData({
                     fullName: '',
-                    email: '',
+                    mobile: '',
                     serviceInterest: '',
                     message: ''
                 });
@@ -282,13 +292,16 @@ function Contact() {
                                 />
                             </div>
                             <div>
-                                <label className="block text-[14px] font-normal text-[#333333] mb-3">E-mail</label>
+                                <label className="block text-[14px] font-normal mb-3">Mobile Number</label>
                                 <input
-                                    type="email"
-                                    name="email"
-                                    value={formData.email}
+                                    type="tel"
+                                    name="mobile"
+                                    value={formData.mobile}
                                     onChange={handleInputChange}
                                     required
+                                    maxLength="10"
+                                    pattern="\d{10}"
+                                    title="Please enter a valid 10-digit mobile number"
                                     className="w-full bg-[#e8e8e8] rounded-full px-8 py-5 outline-none transition-all focus:ring-1 focus:ring-black/10 h-[50px]"
                                 />
                             </div>

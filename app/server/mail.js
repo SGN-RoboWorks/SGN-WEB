@@ -27,22 +27,21 @@ const transporter = nodemailer.createTransport({
 
 // Endpoint to send emails
 app.post('/api/contact', async (req, res) => {
-    const { fullName, email, serviceInterest, message } = req.body;
+    const { fullName, mobile, serviceInterest, message } = req.body;
 
-    if (!fullName || !email || !message) {
+    if (!fullName || !mobile || !message) {
         return res.status(400).json({ success: false, message: 'Please fill in all required fields.' });
     }
 
     const mailOptions = {
         from: `"${fullName}" <${process.env.EMAIL_USER}>`,
-        to: 'akashvichu576@gmail.com',
-        replyTo: email,
+        to: 'sgnroboworks@gmail.com',
         subject: `New Contact Form Submission from ${fullName}`,
         html: `
       <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
         <h2 style="color: #000; border-bottom: 2px solid #eee; padding-bottom: 10px;">New Inquiry Received</h2>
         <p><strong>Name:</strong> ${fullName}</p>
-        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Mobile Number:</strong> ${mobile}</p>
         <p><strong>Service Interested In:</strong> ${serviceInterest || 'Not specified'}</p>
         <div style="background: #f9f9f9; padding: 15px; border-radius: 8px; margin-top: 20px;">
           <p><strong>Message:</strong></p>
