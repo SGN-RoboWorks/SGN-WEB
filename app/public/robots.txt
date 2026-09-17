@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# Block nothing — every route is meant to be indexed.
+
+Sitemap: https://www.sgnroboworks.online/sitemap.xml

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { FAQS } from './seoConfig';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // Assets
@@ -96,24 +97,7 @@ function Contact() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    const faqs = [
-        {
-            q: "Is SGN RoboWorks a product company or a service company?",
-            a: "SGN RoboWorks is a technology engineering company that builds both proprietary platforms and custom intelligent systems. While some solutions are delivered as products or SaaS platforms, others are engineered end-to-end based on real-world industrial needs. The focus is on long-term operational intelligence, not one-time services."
-        },
-        {
-            q: "What makes SGN RoboWorks different from typical AI or automation startups?",
-            a: "Unlike companies that focus only on software or only on hardware, SGN RoboWorks designs complete intelligent ecosystems—combining AI, IoT, automation, security, and system architecture. Every solution is built to be practical, scalable, and deployable in real industrial environments, not just experimental or demo-driven."
-        },
-        {
-            q: "Are SGN RoboWorks solutions only for agriculture-related industries?",
-            a: "No. While SGN RoboWorks has strong capabilities in agri-intelligence and food systems through its AgriTech division, the company also works across industrial automation, IoT infrastructure, cybersecurity, data intelligence, and enterprise platforms. Agriculture is one vertical—not the company’s limitation."
-        },
-        {
-            q: "Who can work with SGN RoboWorks—startups or large enterprises?",
-            a: "Both. SGN RoboWorks designs modular and scalable systems that support early-stage startups, growing businesses, and enterprise-scale operations. The same core intelligence can be adapted to different sizes, budgets, and levels of operational complexity."
-        }
-    ];
+    const faqs = FAQS;
 
     const toggleFaq = (index) => {
         setOpenFaq(openFaq === index ? null : index);
@@ -125,10 +109,16 @@ function Contact() {
             {/* HERO SECTION                             */}
             {/* ═══════════════════════════════════════ */}
             <section className="relative h-screen overflow-hidden bg-black">
+                {/* Page H1 — the hero is a full-bleed image with no text, so this
+                    gives the page a real heading for search engines and screen readers. */}
+                <h1 className="sr-only">
+                    Contact SGN RoboWorks, Chennai. Buy Robotics, IoT, Embedded and AI Project Kits and Electronic Components
+                </h1>
+
                 <div className="absolute inset-0">
                     <img
                         src={contactHero}
-                        alt="Contact Hero"
+                        alt="Contact SGN RoboWorks in Kodungaiyur, Chennai to order robotics, IoT and embedded projects"
                         className="w-full h-full object-cover object-center md:object-center opacity-80"
                     />
                 </div>
@@ -230,7 +220,7 @@ function Contact() {
                             We Got All Answers !
                         </h2>
                         <p className="text-[#666666] text-[14px] md:text-[16px] mt-6 md:mt-[23px] max-w-[496px] font-normal">
-                            Fill in the form or contact us. Our team will get back to you shortly.
+                            Fill in the form or call us to order robotics, IoT, embedded and AI project kits or electronic components. Our Chennai team will get back to you shortly with pricing and delivery details.
                         </p>
 
                         <div className="mt-[145px] space-y-10">
@@ -446,7 +436,7 @@ function Contact() {
                     <div className="flex flex-col md:flex-row justify-between gap-12 pt-12 border-t border-gray-100">
                         <div>
                             <div className="flex items-center gap-4">
-                                <img src={gallery4} alt="SGN Logo" className="w-14 h-14 rounded-full border border-gray-100 p-1" />
+                                <img src={gallery4} alt="SGN RoboWorks logo, robotics and electronics project supplier in Chennai" className="w-14 h-14 rounded-full border border-gray-100 p-1" />
                                 <div>
                                     <h3 className="font-[Playfair_Display] text-6xl md:text-8xl  tracking-tighter text-black leading-none">S G N</h3>
                                     <p className="font-[Playfair_Display] text-base md:text-xl text-gray-800 tracking-wide mt-1">Roboworks</p>

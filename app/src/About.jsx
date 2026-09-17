@@ -213,6 +213,12 @@ function About() {
                     className="absolute top-[9vh] left-1/2 -translate-x-1/2 h-[82vh] w-[180vw] md:inset-0 md:h-screen md:w-full md:left-0 md:transform-none md:translate-x-[5%] z-0 flex items-center justify-center p-0 m-0"
                 ></div>
 
+                {/* Page H1 — the hero is a pure animation with no text, so this gives
+                    the page a real heading for search engines and screen readers. */}
+                <h1 className="sr-only">
+                    About SGN RoboWorks, Robotics, IoT, Embedded and AI Project Builders in Chennai, Tamil Nadu
+                </h1>
+
                 {/* Mobile Edge Fade Overlay to seamlessly blend the animation boundaries into the black background */}
                 <div
                     className="absolute inset-0 pointer-events-none z-[1] md:hidden"
@@ -352,7 +358,7 @@ function About() {
                                 transitionDuration={800}
                                 className="w-full h-full shadow-sm"
                             >
-                                <img src={projectsHandshake} alt="Handshake" className="w-full h-full object-cover" />
+                                <img src={projectsHandshake} alt="SGN RoboWorks partnering with colleges and industries in Chennai for robotics and IoT projects" className="w-full h-full object-cover" />
                                 <div className="absolute inset-0 flex items-end p-8 md:p-12 z-10">
                                     <h2 className="font-[Playfair_Display] text-white text-3xl md:text-[3.25rem] font-normal leading-tight tracking-wide drop-shadow-md">
                                         PROJECTS of <br /> DIRECTORS
@@ -415,9 +421,10 @@ function About() {
                         <p className="text-[#1a1a1a] text-[15px] md:text-[18px] font-medium leading-relaxed">
                             At SGN Roboworks, we believe innovation thrives on diverse perspectives. We are
                             committed to building an inclusive environment where individuals are valued for their
-                            skills, ideas, and contributions—regardless of background or identity. By fostering
+                            skills, ideas, and contributions, regardless of background or identity. By fostering
                             equal opportunity and interdisciplinary collaboration, we strengthen our ability to
-                            engineer intelligent, resilient, and future-ready systems for global industries.
+                            engineer intelligent, resilient, and future-ready robotics, IoT, embedded and AI
+                            systems for students, colleges and industries in Chennai, Tamil Nadu and beyond.
                         </p>
                     </motion.div>
                 </div>
@@ -430,9 +437,9 @@ function About() {
                     <ThreeDImageRing
                         images={[gemini1, gemini2, gemini3, gemini4, gemini5]}
                         titles={[
-                            "IoT & Robotics",
+                            "IoT & Robotics Projects",
                             "AI-Based Products",
-                            "Smart Home Automation",
+                            "Mini Projects in Robotics, Embedded, IoT & AI",
                             "Sustainable Hydro-ponics",
                             "Electronics Component Supply"
                         ]}
@@ -457,10 +464,10 @@ function About() {
                     variants={fadeUp}
                     className="max-w-6xl mx-auto px-6"
                 >
-                    <div className="relative w-full max-w-[1195px] h-auto md:h-[582px] bg-[#0a0a0a] rounded-[40px] overflow-hidden flex flex-col md:flex-row shadow-2xl mx-auto">
+                    <div className="relative w-full max-w-[1195px] h-auto md:min-h-[582px] bg-[#0a0a0a] rounded-[40px] overflow-hidden flex flex-col md:flex-row shadow-2xl mx-auto">
                         {/* Background Image Layer */}
                         <div className="absolute inset-0 z-0">
-                            <img src={gallery6} alt="Contact" className="w-full h-full object-cover md:object-[center_left] opacity-80 border-none" />
+                            <img src={gallery6} alt="Contact SGN RoboWorks Chennai to order robotics, IoT and embedded project kits" className="w-full h-full object-cover md:object-[center_left] opacity-80 border-none" />
                             <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#000000] via-[#000000]/60 to-transparent md:from-transparent md:via-[#000000]/40 md:to-[#000000]/90 pointer-events-none"></div>
                         </div>
 
@@ -468,10 +475,10 @@ function About() {
                         <div className="hidden md:block w-[420px] shrink-0 z-10"></div>
 
                         {/* Right Content Container */}
-                        <div className="relative z-10 flex-1 flex flex-col pt-12 md:pt-[80.89px] px-8 md:px-0 items-center md:items-start pb-12 md:pb-0">
+                        <div className="relative z-10 flex-1 flex flex-col pt-12 md:pt-[80.89px] px-8 md:px-0 items-center md:items-start pb-12 md:pb-10">
 
                             {/* Title area */}
-                            <div className="md:ml-[0px] flex flex-col items-center justify-center w-full max-w-[488px] h-auto md:h-[120px] mb-8 md:mb-[43px]">
+                            <div className="md:ml-[0px] flex flex-col items-center justify-center w-full max-w-[488px] h-auto md:min-h-[120px] mb-8 md:mb-[43px]">
                                 <h3 className="font-[Playfair_Display] text-white text-[26px] md:text-[38.5px] font-normal leading-none tracking-[0.05em] md:tracking-[0.1em]">
                                     BOOK YOUR
                                 </h3>
@@ -481,7 +488,7 @@ function About() {
                             </div>
 
                             {/* Description area */}
-                            <div className="w-full max-w-[592px] h-auto md:h-[149.18px] mb-8 md:mb-[50px]">
+                            <div className="w-full max-w-[592px] h-auto md:min-h-[149.18px] mb-8 md:mb-[50px]">
                                 <p className="text-[#dfdfdf] text-[15px] md:text-[16px] leading-[1.8] font-[Inter] font-light text-center md:text-left">
                                     Our team is just a call away. Whether you need expert
                                     guidance, quick support, or a personalized solution, we're
@@ -511,7 +518,7 @@ function About() {
                         {/* Left — Brand */}
                         <div>
                             <div className="flex items-center gap-4">
-                                <img src={gallery4} alt="SGN Logo" className="w-12 h-12 rounded-full border border-gray-100 p-1" />
+                                <img src={gallery4} alt="SGN RoboWorks logo, robotics and electronics project supplier in Chennai" className="w-12 h-12 rounded-full border border-gray-100 p-1" />
                                 <div>
                                     <h4 className="font-[Playfair_Display] text-6xl md:text-8xl tracking-wider leading-none">
                                         SGN

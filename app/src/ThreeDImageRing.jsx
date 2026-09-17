@@ -230,7 +230,7 @@ export function ThreeDImageRing({
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -10 }}
                             transition={{ duration: 0.3 }}
-                            className="text-[1.35rem] md:text-3xl font-semibold text-gray-800 tracking-tight text-center px-6"
+                            className="text-[1.2rem] md:text-[28px] leading-[1.15] font-semibold text-gray-800 tracking-tight text-center px-6 max-w-[92%] md:max-w-[620px] mx-auto text-balance"
                             style={{
                                 textShadow: '0 2px 10px rgba(0,0,0,0.1)',
                                 fontFamily: 'var(--font-outfit), sans-serif'
