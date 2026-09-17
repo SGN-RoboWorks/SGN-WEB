@@ -3,9 +3,9 @@ import { FAQS } from './seoConfig';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // Assets
-import gallery4 from './assets/gallery-4.png';
-import contactHero from './assets/0dcff79c73a67da491af0896b36e228a98cc1ab4.png';
-import gallery6 from './assets/gallery-6.png';
+import gallery4 from './assets/gallery-4.webp';
+import contactHero from './assets/0dcff79c73a67da491af0896b36e228a98cc1ab4.webp';
+import gallery6 from './assets/gallery-6.webp';
 
 // Animation Variants
 const fadeUp = {
@@ -116,7 +116,7 @@ function Contact() {
                 </h1>
 
                 <div className="absolute inset-0">
-                    <img
+                    <img loading="eager" decoding="async"
                         src={contactHero}
                         alt="Contact SGN RoboWorks in Kodungaiyur, Chennai to order robotics, IoT and embedded projects"
                         className="w-full h-full object-cover object-center md:object-center opacity-80"
@@ -436,7 +436,7 @@ function Contact() {
                     <div className="flex flex-col md:flex-row justify-between gap-12 pt-12 border-t border-gray-100">
                         <div>
                             <div className="flex items-center gap-4">
-                                <img src={gallery4} alt="SGN RoboWorks logo, robotics and electronics project supplier in Chennai" className="w-14 h-14 rounded-full border border-gray-100 p-1" />
+                                <img loading="lazy" decoding="async" src={gallery4} alt="SGN RoboWorks logo, robotics and electronics project supplier in Chennai" className="w-14 h-14 rounded-full border border-gray-100 p-1" />
                                 <div>
                                     <h3 className="font-[Playfair_Display] text-6xl md:text-8xl  tracking-tighter text-black leading-none">S G N</h3>
                                     <p className="font-[Playfair_Display] text-base md:text-xl text-gray-800 tracking-wide mt-1">Roboworks</p>

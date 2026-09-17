@@ -2,23 +2,23 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform, useInView, useMotionValue, useSpring } from 'framer-motion';
 
 // ── Asset Imports ──
-import gallery1 from './assets/gallery-1.png';
-import gallery2 from './assets/gallery-2.png';
-import gallery3 from './assets/gallery-3.png';
-import gallery4 from './assets/gallery-4.png';
-import gallery12 from './assets/gallery-12.png';
+import gallery1 from './assets/gallery-1.webp';
+import gallery2 from './assets/gallery-2.webp';
+import gallery3 from './assets/gallery-3.webp';
+import gallery4 from './assets/gallery-4.webp';
+import gallery12 from './assets/gallery-12.webp';
 
 // Hero asset — metallic swirl
-import newServiceHero from './assets/553ca5ba58dd3cf4ad1b16dbfaf9c28f56db29ad.jpg';
+import newServiceHero from './assets/553ca5ba58dd3cf4ad1b16dbfaf9c28f56db29ad.webp';
 
 // Why Choosing section — real photo assets
-import whyImgLeft from './assets/19a25da78dcd6cc1c69e6275ce99ea0380a1e727.jpg';  // 3 professionals
-import whyImgTopR from './assets/21d2df3d2f6548dbe2c8e5c69b6d11ff166b3670.jpg';  // warehouse + hardware
-import whyImgBotM from './assets/adfda7168d5e5495c59670fb92a804c351eabe6b.jpg'; // laptop meeting room
-import whyImgBotR from './assets/59d5145a665116b455cfcd5f7ca676eaaf2fcf9f.jpg'; // green office + plants
+import whyImgLeft from './assets/19a25da78dcd6cc1c69e6275ce99ea0380a1e727.webp';  // 3 professionals
+import whyImgTopR from './assets/21d2df3d2f6548dbe2c8e5c69b6d11ff166b3670.webp';  // warehouse + hardware
+import whyImgBotM from './assets/adfda7168d5e5495c59670fb92a804c351eabe6b.webp'; // laptop meeting room
+import whyImgBotR from './assets/59d5145a665116b455cfcd5f7ca676eaaf2fcf9f.webp'; // green office + plants
 
 // Contact section dark background
-import gallery6 from './assets/gallery-6.png';
+import gallery6 from './assets/gallery-6.webp';
 
 // ── Components ──
 
@@ -146,7 +146,7 @@ function Service() {
             {/* ═══════════════════════════════════════ */}
             <section id="home" ref={heroRef} className="relative h-screen overflow-hidden bg-black">
                 <motion.div className="absolute inset-0 z-0 origin-top-left" style={{ y: heroY, scale: heroScale }}>
-                    <img
+                    <img loading="eager" decoding="async"
                         src={newServiceHero}
                         alt="SGN RoboWorks services for robotics, IoT, embedded and AI projects in Chennai"
                         className="w-full h-full object-cover object-right md:object-center opacity-80"
@@ -329,7 +329,7 @@ function Service() {
                             className="md:w-[38%] border border-black/[0.12] rounded-[32px] overflow-hidden bg-white flex flex-col shadow-sm"
                         >
                             <div className="flex-1 overflow-hidden">
-                                <img
+                                <img loading="lazy" decoding="async"
                                     src={whyImgLeft}
                                     alt="SGN RoboWorks team delivering affordable automation and student project kits"
                                     className="w-full h-full object-cover scale-[1.2] md:scale-[1.1] origin-left"
@@ -352,7 +352,7 @@ function Service() {
                                 className="border border-black/[0.12] rounded-[32px] overflow-hidden bg-white shadow-sm flex flex-col"
                             >
                                 <div className="h-[200px] md:h-[260px] overflow-hidden">
-                                    <img
+                                    <img loading="lazy" decoding="async"
                                         src={whyImgTopR}
                                         alt="Electronic components and embedded hardware stocked for delivery across Tamil Nadu"
                                         className="w-full h-full object-cover scale-[1.4]"
@@ -373,7 +373,7 @@ function Service() {
                                     className="border border-black/[0.12] rounded-[32px] overflow-hidden bg-white shadow-sm flex flex-col"
                                 >
                                     <div className="h-[180px] overflow-hidden">
-                                        <img
+                                        <img loading="lazy" decoding="async"
                                             src={whyImgBotM}
                                             alt="SGN RoboWorks engineers integrating IoT, AI and robotics hardware and software"
                                             className="w-full h-full object-cover"
@@ -392,7 +392,7 @@ function Service() {
                                     className="border border-black/[0.12] rounded-[32px] overflow-hidden bg-white shadow-sm flex flex-col"
                                 >
                                     <div className="h-[180px] overflow-hidden">
-                                        <img
+                                        <img loading="lazy" decoding="async"
                                             src={whyImgBotR}
                                             alt="Energy-efficient and eco-friendly IoT and hydroponics systems by SGN RoboWorks"
                                             className="w-full h-full object-cover"
@@ -472,7 +472,7 @@ function Service() {
                     <div className="relative w-full max-w-[1195px] h-auto md:min-h-[582px] bg-[#0a0a0a] rounded-[40px] overflow-hidden flex flex-col md:flex-row shadow-2xl mx-auto">
                         {/* Background Image Layer */}
                         <div className="absolute inset-0 z-0">
-                            <img src={gallery6} alt="Contact SGN RoboWorks Chennai to order robotics, IoT and embedded project kits" className="w-full h-full object-cover md:object-[center_left] opacity-80 border-none" />
+                            <img loading="lazy" decoding="async" src={gallery6} alt="Contact SGN RoboWorks Chennai to order robotics, IoT and embedded project kits" className="w-full h-full object-cover md:object-[center_left] opacity-80 border-none" />
                             <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#000000] via-[#000000]/60 to-transparent md:from-transparent md:via-[#000000]/40 md:to-[#000000]/90 pointer-events-none"></div>
                         </div>
 
@@ -529,7 +529,7 @@ function Service() {
                         {/* Left — Brand */}
                         <div>
                             <div className="flex items-center gap-4">
-                                <img src={gallery4} alt="SGN RoboWorks logo, robotics and electronics project supplier in Chennai" className="w-14 h-14 rounded-full border border-gray-100 p-1" />
+                                <img loading="lazy" decoding="async" src={gallery4} alt="SGN RoboWorks logo, robotics and electronics project supplier in Chennai" className="w-14 h-14 rounded-full border border-gray-100 p-1" />
                                 <div>
                                     <h4 className="font-[Playfair_Display] text-6xl md:text-8xl tracking-tighter  leading-none">S G N</h4>
                                     <p className="font-[Playfair_Display] text-base md:text-xl text-gray-800 tracking-wide mt-1">Roboworks</p>

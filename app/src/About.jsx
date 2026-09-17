@@ -2,19 +2,19 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 
 // Assets
-import gallery4 from './assets/gallery-4.png';
-import gallery6 from './assets/gallery-6.png';
-import gallery7 from './assets/gallery-7.png';
-import gallery8 from './assets/gallery-8.png';
-import directorSarath from './assets/director-sarath.jpg';
-import directorGokulnath from './assets/director-gokulnath.jpg';
-import directorNaveen from './assets/direct.jpg';
-import projectsHandshake from './assets/projects-handshake.jpg';
-import gemini1 from './assets/Gemini_Generated_Image_3id6v53id6v53id6.png';
-import gemini2 from './assets/Gemini_Generated_Image_9ubis89ubis89ubi.png';
-import gemini3 from './assets/Gemini_Generated_Image_bui6kcbui6kcbui6.png';
-import gemini4 from './assets/Gemini_Generated_Image_jbe4bkjbe4bkjbe4.png';
-import gemini5 from './assets/Gemini_Generated_Image_t7i1rrt7i1rrt7i1.png';
+import gallery4 from './assets/gallery-4.webp';
+import gallery6 from './assets/gallery-6.webp';
+import gallery7 from './assets/gallery-7.webp';
+import gallery8 from './assets/gallery-8.webp';
+import directorSarath from './assets/director-sarath.webp';
+import directorGokulnath from './assets/director-gokulnath.webp';
+import directorNaveen from './assets/direct.webp';
+import projectsHandshake from './assets/projects-handshake.webp';
+import gemini1 from './assets/Gemini_Generated_Image_3id6v53id6v53id6.webp';
+import gemini2 from './assets/Gemini_Generated_Image_9ubis89ubis89ubi.webp';
+import gemini3 from './assets/Gemini_Generated_Image_bui6kcbui6kcbui6.webp';
+import gemini4 from './assets/Gemini_Generated_Image_jbe4bkjbe4bkjbe4.webp';
+import gemini5 from './assets/Gemini_Generated_Image_t7i1rrt7i1rrt7i1.webp';
 import ThreeDImageRing from './ThreeDImageRing';
 import GlareHover from './GlareHover';
 
@@ -358,7 +358,7 @@ function About() {
                                 transitionDuration={800}
                                 className="w-full h-full shadow-sm"
                             >
-                                <img src={projectsHandshake} alt="SGN RoboWorks partnering with colleges and industries in Chennai for robotics and IoT projects" className="w-full h-full object-cover" />
+                                <img loading="lazy" decoding="async" src={projectsHandshake} alt="SGN RoboWorks partnering with colleges and industries in Chennai for robotics and IoT projects" className="w-full h-full object-cover" />
                                 <div className="absolute inset-0 flex items-end p-8 md:p-12 z-10">
                                     <h2 className="font-[Playfair_Display] text-white text-3xl md:text-[3.25rem] font-normal leading-tight tracking-wide drop-shadow-md">
                                         PROJECTS of <br /> DIRECTORS
@@ -374,7 +374,7 @@ function About() {
                                     <div key={i} className="flex flex-col items-center text-center">
                                         <div className="w-full max-w-[320px] aspect-[4/5] rounded-[24px] bg-[#757575] p-[10px] shadow-sm mb-6 mx-auto transform transition-all duration-300 hover:scale-[1.03]">
                                             <div className="w-full h-full rounded-[16px] overflow-hidden border border-black/10">
-                                                <img src={member.img} alt={member.name} className="w-full h-full object-cover" />
+                                                <img loading="lazy" decoding="async" src={member.img} alt={member.name} className="w-full h-full object-cover" />
                                             </div>
                                         </div>
                                         <div className="mb-4">
@@ -467,7 +467,7 @@ function About() {
                     <div className="relative w-full max-w-[1195px] h-auto md:min-h-[582px] bg-[#0a0a0a] rounded-[40px] overflow-hidden flex flex-col md:flex-row shadow-2xl mx-auto">
                         {/* Background Image Layer */}
                         <div className="absolute inset-0 z-0">
-                            <img src={gallery6} alt="Contact SGN RoboWorks Chennai to order robotics, IoT and embedded project kits" className="w-full h-full object-cover md:object-[center_left] opacity-80 border-none" />
+                            <img loading="lazy" decoding="async" src={gallery6} alt="Contact SGN RoboWorks Chennai to order robotics, IoT and embedded project kits" className="w-full h-full object-cover md:object-[center_left] opacity-80 border-none" />
                             <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#000000] via-[#000000]/60 to-transparent md:from-transparent md:via-[#000000]/40 md:to-[#000000]/90 pointer-events-none"></div>
                         </div>
 
@@ -518,7 +518,7 @@ function About() {
                         {/* Left — Brand */}
                         <div>
                             <div className="flex items-center gap-4">
-                                <img src={gallery4} alt="SGN RoboWorks logo, robotics and electronics project supplier in Chennai" className="w-12 h-12 rounded-full border border-gray-100 p-1" />
+                                <img loading="lazy" decoding="async" src={gallery4} alt="SGN RoboWorks logo, robotics and electronics project supplier in Chennai" className="w-12 h-12 rounded-full border border-gray-100 p-1" />
                                 <div>
                                     <h4 className="font-[Playfair_Display] text-6xl md:text-8xl tracking-wider leading-none">
                                         SGN

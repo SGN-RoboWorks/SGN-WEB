@@ -2,18 +2,18 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 
 // ── Asset Imports ──
-import gallery1 from './assets/gallery-1.png';
-import gallery2 from './assets/gallery-2.png';
-import gallery3 from './assets/gallery-3.png';
-import gallery4 from './assets/gallery-4.png';
-import gallery5 from './assets/gallery-5.png';
-import gallery6 from './assets/gallery-6.png';
-import gallery7 from './assets/gallery-7.png';
-import gallery8 from './assets/gallery-8.png';
-import gallery9 from './assets/gallery-9.png';
-import gallery11 from './assets/gallery-11.png';
-import gallery12 from './assets/gallery-12.png';
-import gallery10 from './assets/gallery-10.png';
+import gallery1 from './assets/gallery-1.webp';
+import gallery2 from './assets/gallery-2.webp';
+import gallery3 from './assets/gallery-3.webp';
+import gallery4 from './assets/gallery-4.webp';
+import gallery5 from './assets/gallery-5.webp';
+import gallery6 from './assets/gallery-6.webp';
+import gallery7 from './assets/gallery-7.webp';
+import gallery8 from './assets/gallery-8.webp';
+import gallery9 from './assets/gallery-9.webp';
+import gallery11 from './assets/gallery-11.webp';
+import gallery12 from './assets/gallery-12.webp';
+import gallery10 from './assets/gallery-10.webp';
 import ScrollStack, { ScrollStackItem } from './ScrollStack';
 
 // ── Animation Variants ──
@@ -92,7 +92,7 @@ function Home() {
             <section ref={heroRef} className="relative h-screen overflow-hidden">
                 {/* Background Image */}
                 <motion.div className="absolute inset-0" style={{ y: heroY, scale: heroScale }}>
-                    <img
+                    <img loading="eager" decoding="async"
                         src={gallery9}
                         alt="SGN RoboWorks humanoid robot, built by robotics, IoT and embedded project specialists in Chennai"
                         className="w-full h-screen md:h-[160vh] object-cover object-[center_20%] md:object-[center_30%]"
@@ -275,7 +275,7 @@ function Home() {
 
                             {/* Image Side with thick frame */}
                             <div className="w-full md:w-[40%] h-[250px] md:h-full rounded-[35px] overflow-hidden border-[8px] border-[#a1a1a1] shrink-0 bg-[#333] shadow-md">
-                                <img src={gallery10} alt="SGN RoboWorks engineers building robotics and embedded projects in Chennai" className="w-full h-full object-cover" />
+                                <img loading="lazy" decoding="async" src={gallery10} alt="SGN RoboWorks engineers building robotics and embedded projects in Chennai" className="w-full h-full object-cover" />
                             </div>
                         </motion.div>
                     </div>
@@ -319,7 +319,7 @@ function Home() {
 
                             {/* Image Container - Full Width */}
                             <div className="w-full h-[280px] overflow-hidden mb-8 shadow-sm">
-                                <img src={gallery8} alt="SGN RoboWorks mission for intelligent robotics, IoT and automation systems" className="w-full h-full object-cover" />
+                                <img loading="lazy" decoding="async" src={gallery8} alt="SGN RoboWorks mission for intelligent robotics, IoT and automation systems" className="w-full h-full object-cover" />
                             </div>
 
                             {/* Mission List */}
@@ -354,7 +354,7 @@ function Home() {
 
                             {/* Image Container - Full Width */}
                             <div className="w-full h-[280px] overflow-hidden mb-8 shadow-sm">
-                                <img src={gallery7} alt="SGN RoboWorks vision for autonomous and climate-resilient industrial systems" className="w-full h-full object-cover" />
+                                <img loading="lazy" decoding="async" src={gallery7} alt="SGN RoboWorks vision for autonomous and climate-resilient industrial systems" className="w-full h-full object-cover" />
                             </div>
 
                             {/* Vision List */}
@@ -430,7 +430,7 @@ function Home() {
                                         </a>
                                     </div>
                                     <div className="w-40 h-40 md:w-60 md:h-60 shrink-0 flex items-center justify-center p-4  rounded-[30px]">
-                                        <img src={svc.img} alt={svc.title} className="w-full h-full object-contain drop-shadow-2xl" />
+                                        <img loading="lazy" decoding="async" src={svc.img} alt={svc.title} className="w-full h-full object-contain drop-shadow-2xl" />
                                     </div>
                                 </div>
                             </ScrollStackItem>
@@ -473,7 +473,7 @@ function Home() {
                     <div className="relative w-full max-w-[1195px] h-auto md:min-h-[582px] bg-[#0a0a0a] rounded-[40px] overflow-hidden flex flex-col md:flex-row shadow-2xl mx-auto">
                         {/* Background Image Layer */}
                         <div className="absolute inset-0 z-0">
-                            <img src={gallery6} alt="Contact SGN RoboWorks Chennai to order robotics, IoT and embedded projects" className="w-full h-full object-cover md:object-[center_left] opacity-80 border-none" />
+                            <img loading="lazy" decoding="async" src={gallery6} alt="Contact SGN RoboWorks Chennai to order robotics, IoT and embedded projects" className="w-full h-full object-cover md:object-[center_left] opacity-80 border-none" />
                             <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#000000] via-[#000000]/60 to-transparent md:from-transparent md:via-[#000000]/40 md:to-[#000000]/90 pointer-events-none"></div>
                         </div>
 
@@ -529,7 +529,7 @@ function Home() {
                         {/* Left — Brand */}
                         <div>
                             <div className="flex items-center gap-4">
-                                <img src={gallery4} alt="SGN RoboWorks logo, robotics and IoT project supplier in Chennai" className="w-12 h-12 rounded-full" />
+                                <img loading="lazy" decoding="async" src={gallery4} alt="SGN RoboWorks logo, robotics and IoT project supplier in Chennai" className="w-12 h-12 rounded-full" />
                                 <div>
                                     <h4 className="font-[Playfair_Display] text-6xl md:text-8xl  tracking-wider">
                                         SGN

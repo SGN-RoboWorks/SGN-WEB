@@ -2,18 +2,18 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 
 // ── Asset Imports ──
-import gallery1 from './assets/gallery-1.png';
-import gallery2 from './assets/gallery-2.png';
-import gallery3 from './assets/gallery-3.png';
-import gallery4 from './assets/gallery-4.png';
-import gallery5 from './assets/gallery-5.png';
-import gallery6 from './assets/gallery-6.png';
-import gallery7 from './assets/gallery-7.png';
-import gallery8 from './assets/gallery-8.png';
-import gallery9 from './assets/gallery-9.png';
-import gallery11 from './assets/gallery-11.png';
-import gallery12 from './assets/gallery-12.png';
-import gallery10 from './assets/gallery-10.png';
+import gallery1 from './assets/gallery-1.webp';
+import gallery2 from './assets/gallery-2.webp';
+import gallery3 from './assets/gallery-3.webp';
+import gallery4 from './assets/gallery-4.webp';
+import gallery5 from './assets/gallery-5.webp';
+import gallery6 from './assets/gallery-6.webp';
+import gallery7 from './assets/gallery-7.webp';
+import gallery8 from './assets/gallery-8.webp';
+import gallery9 from './assets/gallery-9.webp';
+import gallery11 from './assets/gallery-11.webp';
+import gallery12 from './assets/gallery-12.webp';
+import gallery10 from './assets/gallery-10.webp';
 import ScrollStack, { ScrollStackItem } from './ScrollStack';
 
 // ── Animation Variants ──
