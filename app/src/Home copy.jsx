@@ -5,7 +5,6 @@ import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import gallery1 from './assets/gallery-1.webp';
 import gallery2 from './assets/gallery-2.webp';
 import gallery3 from './assets/gallery-3.webp';
-import gallery4 from './assets/gallery-4.webp';
 import gallery5 from './assets/gallery-5.webp';
 import gallery6 from './assets/gallery-6.webp';
 import gallery7 from './assets/gallery-7.webp';
@@ -15,6 +14,8 @@ import gallery11 from './assets/gallery-11.webp';
 import gallery12 from './assets/gallery-12.webp';
 import gallery10 from './assets/gallery-10.webp';
 import ScrollStack, { ScrollStackItem } from './ScrollStack';
+
+const brandLogo = '/IMG-20260903-WA0018.jpg';
 
 // ── Animation Variants ──
 const fadeUp = {
@@ -36,11 +37,11 @@ const navLinks = ['Home', 'About', 'Service', 'Contact'];
 
 // ── Services Data ──
 const services = [
-    { title: 'IoT & Robotics', location: 'Tamil Nadu', desc: 'Hardware-based installation across TN.', img: gallery1 },
-    { title: 'AI-Based Products', location: 'Global', desc: 'Custom Software solutions available worldwide.', img: gallery5 },
-    { title: 'Smart Home Automation', location: 'Tamil Nadu', desc: 'Direct installation & consultation across TN.', img: gallery3 },
-    { title: 'Sustainable Hydro-ponics', location: 'Tamil Nadu', desc: 'Commercial & home farm setup across TN.', img: gallery2 },
-    { title: 'Electronics Component Supply', location: 'Tamil Nadu', desc: 'Wholesale supply & dealer network across TN.', img: gallery12 },
+    { title: 'IoT & Robotics Consultation Solutions', location: 'Tamil Nadu', desc: 'Expert consultation and custom robotics and IoT systems designed and deployed across TN.', img: gallery1 },
+    { title: 'AI-Based Products', location: 'Global', desc: 'Custom Natural Language Processing, Machine Learning, Deep Learning, Reinforcement Learning and Large Language Model solutions available worldwide.', img: gallery5 },
+    { title: 'Industrial Automation', location: 'Tamil Nadu', desc: 'PLC, SCADA and smart automation services across TN.', img: gallery3 },
+    { title: 'Hydroponics, Aeroponics & Aquaponics', location: 'Tamil Nadu', desc: 'Commercial and home agritech systems across TN.', img: gallery2 },
+    { title: 'Electronics & Components Supply for Automation, Robotics, IoT & Embedded Systems', location: 'Tamil Nadu', desc: 'Electronics, sensors, controllers, boards and modules supplied for automation, robotics, IoT and embedded systems across TN.', img: gallery12 },
 ];
 
 function Home() {
@@ -570,7 +571,7 @@ function Home() {
                         {/* Left — Brand */}
                         <div>
                             <div className="flex items-center gap-4">
-                                <img src={gallery4} alt="SGN Logo" className="w-12 h-12 rounded-full" />
+                                <img src={brandLogo} alt="SGN RoboWorks logo" className="w-16 h-16 md:w-20 md:h-20 rounded-full" />
                                 <div>
                                     <h4 className="font-[Playfair_Display] text-6xl md:text-8xl  tracking-wider">
                                         SGN
@@ -593,11 +594,6 @@ function Home() {
                         </div>
                     </div>
 
-                    {/* Bottom credit */}
-                    <div className="mt-16 text-center">
-                        <p className="text-gray-400 text-sm">Designed & Developed by</p>
-                        <p className="text-gray-600 text-sm font-semibold tracking-[0.15em] mt-1">TECHLON</p>
-                    </div>
                 </motion.div>
             </footer>
         </div >

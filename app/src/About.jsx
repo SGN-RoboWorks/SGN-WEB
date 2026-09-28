@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 
 // Assets
-import gallery4 from './assets/gallery-4.webp';
 import gallery6 from './assets/gallery-6.webp';
 import gallery7 from './assets/gallery-7.webp';
 import gallery8 from './assets/gallery-8.webp';
@@ -17,6 +16,8 @@ import gemini4 from './assets/Gemini_Generated_Image_jbe4bkjbe4bkjbe4.webp';
 import gemini5 from './assets/Gemini_Generated_Image_t7i1rrt7i1rrt7i1.webp';
 import ThreeDImageRing from './ThreeDImageRing';
 import GlareHover from './GlareHover';
+
+const brandLogo = '/IMG-20260903-WA0018.jpg';
 
 // Animation Variants
 const fadeUp = {
@@ -40,7 +41,7 @@ const staggerContainer = {
 };
 
 // Nav Links
-const navLinks = ['Home', 'About', 'Service', 'Contact'];
+const navLinks = ['Home', 'About', 'Service', 'Components', 'Contact'];
 
 const team = [
     { name: 'Sarath Kumar Sk', role: 'Managing Director', img: directorGokulnath },
@@ -216,7 +217,7 @@ function About() {
                 {/* Page H1 — the hero is a pure animation with no text, so this gives
                     the page a real heading for search engines and screen readers. */}
                 <h1 className="sr-only">
-                    About SGN RoboWorks, Robotics, IoT, Embedded and AI Project Builders in Chennai, Tamil Nadu
+                    About SGN RoboWorks, Robotics, IoT, Embedded and AI Solutions in Chennai, Tamil Nadu
                 </h1>
 
                 {/* Mobile Edge Fade Overlay to seamlessly blend the animation boundaries into the black background */}
@@ -240,7 +241,7 @@ function About() {
                                 {navLinks.map((link) => (
                                     <a
                                         key={link}
-                                        href={link === 'About' ? '/about' : link === 'Service' ? '/service' : link === 'Contact' ? '/contact' : link === 'Home' ? '/' : '#'}
+                                        href={link === 'About' ? '/about' : link === 'Service' ? '/service' : link === 'Components' ? '/components' : link === 'Contact' ? '/contact' : link === 'Home' ? '/' : '#'}
                                         className={`text-[15px] md:text-[17px] tracking-wide transition-colors duration-300 ${isScrolled ? "text-black hover:text-gray-600" : "text-white hover:opacity-70"
                                             } drop-shadow-sm ${link === 'About' ? 'flex' : 'hidden md:flex'}`}
                                     >
@@ -277,7 +278,7 @@ function About() {
                             {navLinks.map((link) => (
                                 <a
                                     key={link}
-                                    href={link === 'About' ? '/about' : link === 'Service' ? '/service' : link === 'Contact' ? '/contact' : link === 'Home' ? '/' : '#'}
+                                    href={link === 'About' ? '/about' : link === 'Service' ? '/service' : link === 'Components' ? '/components' : link === 'Contact' ? '/contact' : link === 'Home' ? '/' : '#'}
                                     className={`text-lg font-medium transition-colors ${isScrolled ? "text-gray-800 hover:text-black" : "text-white hover:text-gray-300"}`}
                                     onClick={() => setMobileMenuOpen(false)}
                                 >
@@ -358,7 +359,7 @@ function About() {
                                 transitionDuration={800}
                                 className="w-full h-full shadow-sm"
                             >
-                                <img loading="lazy" decoding="async" src={projectsHandshake} alt="SGN RoboWorks partnering with colleges and industries in Chennai for robotics and IoT projects" className="w-full h-full object-cover" />
+                                <img loading="lazy" decoding="async" src={projectsHandshake} alt="SGN RoboWorks partnering with industries in Chennai for robotics and IoT solutions" className="w-full h-full object-cover" />
                                 <div className="absolute inset-0 flex items-end p-8 md:p-12 z-10">
                                     <h2 className="font-[Playfair_Display] text-white text-3xl md:text-[3.25rem] font-normal leading-tight tracking-wide drop-shadow-md">
                                         PROJECTS of <br /> DIRECTORS
@@ -424,7 +425,7 @@ function About() {
                             skills, ideas, and contributions, regardless of background or identity. By fostering
                             equal opportunity and interdisciplinary collaboration, we strengthen our ability to
                             engineer intelligent, resilient, and future-ready robotics, IoT, embedded and AI
-                            systems for students, colleges and industries in Chennai, Tamil Nadu and beyond.
+                            systems for industries, startups and institutions in Chennai, Tamil Nadu and beyond.
                         </p>
                     </motion.div>
                 </div>
@@ -437,11 +438,11 @@ function About() {
                     <ThreeDImageRing
                         images={[gemini1, gemini2, gemini3, gemini4, gemini5]}
                         titles={[
-                            "IoT & Robotics Projects",
-                            "AI-Based Products",
-                            "Mini Projects in Robotics, Embedded, IoT & AI",
-                            "Sustainable Hydro-ponics",
-                            "Electronics Component Supply"
+                            "IoT & Robotics Consultation Solutions",
+                            "AI-Based Products: Natural Language Processing, Machine Learning, Deep Learning, Reinforcement Learning & Large Language Models",
+                            "Industrial Automation",
+                            "Hydroponics, Aeroponics & Aquaponics",
+                            "Electronics & Components Supply for Automation, Robotics, IoT & Embedded Systems"
                         ]}
                         width={850}
                         height={450}
@@ -467,7 +468,7 @@ function About() {
                     <div className="relative w-full max-w-[1195px] h-auto md:min-h-[582px] bg-[#0a0a0a] rounded-[40px] overflow-hidden flex flex-col md:flex-row shadow-2xl mx-auto">
                         {/* Background Image Layer */}
                         <div className="absolute inset-0 z-0">
-                            <img loading="lazy" decoding="async" src={gallery6} alt="Contact SGN RoboWorks Chennai to order robotics, IoT and embedded project kits" className="w-full h-full object-cover md:object-[center_left] opacity-80 border-none" />
+                            <img loading="lazy" decoding="async" src={gallery6} alt="Contact SGN RoboWorks Chennai for robotics, IoT and embedded solutions" className="w-full h-full object-cover md:object-[center_left] opacity-80 border-none" />
                             <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#000000] via-[#000000]/60 to-transparent md:from-transparent md:via-[#000000]/40 md:to-[#000000]/90 pointer-events-none"></div>
                         </div>
 
@@ -518,7 +519,7 @@ function About() {
                         {/* Left — Brand */}
                         <div>
                             <div className="flex items-center gap-4">
-                                <img loading="lazy" decoding="async" src={gallery4} alt="SGN RoboWorks logo, robotics and electronics project supplier in Chennai" className="w-12 h-12 rounded-full border border-gray-100 p-1" />
+                                <img loading="lazy" decoding="async" src={brandLogo} alt="SGN RoboWorks logo, robotics and electronics solutions provider in Chennai" className="w-16 h-16 md:w-20 md:h-20 rounded-full border border-gray-100 p-1" />
                                 <div>
                                     <h4 className="font-[Playfair_Display] text-6xl md:text-8xl tracking-wider leading-none">
                                         SGN
@@ -541,10 +542,6 @@ function About() {
                         </div>
                     </div>
 
-                    <div className="mt-16 text-center">
-                        <p className="text-gray-400 text-sm">Designed & Developed by</p>
-                        <p className="text-gray-600 text-sm font-semibold tracking-[0.15em] mt-1">TECHLON</p>
-                    </div>
                 </div>
             </footer>
         </div >

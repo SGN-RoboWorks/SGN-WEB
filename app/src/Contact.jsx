@@ -3,9 +3,13 @@ import { FAQS } from './seoConfig';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // Assets
-import gallery4 from './assets/gallery-4.webp';
 import contactHero from './assets/0dcff79c73a67da491af0896b36e228a98cc1ab4.webp';
 import gallery6 from './assets/gallery-6.webp';
+
+const brandLogo = '/IMG-20260903-WA0018.jpg';
+const EMAILJS_SERVICE_ID = 'service_hxjuzwu';
+const EMAILJS_TEMPLATE_ID = 'template_3n0tiy2';
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
 // Animation Variants
 const fadeUp = {
@@ -18,7 +22,7 @@ const fadeIn = {
     visible: { opacity: 1, transition: { duration: 0.6 } },
 };
 
-const navLinks = ['Home', 'About', 'Service', 'Contact'];
+const navLinks = ['Home', 'About', 'Service', 'Components', 'Contact'];
 
 function Contact() {
     const [openFaq, setOpenFaq] = useState(null);
@@ -61,15 +65,32 @@ function Contact() {
         setSubmitStatus({ type: '', message: '' });
 
         try {
-            const response = await fetch('http://localhost:5000/api/contact', {
+            if (!EMAILJS_PUBLIC_KEY) {
+                throw new Error('EmailJS is not fully configured.');
+            }
+
+            const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify({
+                    service_id: EMAILJS_SERVICE_ID,
+                    template_id: EMAILJS_TEMPLATE_ID,
+                    user_id: EMAILJS_PUBLIC_KEY,
+                    template_params: {
+                        from_name: formData.fullName,
+                        mobile: formData.mobile,
+                        service_interest: formData.serviceInterest || 'Not specified',
+                        message: formData.message,
+                        submitted_at: new Intl.DateTimeFormat('en-IN', {
+                            dateStyle: 'medium',
+                            timeStyle: 'short',
+                            timeZone: 'Asia/Kolkata',
+                        }).format(new Date()),
+                    },
+                }),
             });
-
-            const data = await response.json();
 
             if (response.ok) {
                 setSubmitStatus({ type: 'success', message: 'Message sent successfully!' });
@@ -80,10 +101,14 @@ function Contact() {
                     message: ''
                 });
             } else {
-                setSubmitStatus({ type: 'error', message: data.message || 'Failed to send message.' });
+                const errorMessage = await response.text();
+                setSubmitStatus({ type: 'error', message: errorMessage || 'Failed to send message.' });
             }
         } catch (error) {
-            setSubmitStatus({ type: 'error', message: 'Network error. Please make sure the backend server is running.' });
+            const message = error instanceof Error && error.message === 'EmailJS is not fully configured.'
+                ? 'Email service is not configured yet. Please try again later.'
+                : 'Unable to send your message. Please try again shortly.';
+            setSubmitStatus({ type: 'error', message });
         } finally {
             setIsSubmitting(false);
         }
@@ -112,13 +137,13 @@ function Contact() {
                 {/* Page H1 — the hero is a full-bleed image with no text, so this
                     gives the page a real heading for search engines and screen readers. */}
                 <h1 className="sr-only">
-                    Contact SGN RoboWorks, Chennai. Buy Robotics, IoT, Embedded and AI Project Kits and Electronic Components
+                    Contact SGN RoboWorks, Chennai for robotics, IoT, embedded, AI and industrial automation solutions
                 </h1>
 
                 <div className="absolute inset-0">
                     <img loading="eager" decoding="async"
                         src={contactHero}
-                        alt="Contact SGN RoboWorks in Kodungaiyur, Chennai to order robotics, IoT and embedded projects"
+                        alt="Contact SGN RoboWorks in Kodungaiyur, Chennai for robotics, IoT and embedded solutions"
                         className="w-full h-full object-cover object-center md:object-center opacity-80"
                     />
                 </div>
@@ -141,7 +166,7 @@ function Contact() {
                                 {navLinks.map((link) => (
                                     <a
                                         key={link}
-                                        href={link === 'About' ? '/about' : link === 'Service' ? '/service' : link === 'Contact' ? '/contact' : link === 'Home' ? '/' : '#'}
+                                        href={link === 'About' ? '/about' : link === 'Service' ? '/service' : link === 'Components' ? '/components' : link === 'Contact' ? '/contact' : link === 'Home' ? '/' : '#'}
                                         className={`text-[15px] md:text-[17px] tracking-wide transition-colors duration-300 ${isScrolled ? "text-black hover:text-gray-600" : "text-white hover:opacity-70"
                                             } drop-shadow-sm ${link === 'Contact' ? 'flex' : 'hidden md:flex'}`}
                                     >
@@ -178,7 +203,7 @@ function Contact() {
                             {navLinks.map((link) => (
                                 <a
                                     key={link}
-                                    href={link === 'About' ? '/about' : link === 'Service' ? '/service' : link === 'Contact' ? '/contact' : link === 'Home' ? '/' : '#'}
+                                    href={link === 'About' ? '/about' : link === 'Service' ? '/service' : link === 'Components' ? '/components' : link === 'Contact' ? '/contact' : link === 'Home' ? '/' : '#'}
                                     className={`text-lg font-medium transition-colors ${isScrolled ? "text-gray-800 hover:text-black" : "text-white hover:text-gray-300"}`}
                                     onClick={() => setMobileMenuOpen(false)}
                                 >
@@ -220,7 +245,7 @@ function Contact() {
                             We Got All Answers !
                         </h2>
                         <p className="text-[#666666] text-[14px] md:text-[16px] mt-6 md:mt-[23px] max-w-[496px] font-normal">
-                            Fill in the form or call us to order robotics, IoT, embedded and AI project kits or electronic components. Our Chennai team will get back to you shortly with pricing and delivery details.
+                            Fill in the form or call us for robotics, IoT, embedded, AI, industrial automation or electronics and components supply. Our Chennai team will get back to you shortly with pricing and delivery details.
                         </p>
 
                         <div className="mt-[145px] space-y-10">
@@ -436,7 +461,7 @@ function Contact() {
                     <div className="flex flex-col md:flex-row justify-between gap-12 pt-12 border-t border-gray-100">
                         <div>
                             <div className="flex items-center gap-4">
-                                <img loading="lazy" decoding="async" src={gallery4} alt="SGN RoboWorks logo, robotics and electronics project supplier in Chennai" className="w-14 h-14 rounded-full border border-gray-100 p-1" />
+                                <img loading="lazy" decoding="async" src={brandLogo} alt="SGN RoboWorks logo, robotics and electronics solutions provider in Chennai" className="w-16 h-16 md:w-20 md:h-20 rounded-full border border-gray-100 p-1" />
                                 <div>
                                     <h3 className="font-[Playfair_Display] text-6xl md:text-8xl  tracking-tighter text-black leading-none">S G N</h3>
                                     <p className="font-[Playfair_Display] text-base md:text-xl text-gray-800 tracking-wide mt-1">Roboworks</p>
@@ -456,10 +481,6 @@ function Contact() {
                         </div>
                     </div>
 
-                    <div className="mt-20 text-center">
-                        <p className="text-gray-400 text-sm">Designed & Developed by</p>
-                        <p className="text-gray-600 text-sm font-semibold tracking-[0.15em] mt-1">TECHLON</p>
-                    </div>
                 </div>
             </section>
         </div>

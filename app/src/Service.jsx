@@ -5,7 +5,6 @@ import { motion, useScroll, useTransform, useInView, useMotionValue, useSpring }
 import gallery1 from './assets/gallery-1.webp';
 import gallery2 from './assets/gallery-2.webp';
 import gallery3 from './assets/gallery-3.webp';
-import gallery4 from './assets/gallery-4.webp';
 import gallery12 from './assets/gallery-12.webp';
 
 // Hero asset — metallic swirl
@@ -19,6 +18,8 @@ import whyImgBotR from './assets/59d5145a665116b455cfcd5f7ca676eaaf2fcf9f.webp';
 
 // Contact section dark background
 import gallery6 from './assets/gallery-6.webp';
+
+const brandLogo = '/IMG-20260903-WA0018.jpg';
 
 // ── Components ──
 
@@ -45,15 +46,15 @@ const staggerContainer = {
 };
 
 // ── Nav Links ──
-const navLinks = ['Home', 'About', 'Service', 'Contact'];
+const navLinks = ['Home', 'About', 'Service', 'Components', 'Contact'];
 
 // ── Tech Solutions Grid Data (text-only cards) ──
 const techSolutions = [
-    { name: 'IoT & Robotics Projects' },
-    { name: 'AI-Based Products' },
-    { name: 'Mini Projects in Robotics, Embedded, IoT & AI' },
-    { name: 'Sustainable Hydro-ponics' },
-    { name: 'Electronics Component Supply' },
+    { name: 'IoT & Robotics Consultation Solutions' },
+    { name: 'AI-Based Products: Natural Language Processing, Machine Learning, Deep Learning, Reinforcement Learning & Large Language Models' },
+    { name: 'Industrial Automation' },
+    { name: 'Hydroponics, Aeroponics & Aquaponics' },
+    { name: 'Electronics & Components Supply for Automation, Robotics, IoT & Embedded Systems' },
 ];
 
 
@@ -148,7 +149,7 @@ function Service() {
                 <motion.div className="absolute inset-0 z-0 origin-top-left" style={{ y: heroY, scale: heroScale }}>
                     <img loading="eager" decoding="async"
                         src={newServiceHero}
-                        alt="SGN RoboWorks services for robotics, IoT, embedded and AI projects in Chennai"
+                        alt="SGN RoboWorks services for robotics, IoT, embedded and AI solutions in Chennai"
                         className="w-full h-full object-cover object-right md:object-center opacity-80"
                     />
                 </motion.div>
@@ -164,7 +165,7 @@ function Service() {
                         OUR SERVICES
                         {/* Spelled out for search engines and screen readers — not rendered visually. */}
                         <span className="sr-only">
-                            {' '}for Robotics, IoT, Embedded and AI Mini Projects &amp; Electronic Components in Chennai
+                            {' '}for robotics, IoT, embedded, AI and industrial automation solutions in Chennai
                         </span>
                     </motion.h1>
                 </div>
@@ -187,7 +188,7 @@ function Service() {
                                 {navLinks.map((link) => (
                                     <a
                                         key={link}
-                                        href={link === 'About' ? '/about' : link === 'Service' ? '/service' : link === 'Contact' ? '/contact' : link === 'Home' ? '/' : '#'}
+                                        href={link === 'About' ? '/about' : link === 'Service' ? '/service' : link === 'Components' ? '/components' : link === 'Contact' ? '/contact' : link === 'Home' ? '/' : '#'}
                                         className={`text-[15px] md:text-[17px] tracking-wide transition-colors duration-300 ${isScrolled ? "text-black hover:text-gray-600" : "text-white hover:opacity-70"
                                             } drop-shadow-sm ${link === 'Service' ? 'flex' : 'hidden md:flex'}`}
                                     >
@@ -224,7 +225,7 @@ function Service() {
                             {navLinks.map((link) => (
                                 <a
                                     key={link}
-                                    href={link === 'About' ? '/about' : link === 'Service' ? '/service' : link === 'Contact' ? '/contact' : link === 'Home' ? '/' : '#'}
+                                    href={link === 'About' ? '/about' : link === 'Service' ? '/service' : link === 'Components' ? '/components' : link === 'Contact' ? '/contact' : link === 'Home' ? '/' : '#'}
                                     className={`text-lg font-medium transition-colors ${isScrolled ? "text-gray-800 hover:text-black" : "text-white hover:text-gray-300"}`}
                                     onClick={() => setMobileMenuOpen(false)}
                                 >
@@ -253,12 +254,10 @@ function Service() {
                         variants={fadeUp}
                         className="text-gray-600 text-[16px] md:text-xl leading-relaxed font-normal"
                     >
-                        SGN RoboWorks builds and supplies robotics, embedded, IoT and AI projects for
-                        college and school students, and for industries across Chennai and Tamil Nadu.
-                        Every mini project and final year project is designed, assembled, tested and
-                        delivered with source code, circuit diagrams and documentation, along with the
-                        sensors, microcontrollers, boards and electronic components needed to build it.
-                        Order online, and we deliver anywhere in Tamil Nadu and India.
+                        SGN RoboWorks designs and delivers robotics, embedded, IoT, AI and industrial
+                        automation solutions for industries, startups and institutions across Chennai and
+                        Tamil Nadu. Our electronics and component supply and software systems are selected,
+                        integrated, tested and delivered with the documentation and support each application needs.
                     </motion.p>
                 </motion.div>
             </section>
@@ -279,7 +278,7 @@ function Service() {
                                 Our Main <span className="font-bold">Tech Solutions</span>
                             </h2>
                             <p className="text-[#1a1a1a] text-[16px] mt-4 leading-relaxed max-w-[300px]">
-                                Buy robotics, embedded, IoT and AI project kits and electronic components in Chennai and across Tamil Nadu, with custom AI and software solutions delivered globally.
+                                Robotics, embedded, IoT, AI, industrial automation and electronics and components supply from Chennai, delivered across Tamil Nadu and globally where required.
                             </p>
                         </div>
 
@@ -331,22 +330,22 @@ function Service() {
                             <div className="flex-1 overflow-hidden">
                                 <img loading="lazy" decoding="async"
                                     src={whyImgLeft}
-                                    alt="SGN RoboWorks team delivering affordable automation and student project kits"
+                                    alt="SGN RoboWorks team delivering industrial automation solutions"
                                     className="w-full h-full object-cover scale-[1.2] md:scale-[1.1] origin-left"
                                 />
                             </div>
                             <div className="p-10">
                                 <h3 className="text-[28px] font-semibold text-[#1a1a1a] leading-tight mb-4">Value-Driven Automation</h3>
                                 <p className="text-[#666] text-[15px] leading-relaxed">
-                                    Affordable, student-friendly project pricing and cost-effective automation for SMEs. You get working hardware and real value, not an inflated quote.
+                                    Cost-effective industrial automation for SMEs and manufacturers, from PLC and SCADA integration to sensor-driven process control. You get reliable systems and clear value.
                                 </p>
                             </div>
                         </AnimatedCard>
 
-                        {/* RIGHT — column: Global AI + Bottom 2 */}
+                        {/* RIGHT — column: Best Services + Bottom 2 */}
                         <div className="md:w-[62%] flex flex-col gap-10">
 
-                            {/* Top large card: Global AI, Local Hardware */}
+                            {/* Top large card: Best Services */}
                             <AnimatedCard
                                 variants={fadeUp}
                                 className="border border-black/[0.12] rounded-[32px] overflow-hidden bg-white shadow-sm flex flex-col"
@@ -354,14 +353,14 @@ function Service() {
                                 <div className="h-[200px] md:h-[260px] overflow-hidden">
                                     <img loading="lazy" decoding="async"
                                         src={whyImgTopR}
-                                        alt="Electronic components and embedded hardware stocked for delivery across Tamil Nadu"
+                                        alt="Electronics and components supplied for automation, robotics, IoT and embedded systems across Tamil Nadu"
                                         className="w-full h-full object-cover scale-[1.4]"
                                     />
                                 </div>
                                 <div className="p-10">
-                                    <h3 className="text-[28px] font-semibold text-[#1a1a1a] leading-tight mb-4">Global AI, Local Hardware</h3>
+                                    <h3 className="text-[28px] font-semibold text-[#1a1a1a] leading-tight mb-4">Best Services</h3>
                                     <p className="text-[#666] text-[15px] leading-relaxed">
-                                        World-class custom AI and software development delivered globally, backed by robotics and embedded hardware built and shipped from Chennai across Tamil Nadu.
+                                        End-to-end robotics, AI, embedded, automation and electronics and components supply from Chennai, delivered across Tamil Nadu.
                                     </p>
                                 </div>
                             </AnimatedCard>
@@ -382,8 +381,15 @@ function Service() {
                                     <div className="p-10">
                                         <h3 className="text-[24px] font-semibold text-[#1a1a1a] leading-tight mb-4">Holistic Tech Integration</h3>
                                         <p className="text-[#666] text-[14px] leading-relaxed">
-                                            Expertise across IoT, AI, robotics and embedded systems, with one team for the hardware, the firmware, the code and the documentation your project needs.
+                                            Every solution is customized to each customer's specific purpose, with:
                                         </p>
+                                        <ul className="mt-3 list-disc pl-5 text-[#666] text-[14px] leading-relaxed space-y-1">
+                                            <li>Hardware and embedded systems</li>
+                                            <li>Software applications</li>
+                                            <li>Backend systems</li>
+                                            <li>Cloud integration</li>
+                                            <li>Custom dashboards</li>
+                                        </ul>
                                     </div>
                                 </AnimatedCard>
 
@@ -394,15 +400,23 @@ function Service() {
                                     <div className="h-[180px] overflow-hidden">
                                         <img loading="lazy" decoding="async"
                                             src={whyImgBotR}
-                                            alt="Energy-efficient and eco-friendly IoT and hydroponics systems by SGN RoboWorks"
+                                            alt="Aquaponics and resource-efficient agritech systems by SGN RoboWorks"
                                             className="w-full h-full object-cover"
                                         />
                                     </div>
                                     <div className="p-10">
                                         <h3 className="text-[24px] font-semibold text-[#1a1a1a] leading-tight mb-4">Sustainability Focus</h3>
                                         <p className="text-[#666] text-[14px] leading-relaxed">
-                                            Committed to greener engineering through eco-friendly systems like hydroponics and aquaponics, and energy-efficient, low-power embedded and IoT designs.
+                                            Our aquaponics systems support these Sustainable Development Goals:
                                         </p>
+                                        <ul className="mt-3 list-disc pl-5 text-[#666] text-[14px] leading-relaxed space-y-1">
+                                            <li>SDG 3: Good Health and Well-being</li>
+                                            <li>SDG 8: Decent Work and Economic Growth</li>
+                                            <li>SDG 9: Industry, Innovation and Infrastructure</li>
+                                            <li>SDG 11: Sustainable Cities and Communities</li>
+                                            <li>SDG 12: Responsible Consumption and Production</li>
+                                            <li>SDG 13: Climate Action</li>
+                                        </ul>
                                     </div>
                                 </AnimatedCard>
                             </div>
@@ -432,10 +446,9 @@ function Service() {
                         variants={fadeUp}
                         className="mt-12 text-gray-700 text-base md:text-lg leading-relaxed max-w-3xl mx-auto"
                     >
-                        We deliver robotics, embedded, IoT and AI project kits and electronic components
-                        to students, colleges and schools across Chennai and Tamil Nadu, with on-site
-                        installation and consulting for hardware and automation work in and around
-                        Chennai.
+                        We deliver robotics, embedded, IoT, AI, industrial automation and electronics and components
+                        services across Chennai and Tamil Nadu, with on-site installation and consulting
+                        for hardware and automation work.
                     </motion.p>
                     <motion.div
                         variants={fadeUp}
@@ -472,7 +485,7 @@ function Service() {
                     <div className="relative w-full max-w-[1195px] h-auto md:min-h-[582px] bg-[#0a0a0a] rounded-[40px] overflow-hidden flex flex-col md:flex-row shadow-2xl mx-auto">
                         {/* Background Image Layer */}
                         <div className="absolute inset-0 z-0">
-                            <img loading="lazy" decoding="async" src={gallery6} alt="Contact SGN RoboWorks Chennai to order robotics, IoT and embedded project kits" className="w-full h-full object-cover md:object-[center_left] opacity-80 border-none" />
+                            <img loading="lazy" decoding="async" src={gallery6} alt="Contact SGN RoboWorks Chennai for robotics, IoT and embedded solutions" className="w-full h-full object-cover md:object-[center_left] opacity-80 border-none" />
                             <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#000000] via-[#000000]/60 to-transparent md:from-transparent md:via-[#000000]/40 md:to-[#000000]/90 pointer-events-none"></div>
                         </div>
 
@@ -496,10 +509,9 @@ function Service() {
                             <div className="w-full max-w-[592px] h-auto md:min-h-[149.18px] mb-8 md:mb-[50px]">
                                 <p className="text-[#dfdfdf] text-[15px] md:text-[16px] leading-[1.8] font-[Inter] font-light text-center md:text-left">
                                     Our team in Chennai is just a call away. Whether you want to buy a
-                                    robotics, embedded, IoT or AI mini project, order electronic
-                                    components, or get a custom final year project built, we will
-                                    guide you end to end. Call or message us today for pricing and
-                                    delivery across Tamil Nadu and India.
+                                    robotics, embedded, IoT, AI or industrial automation solutions, or
+                                    electronics and components, we will guide you end to end. Call or message
+                                    us today for service and delivery across Tamil Nadu and India.
                                 </p>
                             </div>
 
@@ -529,7 +541,7 @@ function Service() {
                         {/* Left — Brand */}
                         <div>
                             <div className="flex items-center gap-4">
-                                <img loading="lazy" decoding="async" src={gallery4} alt="SGN RoboWorks logo, robotics and electronics project supplier in Chennai" className="w-14 h-14 rounded-full border border-gray-100 p-1" />
+                                <img loading="lazy" decoding="async" src={brandLogo} alt="SGN RoboWorks logo, robotics and electronics solutions provider in Chennai" className="w-16 h-16 md:w-20 md:h-20 rounded-full border border-gray-100 p-1" />
                                 <div>
                                     <h4 className="font-[Playfair_Display] text-6xl md:text-8xl tracking-tighter  leading-none">S G N</h4>
                                     <p className="font-[Playfair_Display] text-base md:text-xl text-gray-800 tracking-wide mt-1">Roboworks</p>
@@ -545,7 +557,7 @@ function Service() {
                                 {navLinks.map((link) => (
                                     <li key={link}>
                                         <a
-                                            href={link === 'About' ? '/about' : link === 'Service' ? '/service' : link === 'Contact' ? '/contact' : link === 'Home' ? '/' : '#'}
+                                            href={link === 'About' ? '/about' : link === 'Service' ? '/service' : link === 'Components' ? '/components' : link === 'Contact' ? '/contact' : link === 'Home' ? '/' : '#'}
                                             className="text-black hover:text-gray transition-colors"
                                         >
                                             {link === 'About' ? 'About us' : link === 'Service' ? 'Services' : link}
@@ -557,10 +569,6 @@ function Service() {
                     </div>
 
                     {/* Bottom credit */}
-                    <div className="mt-16 text-center">
-                        <p className="text-gray-400 text-sm">Designed &amp; Developed by</p>
-                        <p className="text-gray-600 text-sm font-semibold tracking-[0.15em] mt-1">TECHLON</p>
-                    </div>
                 </motion.div>
             </footer>
         </div >

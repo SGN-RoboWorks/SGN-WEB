@@ -4,6 +4,7 @@
   "rewrites": [
     { "source": "/about", "destination": "/about.html" },
     { "source": "/service", "destination": "/service.html" },
+    { "source": "/components", "destination": "/components.html" },
     { "source": "/contact", "destination": "/contact.html" },
     { "source": "/((?!assets/|.*\\.[a-zA-Z0-9]+$).*)", "destination": "/index.html" }
   ],
