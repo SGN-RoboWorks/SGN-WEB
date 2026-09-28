@@ -12,7 +12,7 @@ import compAirPump from './assets/comp-air-pump.webp';
 import compSettlingFilter from './assets/comp-settling-filter.webp';
 import compNftGrowBed from './assets/comp-nft-grow-bed.webp';
 
-import newServiceHero from './assets/553ca5ba58dd3cf4ad1b16dbfaf9c28f56db29ad.webp';
+import aquaponicsHeroGreen from './assets/aquaponics-hero-green.webp';
 import gallery6 from './assets/gallery-6.webp';
 
 const brandLogo = '/IMG-20260903-WA0018.jpg';
@@ -177,7 +177,7 @@ function Components() {
           <img
             loading="eager"
             decoding="async"
-            src={newServiceHero}
+            src={aquaponicsHeroGreen}
             alt="Hydroponic and Aquaponics components by SGN RoboWorks"
             className="w-full h-full object-cover object-center opacity-70"
           />

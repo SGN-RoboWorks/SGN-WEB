@@ -133,19 +133,42 @@ function Contact() {
             {/* ═══════════════════════════════════════ */}
             {/* HERO SECTION                             */}
             {/* ═══════════════════════════════════════ */}
-            <section className="relative h-screen overflow-hidden bg-black">
-                {/* Page H1 — the hero is a full-bleed image with no text, so this
-                    gives the page a real heading for search engines and screen readers. */}
-                <h1 className="sr-only">
-                    Contact SGN RoboWorks, Chennai for robotics, IoT, embedded, AI and industrial automation solutions
-                </h1>
-
-                <div className="absolute inset-0">
+            <section className="relative h-[75vh] md:h-[85vh] overflow-hidden bg-black flex items-end">
+                <div className="absolute inset-0 z-0">
                     <img loading="eager" decoding="async"
                         src={contactHero}
                         alt="Contact SGN RoboWorks in Kodungaiyur, Chennai for robotics, IoT and embedded solutions"
-                        className="w-full h-full object-cover object-center md:object-center opacity-80"
+                        className="w-full h-full object-cover object-center opacity-70"
                     />
+                </div>
+
+                {/* Hero Title Container */}
+                <div className="relative z-10 p-8 md:p-20 max-w-6xl w-full pb-16">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.7, delay: 0.2 }}
+                        className="inline-block px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs md:text-sm font-medium mb-4 tracking-wider uppercase"
+                    >
+                        Get In Touch • Consultation • Support
+                    </motion.div>
+                    <motion.h1
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.4 }}
+                        className="font-[Playfair_Display] text-white text-4xl md:text-7xl font-normal leading-tight tracking-tight uppercase"
+                    >
+                        Connect With Our Engineers <br className="hidden md:block" />
+                        <span className="italic font-light text-gray-300">Contact SGN RoboWorks</span>
+                    </motion.h1>
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.6 }}
+                        className="text-gray-300 text-sm md:text-lg max-w-2xl mt-4 font-light leading-relaxed"
+                    >
+                        Reach out for custom robotics, IoT, AI solutions, industrial automation systems, agritech projects, and electronics component supply across Tamil Nadu and India.
+                    </motion.p>
                 </div>
 
                 {/* Top Navbar — Glassmorphic Pill */}
@@ -153,7 +176,6 @@ function Contact() {
                     initial={{ opacity: 0, y: -30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.3 }}
-                    // Switch from absolute to fixed so it follows the user
                     className={`fixed z-50 left-1/2 -translate-x-1/2 transition-all duration-300 w-[90%] md:w-auto ${isScrolled ? "top-4" : "top-8"
                         }`}
                 >
@@ -168,7 +190,7 @@ function Contact() {
                                         key={link}
                                         href={link === 'About' ? '/about' : link === 'Service' ? '/service' : link === 'Components' ? '/components' : link === 'Contact' ? '/contact' : link === 'Home' ? '/' : '#'}
                                         className={`text-[15px] md:text-[17px] tracking-wide transition-colors duration-300 ${isScrolled ? "text-black hover:text-gray-600" : "text-white hover:opacity-70"
-                                            } drop-shadow-sm ${link === 'Contact' ? 'flex' : 'hidden md:flex'}`}
+                                            } drop-shadow-sm ${link === 'Contact' ? 'flex font-semibold underline underline-offset-4' : 'hidden md:flex'}`}
                                     >
                                         {link}
                                     </a>
@@ -197,7 +219,7 @@ function Contact() {
                             animate={{ opacity: 1, y: 0 }}
                             className={`absolute top-[120%] left-0 right-0 p-6 flex flex-col gap-4 rounded-3xl md:hidden ${isScrolled
                                 ? "bg-white/95 backdrop-blur-md shadow-lg border border-gray-200"
-                                : "glass-card border border-white/20"
+                                : "glass-card border border-white/20 bg-black/90 backdrop-blur-md text-white"
                                 }`}
                         >
                             {navLinks.map((link) => (
@@ -213,18 +235,6 @@ function Contact() {
                         </motion.div>
                     )}
                 </motion.nav>
-
-                {/* Hero Text */}
-                <div className="absolute bottom-24 left-8 md:left-16 z-10 pointer-events-none">
-                    <motion.h1
-                        initial={{ opacity: 0, x: -30 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8, delay: 0.5 }}
-                        className="font-[Playfair_Display] text-white text-5xl md:text-9xl font-normal tracking-wider"
-                    >
-                        CONTACT US
-                    </motion.h1>
-                </div>
             </section>
 
 

@@ -145,29 +145,42 @@ function Service() {
             {/* ═══════════════════════════════════════ */}
             {/* HERO — Dark bg + metallic swirl asset   */}
             {/* ═══════════════════════════════════════ */}
-            <section id="home" ref={heroRef} className="relative h-screen overflow-hidden bg-black">
+            <section id="home" ref={heroRef} className="relative h-[75vh] md:h-[85vh] overflow-hidden bg-black flex items-end">
                 <motion.div className="absolute inset-0 z-0 origin-top-left" style={{ y: heroY, scale: heroScale }}>
                     <img loading="eager" decoding="async"
                         src={newServiceHero}
                         alt="SGN RoboWorks services for robotics, IoT, embedded and AI solutions in Chennai"
-                        className="w-full h-full object-cover object-right md:object-center opacity-80"
+                        className="w-full h-full object-cover object-right md:object-center opacity-70"
                     />
                 </motion.div>
 
-                {/* Hero Title — Positioned bottom-left */}
-                <div className="absolute inset-0 flex flex-col items-start justify-end p-10 md:p-20 z-10 pointer-events-none">
+                {/* Hero Title Container */}
+                <div className="relative z-10 p-8 md:p-20 max-w-6xl w-full pb-16">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.7, delay: 0.2 }}
+                        className="inline-block px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs md:text-sm font-medium mb-4 tracking-wider uppercase"
+                    >
+                        Robotics • IoT • AI • Industrial Automation
+                    </motion.div>
                     <motion.h1
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.5 }}
-                        className="font-[Playfair_Display] text-white text-5xl md:text-8xl font-normal tracking-wide"
+                        transition={{ duration: 0.8, delay: 0.4 }}
+                        className="font-[Playfair_Display] text-white text-4xl md:text-7xl font-normal leading-tight tracking-tight uppercase"
                     >
-                        OUR SERVICES
-                        {/* Spelled out for search engines and screen readers — not rendered visually. */}
-                        <span className="sr-only">
-                            {' '}for robotics, IoT, embedded, AI and industrial automation solutions in Chennai
-                        </span>
+                        Engineering &amp; Automation <br className="hidden md:block" />
+                        <span className="italic font-light text-gray-300">Our Core Services</span>
                     </motion.h1>
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.6 }}
+                        className="text-gray-300 text-sm md:text-lg max-w-2xl mt-4 font-light leading-relaxed"
+                    >
+                        End-to-end robotics, IoT, embedded systems, AI products, industrial process automation, and electronics component supply delivered across Tamil Nadu and global markets.
+                    </motion.p>
                 </div>
 
                 {/* Top Navbar — Glassmorphic Pill */}
@@ -175,7 +188,6 @@ function Service() {
                     initial={{ opacity: 0, y: -30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.3 }}
-                    // Switch from absolute to fixed so it follows the user
                     className={`fixed z-50 left-1/2 -translate-x-1/2 transition-all duration-300 w-[90%] md:w-auto ${isScrolled ? "top-4" : "top-8"
                         }`}
                 >
@@ -190,7 +202,7 @@ function Service() {
                                         key={link}
                                         href={link === 'About' ? '/about' : link === 'Service' ? '/service' : link === 'Components' ? '/components' : link === 'Contact' ? '/contact' : link === 'Home' ? '/' : '#'}
                                         className={`text-[15px] md:text-[17px] tracking-wide transition-colors duration-300 ${isScrolled ? "text-black hover:text-gray-600" : "text-white hover:opacity-70"
-                                            } drop-shadow-sm ${link === 'Service' ? 'flex' : 'hidden md:flex'}`}
+                                            } drop-shadow-sm ${link === 'Service' ? 'flex font-semibold underline underline-offset-4' : 'hidden md:flex'}`}
                                     >
                                         {link}
                                     </a>
@@ -219,7 +231,7 @@ function Service() {
                             animate={{ opacity: 1, y: 0 }}
                             className={`absolute top-[120%] left-0 right-0 p-6 flex flex-col gap-4 rounded-3xl md:hidden ${isScrolled
                                 ? "bg-white/95 backdrop-blur-md shadow-lg border border-gray-200"
-                                : "glass-card border border-white/20"
+                                : "glass-card border border-white/20 bg-black/90 backdrop-blur-md text-white"
                                 }`}
                         >
                             {navLinks.map((link) => (

@@ -206,21 +206,15 @@ function About() {
             <section
                 id="about-hero"
                 ref={heroRef}
-                className="relative w-full h-screen flex justify-center items-center bg-black overflow-hidden"
+                className="relative w-full h-[75vh] md:h-[85vh] flex items-end bg-black overflow-hidden"
             >
-                {/* Optimized 3D Animation Container — "Goldilocks" ratio for mobile: 82vh vertical height removes big black empty gaps, while 180vw horizontal width forces the intrinsic 3D camera to zoom out enough to perfectly reveal both ears. */}
+                {/* 3D Animation Container */}
                 <div
                     data-us-project="gcNwfvcVtYZDlhVdfUiA"
-                    className="absolute top-[9vh] left-1/2 -translate-x-1/2 h-[82vh] w-[180vw] md:inset-0 md:h-screen md:w-full md:left-0 md:transform-none md:translate-x-[5%] z-0 flex items-center justify-center p-0 m-0"
+                    className="absolute top-[9vh] left-1/2 -translate-x-1/2 h-[82vh] w-[180vw] md:inset-0 md:h-full md:w-full md:left-0 md:transform-none md:translate-x-[5%] z-0 flex items-center justify-center p-0 m-0 opacity-80"
                 ></div>
 
-                {/* Page H1 — the hero is a pure animation with no text, so this gives
-                    the page a real heading for search engines and screen readers. */}
-                <h1 className="sr-only">
-                    About SGN RoboWorks, Robotics, IoT, Embedded and AI Solutions in Chennai, Tamil Nadu
-                </h1>
-
-                {/* Mobile Edge Fade Overlay to seamlessly blend the animation boundaries into the black background */}
+                {/* Mobile Edge Fade Overlay */}
                 <div
                     className="absolute inset-0 pointer-events-none z-[1] md:hidden"
                     style={{ background: 'linear-gradient(to bottom, #000 10%, transparent 20%, transparent 80%, #000 90%)' }}
@@ -230,7 +224,7 @@ function About() {
                     initial={{ opacity: 0, y: -30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.3 }}
-                    className={`fixed z-50 left-1/2 -translate-x-1/2 transition-all duration-300 w-[95%] md:w-auto ${isScrolled ? "top-4" : "top-8"}`}
+                    className={`fixed z-[1001] left-1/2 -translate-x-1/2 transition-all duration-300 w-[95%] md:w-auto ${isScrolled ? "top-4" : "top-8"}`}
                 >
                     <div className={`nav-pill flex items-center justify-center font-medium px-6 md:px-8 py-2 rounded-full transition-all duration-300 w-full md:w-auto ${isScrolled
                         ? "bg-white/90 backdrop-blur-md shadow-md border border-gray-200"
@@ -243,7 +237,7 @@ function About() {
                                         key={link}
                                         href={link === 'About' ? '/about' : link === 'Service' ? '/service' : link === 'Components' ? '/components' : link === 'Contact' ? '/contact' : link === 'Home' ? '/' : '#'}
                                         className={`text-[15px] md:text-[17px] tracking-wide transition-colors duration-300 ${isScrolled ? "text-black hover:text-gray-600" : "text-white hover:opacity-70"
-                                            } drop-shadow-sm ${link === 'About' ? 'flex' : 'hidden md:flex'}`}
+                                            } drop-shadow-sm ${link === 'About' ? 'flex font-semibold underline underline-offset-4' : 'hidden md:flex'}`}
                                     >
                                         {link}
                                     </a>
@@ -272,7 +266,7 @@ function About() {
                             animate={{ opacity: 1, y: 0 }}
                             className={`absolute top-[120%] left-0 right-0 p-6 flex flex-col gap-4 rounded-3xl md:hidden ${isScrolled
                                 ? "bg-white/95 backdrop-blur-md shadow-lg border border-gray-200"
-                                : "glass-card border border-white/20"
+                                : "glass-card border border-white/20 bg-black/90 backdrop-blur-md text-white"
                                 }`}
                         >
                             {navLinks.map((link) => (
@@ -290,16 +284,33 @@ function About() {
                 </motion.nav>
             </section>
 
-            {/* Hero Text — "ABOUT US" (Overlay) - Pushed down slightly via pb-8 on mobile to clear the face */}
-            <div className="absolute top-0 left-0 w-full h-screen pointer-events-none z-[1000] flex flex-col items-center md:items-start justify-end p-10 pb-8 md:pb-36 md:p-20">
+            {/* Hero Title Container — Positioned on top of section with z-[1000] */}
+            <div className="absolute top-0 left-0 right-0 h-[75vh] md:h-[85vh] z-[1000] pointer-events-none p-8 md:p-20 max-w-6xl w-full flex flex-col items-start text-left justify-end pb-12 md:pb-16">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.7, delay: 0.2 }}
+                    className="inline-block px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs md:text-sm font-medium mb-4 tracking-wider uppercase pointer-events-auto w-fit"
+                >
+                    Innovation • Excellence • Sustainable Agritech
+                </motion.div>
                 <motion.h1
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.5 }}
-                    className="font-[Playfair_Display] text-white text-[3rem] md:text-8xl font-normal tracking-wide drop-shadow-2xl z-20 relative"
+                    transition={{ duration: 0.8, delay: 0.4 }}
+                    className="font-[Playfair_Display] text-white text-5xl md:text-8xl font-normal leading-tight tracking-tight uppercase drop-shadow-2xl"
                 >
-                    ABOUT US
+                    ABOUT US <br className="hidden md:block" />
+                    <span className="italic font-light text-gray-300">SGN RoboWorks</span>
                 </motion.h1>
+                <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.6 }}
+                    className="text-gray-300 text-sm md:text-lg max-w-2xl mt-4 font-light leading-relaxed drop-shadow-md"
+                >
+                    Chennai-based technology enterprise transforming industrial, institutional, and agricultural operations into data-driven, self-optimizing digital &amp; hardware ecosystems.
+                </motion.p>
             </div>
 
 
